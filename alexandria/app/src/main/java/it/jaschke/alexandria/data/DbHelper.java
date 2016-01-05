@@ -20,30 +20,30 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        final String SQL_CREATE_BOOK_TABLE = "CREATE TABLE " + AlexandriaContract.BookEntry.TABLE_NAME + " ("+
+        final String SQL_CREATE_BOOK_TABLE = "CREATE TABLE " + AlexandriaContract.BookEntry.TABLE_NAME + " (" +
                 AlexandriaContract.BookEntry._ID + " INTEGER PRIMARY KEY," +
                 AlexandriaContract.BookEntry.TITLE + " TEXT NOT NULL," +
                 AlexandriaContract.BookEntry.SUBTITLE + " TEXT ," +
                 AlexandriaContract.BookEntry.DESC + " TEXT ," +
                 AlexandriaContract.BookEntry.IMAGE_URL + " TEXT, " +
-                "UNIQUE ("+ AlexandriaContract.BookEntry._ID +") ON CONFLICT IGNORE)";
+                "UNIQUE (" + AlexandriaContract.BookEntry._ID + ") ON CONFLICT IGNORE)";
 
-        final String SQL_CREATE_AUTHOR_TABLE = "CREATE TABLE " + AlexandriaContract.AuthorEntry.TABLE_NAME + " ("+
+        final String SQL_CREATE_AUTHOR_TABLE = "CREATE TABLE " + AlexandriaContract.AuthorEntry.TABLE_NAME + " (" +
                 AlexandriaContract.AuthorEntry._ID + " INTEGER," +
                 AlexandriaContract.AuthorEntry.AUTHOR + " TEXT," +
                 " FOREIGN KEY (" + AlexandriaContract.AuthorEntry._ID + ") REFERENCES " +
                 AlexandriaContract.BookEntry.TABLE_NAME + " (" + AlexandriaContract.BookEntry._ID + "))";
 
-        final String SQL_CREATE_CATEGORY_TABLE = "CREATE TABLE " + AlexandriaContract.CategoryEntry.TABLE_NAME + " ("+
+        final String SQL_CREATE_CATEGORY_TABLE = "CREATE TABLE " + AlexandriaContract.CategoryEntry.TABLE_NAME + " (" +
                 AlexandriaContract.CategoryEntry._ID + " INTEGER," +
                 AlexandriaContract.CategoryEntry.CATEGORY + " TEXT," +
                 " FOREIGN KEY (" + AlexandriaContract.CategoryEntry._ID + ") REFERENCES " +
                 AlexandriaContract.BookEntry.TABLE_NAME + " (" + AlexandriaContract.BookEntry._ID + "))";
 
 
-        Log.d("sql-statments",SQL_CREATE_BOOK_TABLE);
-        Log.d("sql-statments",SQL_CREATE_AUTHOR_TABLE);
-        Log.d("sql-statments",SQL_CREATE_CATEGORY_TABLE);
+        Log.d("sql-statments", SQL_CREATE_BOOK_TABLE);
+        Log.d("sql-statments", SQL_CREATE_AUTHOR_TABLE);
+        Log.d("sql-statments", SQL_CREATE_CATEGORY_TABLE);
 
         db.execSQL(SQL_CREATE_BOOK_TABLE);
         db.execSQL(SQL_CREATE_AUTHOR_TABLE);
@@ -53,6 +53,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        //Todo DB onUpgrade: delete existing tables, and create fresh ones
+        //Todo DB onUpgrade: add note that we can write some logic to retain values
     }
 }
