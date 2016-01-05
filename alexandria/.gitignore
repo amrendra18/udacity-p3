@@ -1,7 +1,17 @@
-.gradle
-/local.properties
-/.idea/workspace.xml
-/.idea
-.DS_Store
-/build
-*.iml
+# built/generate files
+build/
+app/build/
+
+# local configuration files
+local.properties
+
+# AndroidStudio project files
+/.idea/*
+/.gradle/*
+
+# iml files
+alexandria.iml
+app/app.iml
+
+# Misc
+.DS_STORE
