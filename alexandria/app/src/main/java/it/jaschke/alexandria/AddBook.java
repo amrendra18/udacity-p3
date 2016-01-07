@@ -1,6 +1,6 @@
 package it.jaschke.alexandria;
 
-import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -243,10 +243,7 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
     public void onAttach(Context context) {
         super.onAttach(context);
         Debug.c();
-        ActionBar actionBar = getActivity().getActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle(R.string.scan);
-        }
+        getActivity().setTitle(R.string.scan);
     }
 
     @Override
@@ -254,12 +251,17 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
         Debug.e("requestCode : " + requestCode, false);
         Debug.e("resultCode : " + resultCode, false);
         if (requestCode == REQUEST_SCAN_BARCODE) {
-            if (data != null) {
-                Bundle bundle = data.getExtras();
-                Debug.bundle(bundle);
+            if (resultCode == Activity.RESULT_OK) {
+                if (data != null) {
+                    Bundle bundle = data.getExtras();
+                    Debug.bundle(bundle);
 
-                String barcode = bundle.getString(BarcodeCaptureActivity.BarcodeObject, "");
-                Debug.e("BARCODE : " + barcode, false);
+                    String barcode = bundle.getString(BarcodeCaptureActivity.BarcodeObject, "");
+                    Debug.e("BARCODE : " + barcode, false);
+                }
+            } else {
+                // TODO Add snackbar saying couldnot find any qr
+                Debug.c();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);

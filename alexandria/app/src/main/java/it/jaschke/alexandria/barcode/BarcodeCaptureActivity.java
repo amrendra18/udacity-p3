@@ -31,7 +31,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -44,17 +43,24 @@ import com.google.android.gms.vision.barcode.BarcodeDetector;
 import java.io.IOException;
 
 import it.jaschke.alexandria.R;
-import it.jaschke.alexandria.logger.Debug;
 import it.jaschke.alexandria.barcode.camera.CameraSource;
 import it.jaschke.alexandria.barcode.camera.CameraSourcePreview;
 import it.jaschke.alexandria.barcode.camera.GraphicOverlay;
+import it.jaschke.alexandria.logger.Debug;
 
 /**
+ * Barcode Reader code taken from google samples
+ * https://github.com/googlesamples/android-vision/tree/master/visionSamples/barcode-reader
+ * <p>
+ * Modified slightly to add a callback when barcode is read
+ * http://stackoverflow.com/questions/32021193/how-to-capture-barcode-values-using-the-new-barcode-api-in-google-play-services
+ * <p>
+ * <p>
  * Activity for the multi-tracker app.  This app detects barcodes and displays the value with the
  * rear facing camera. During detection overlay graphics are drawn to indicate the position,
  * size, and ID of each barcode.
  */
-public final class BarcodeCaptureActivity extends AppCompatActivity {
+public final class BarcodeCaptureActivity extends Activity {
     private static final String TAG = "Barcode-reader";
 
     // intent request code to handle updating play services if needed.
@@ -333,5 +339,10 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
             setResult(Activity.RESULT_CANCELED, resultIntent);
         }
         super.finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

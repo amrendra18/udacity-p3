@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout
     android:id="@+id/topLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:keepScreenOn="true"
     android:orientation="vertical">
 
@@ -19,5 +18,4 @@
             android:layout_height="match_parent"/>
 
     </it.jaschke.alexandria.barcode.camera.CameraSourcePreview>
-
 </LinearLayout>
