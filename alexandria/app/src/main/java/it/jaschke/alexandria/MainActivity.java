@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
             actionBar.setLogo(R.drawable.ic_launcher);
             actionBar.setDisplayUseLogoEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer);
         }
 
 

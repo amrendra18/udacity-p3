@@ -150,6 +150,7 @@ public class NavigationDrawerFragment extends Fragment {
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
+                burgerIcon();
                 if (!isAdded()) {
                     return;
                 }
@@ -159,11 +160,10 @@ public class NavigationDrawerFragment extends Fragment {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
+                backIcon();
                 if (!isAdded()) {
                     return;
                 }
-                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R
-                        .string.app_name));
                 if (!mUserLearnedDrawer) {
                     // The user manually opened the drawer; store this flag to prevent auto-showing
                     // the navigation drawer automatically in the future.
@@ -262,5 +262,22 @@ public class NavigationDrawerFragment extends Fragment {
          * Called when an item in the navigation drawer is selected.
          */
         void onNavigationDrawerItemSelected(int position);
+    }
+
+    private void burgerIcon() {
+        ActionBar ab = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (ab != null) {
+            ab.setHomeAsUpIndicator(R.drawable.ic_drawer);
+        }
+    }
+
+    private void backIcon() {
+        mDrawerToggle.setDrawerIndicatorEnabled(true
+        );
+        ActionBar ab = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (ab != null) {
+            ab.setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+            ab.setTitle(getString(R.string.app_name));
+        }
     }
 }
