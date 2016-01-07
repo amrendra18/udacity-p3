@@ -1,6 +1,5 @@
 package it.jaschke.alexandria;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -91,7 +90,6 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_add_book, container, false);
         ButterKnife.bind(this, rootView);
-
         eanEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -238,16 +236,6 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
         bookCoverImageView.setVisibility(View.INVISIBLE);
         saveButton.setVisibility(View.INVISIBLE);
         deleteButton.setVisibility(View.INVISIBLE);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Debug.c();
-        ActionBar actionBar = getActivity().getActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle(R.string.scan);
-        }
     }
 
     @Override

@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import it.jaschke.alexandria.api.Callback;
+import it.jaschke.alexandria.logger.Debug;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawerFragment
@@ -41,10 +42,15 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     private Toolbar toolbar;
 
+    // slide menu items
+    private String[] navMenuTitles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
+
         IS_TABLET = isTablet();
         if (IS_TABLET) {
             setContentView(R.layout.activity_main_tablet);
@@ -54,6 +60,13 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setLogo(R.drawable.ic_launcher);
+            actionBar.setDisplayUseLogoEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+        }
 
 
         messageReciever = new MessageReciever();
@@ -67,6 +80,10 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         // Set up the drawer.
         navigationDrawerFragment.setUp(R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+    }
+
+    public String[] getNavMenuStrings() {
+        return navMenuTitles;
     }
 
     @Override
@@ -86,13 +103,17 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
             case 2:
                 nextFragment = new About();
                 break;
-
         }
+
+        title = navMenuTitles[position];
 
         fragmentManager.beginTransaction()
                 .replace(R.id.container, nextFragment)
                 .addToBackStack((String) title)
                 .commit();
+
+        setUpTitle((String) title);
+
     }
 
     public void setTitle(int titleId) {
@@ -100,10 +121,20 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     }
 
     public void restoreActionBar() {
+        Debug.c();
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(title);
+        if (actionBar != null) {
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setTitle(title);
+        }
+    }
+
+    public void setUpTitle(String title) {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(title);
+        }
     }
 
 
@@ -114,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.main, menu);
-            restoreActionBar();
+            //restoreActionBar();
             return true;
         }
         return super.onCreateOptionsMenu(menu);
@@ -155,8 +186,9 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         }
         getSupportFragmentManager().beginTransaction()
                 .replace(id, fragment)
-                .addToBackStack("Book Detail")
+                .addToBackStack(getResources().getString(R.string.detail))
                 .commit();
+
 
     }
 
@@ -181,10 +213,14 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     @Override
     public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() < 2) {
+        int pos = getSupportFragmentManager().getBackStackEntryCount();
+        if (pos < 2) {
             finish();
+        } else {
+            String tr = getSupportFragmentManager().getBackStackEntryAt(pos - 2).getName();
+            setUpTitle(tr);
+            super.onBackPressed();
         }
-        super.onBackPressed();
     }
 
 

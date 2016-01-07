@@ -2,6 +2,11 @@
 - Books browsign app
 
 
+#Changes
+- Added Google Vision API for barcode reading
+- Updated Nav drawer with latest material theme
+- Fix issue of improper title when pressed back
+
 
 
 ##Acknowledgments
