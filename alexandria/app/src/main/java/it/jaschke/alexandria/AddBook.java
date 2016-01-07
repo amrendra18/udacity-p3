@@ -1,5 +1,6 @@
 package it.jaschke.alexandria;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -243,7 +244,10 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
     public void onAttach(Context context) {
         super.onAttach(context);
         Debug.c();
-        getActivity().setTitle(R.string.scan);
+        ActionBar actionBar = getActivity().getActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(R.string.scan);
+        }
     }
 
     @Override
