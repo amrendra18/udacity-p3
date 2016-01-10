@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
         // Set up the drawer.
         navigationDrawerFragment.setUp(R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
+                (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
     }
 
     public String[] getNavMenuStrings() {
@@ -121,15 +121,6 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         title = getString(titleId);
     }
 
-    public void restoreActionBar() {
-        Debug.c();
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-            actionBar.setDisplayShowTitleEnabled(true);
-            actionBar.setTitle(title);
-        }
-    }
 
     public void setUpTitle(String title) {
         ActionBar actionBar = getSupportActionBar();
