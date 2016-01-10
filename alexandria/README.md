@@ -13,7 +13,7 @@
 - Crash on rotation
 - Crash when error in string split
 - ListView should scroll
-
+- Use Gilde/Picasso for image caching
 
 ##Acknowledgments
 - [BarCodes APIs](https://search-codelabs.appspot.com/codelabs/bar-codes)

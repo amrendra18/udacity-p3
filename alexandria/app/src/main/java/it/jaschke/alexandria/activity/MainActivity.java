@@ -1,4 +1,4 @@
-package it.jaschke.alexandria;
+package it.jaschke.alexandria.activity;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -19,14 +19,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import it.jaschke.alexandria.fragments.NavigationDrawerFragment;
+import it.jaschke.alexandria.R;
 import it.jaschke.alexandria.api.Callback;
 import it.jaschke.alexandria.barcode.BarcodeCaptureActivity;
+import it.jaschke.alexandria.fragments.About;
+import it.jaschke.alexandria.fragments.AddBook;
+import it.jaschke.alexandria.fragments.BookDetail;
+import it.jaschke.alexandria.fragments.ListOfBooks;
 import it.jaschke.alexandria.logger.Debug;
-import it.jaschke.alexandria.services.BookService;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationDrawerFragment
-        .NavigationDrawerCallbacks, Callback {
+public class MainActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks, Callback {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.

@@ -1,4 +1,4 @@
-package it.jaschke.alexandria;
+package it.jaschke.alexandria.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -20,6 +20,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import it.jaschke.alexandria.R;
+import it.jaschke.alexandria.activity.MainActivity;
 import it.jaschke.alexandria.logger.Debug;
 
 /**
