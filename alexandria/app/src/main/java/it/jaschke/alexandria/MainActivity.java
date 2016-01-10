@@ -1,5 +1,6 @@
 package it.jaschke.alexandria;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -19,7 +20,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import it.jaschke.alexandria.api.Callback;
+import it.jaschke.alexandria.barcode.BarcodeCaptureActivity;
 import it.jaschke.alexandria.logger.Debug;
+import it.jaschke.alexandria.services.BookService;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawerFragment
@@ -205,9 +208,40 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         } else {
             String tr = getSupportFragmentManager().getBackStackEntryAt(pos - 2).getName();
             setUpTitle(tr);
-            super.onBackPressed();
         }
+        super.onBackPressed();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Debug.e("requestCode : " + requestCode, false);
+        Debug.e("resultCode : " + resultCode, false);
+        if (requestCode == AddBook.REQUEST_SCAN_BARCODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data != null) {
+                    Bundle bundle = data.getExtras();
+                    Debug.bundle(bundle);
+                    String barcode = bundle.getString(BarcodeCaptureActivity.BarcodeObject, "");
+                    Debug.showToastShort("BARCODE : " + barcode, this);
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    Fragment addBook = new AddBook();
+                    Bundle args = new Bundle();
+                    args.putString(AddBook.SCANNED_BARCODE, barcode);
+                    addBook.setArguments(args);
+                    //remove the previous addBook fragment
+                    fragmentManager.popBackStack();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.container, addBook)
+                            .addToBackStack((String) title)
+                            .commit();
+
+                }
+            } else {
+                // TODO Add snackbar saying couldnot find any qr
+                Debug.c();
+            }
+        }
+    }
 
 }

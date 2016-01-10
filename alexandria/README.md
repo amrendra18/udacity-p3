@@ -11,6 +11,8 @@
 #Todo
 - Accessibility
 - Crash on rotation
+- Crash when error in string split
+- ListView should scroll
 
 
 ##Acknowledgments
