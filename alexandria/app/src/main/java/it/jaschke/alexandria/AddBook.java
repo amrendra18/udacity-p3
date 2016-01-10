@@ -89,6 +89,7 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_add_book, container, false);
+        getActivity().setTitle(getString(R.string.scan));
         ButterKnife.bind(this, rootView);
         eanEditText.addTextChangedListener(new TextWatcher() {
             @Override

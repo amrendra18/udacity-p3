@@ -1,12 +1,16 @@
 #Alexandria
-- Books browsign app
+- Books browsing app
 
 
 #Changes
 - Added Google Vision API for barcode reading
 - Updated Nav drawer with latest material theme
 - Fix issue of improper title when pressed back
+- Updated deprecated v4.ActionBarDrawerToggle to v7.ActionBarDrawerToggle
 
+#Todo
+- Accessibility
+- Crash on rotation
 
 
 ##Acknowledgments

@@ -40,8 +40,6 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     public static final String MESSAGE_EVENT = "MESSAGE_EVENT";
     public static final String MESSAGE_KEY = "MESSAGE_EXTRA";
 
-    private Toolbar toolbar;
-
     // slide menu items
     private String[] navMenuTitles;
 
@@ -58,15 +56,14 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
             setContentView(R.layout.activity_main);
         }
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setLogo(R.drawable.ic_launcher);
             actionBar.setDisplayUseLogoEnabled(true);
-            actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer);
+            //actionBar.setDisplayShowHomeEnabled(true);
         }
 
 
@@ -76,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
         navigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-        title = getTitle();
+        //title = getTitle();
 
         // Set up the drawer.
         navigationDrawerFragment.setUp(R.id.navigation_drawer,
@@ -89,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-
+        Debug.c();
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment nextFragment;
 
@@ -117,12 +114,9 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     }
 
-    public void setTitle(int titleId) {
-        title = getString(titleId);
-    }
-
 
     public void setUpTitle(String title) {
+        Debug.e(title, false);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(title);
