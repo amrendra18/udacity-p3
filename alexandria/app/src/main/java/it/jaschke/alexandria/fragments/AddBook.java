@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -25,7 +27,6 @@ import it.jaschke.alexandria.barcode.BarcodeCaptureActivity;
 import it.jaschke.alexandria.data.AlexandriaContract;
 import it.jaschke.alexandria.logger.Debug;
 import it.jaschke.alexandria.services.BookService;
-import it.jaschke.alexandria.services.DownloadImage;
 
 
 public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -210,7 +211,11 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
         authorsTextView.setText(authors.replace(",", "\n"));
         String imgUrl = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL));
         if (Patterns.WEB_URL.matcher(imgUrl).matches()) {
-            new DownloadImage(bookCoverImageView).execute(imgUrl);
+            Glide.with(getActivity())
+                    .load(imgUrl).asBitmap()
+                    .placeholder(R.drawable.ic_launcher)
+                    .error(R.drawable.ic_launcher)
+                    .into(bookCoverImageView);
             bookCoverImageView.setVisibility(View.VISIBLE);
         }
 

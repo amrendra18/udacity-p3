@@ -4,16 +4,17 @@
 
 #Changes
 - Added Google Vision API for barcode reading
+- Added new book functionality using barcode
 - Updated Nav drawer with latest material theme
-- Fix issue of improper title when pressed back
+- Fixed issue of improper title when pressed back
 - Updated deprecated v4.ActionBarDrawerToggle to v7.ActionBarDrawerToggle
+- Used Glide for async image loading & caching
 
 #Todo
 - Accessibility
 - Crash on rotation
 - Crash when error in string split
-- ListView should scroll
-- Use Gilde/Picasso for image caching
+- Use Gilde/Picasso for image loading/caching
 
 ##Acknowledgments
 - [BarCodes APIs](https://search-codelabs.appspot.com/codelabs/bar-codes)
