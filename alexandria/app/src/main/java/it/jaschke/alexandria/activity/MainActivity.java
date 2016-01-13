@@ -2,7 +2,6 @@ package it.jaschke.alexandria.activity;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
@@ -18,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import it.jaschke.alexandria.receiver.MessageReceiver;
 
 import it.jaschke.alexandria.fragments.NavigationDrawerFragment;
 import it.jaschke.alexandria.R;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
      */
     private CharSequence title;
     public static boolean IS_TABLET = false;
-    private BroadcastReceiver messageReciever;
+    private BroadcastReceiver messageReceiver;
 
     public static final String MESSAGE_EVENT = "MESSAGE_EVENT";
     public static final String MESSAGE_KEY = "MESSAGE_EXTRA";
@@ -70,17 +71,15 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         if (actionBar != null) {
             actionBar.setLogo(R.drawable.ic_launcher);
             actionBar.setDisplayUseLogoEnabled(true);
-            //actionBar.setDisplayShowHomeEnabled(true);
         }
 
 
-        messageReciever = new MessageReciever();
+        messageReceiver = new MessageReceiver();
         IntentFilter filter = new IntentFilter(MESSAGE_EVENT);
-        LocalBroadcastManager.getInstance(this).registerReceiver(messageReciever, filter);
+        LocalBroadcastManager.getInstance(this).registerReceiver(messageReceiver, filter);
 
         navigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-        //title = getTitle();
 
         // Set up the drawer.
         navigationDrawerFragment.setUp(R.id.navigation_drawer,
@@ -161,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     @Override
     protected void onDestroy() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(messageReciever);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(messageReceiver);
         super.onDestroy();
     }
 
@@ -186,15 +185,6 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     }
 
-    private class MessageReciever extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getStringExtra(MESSAGE_KEY) != null) {
-                Toast.makeText(MainActivity.this, intent.getStringExtra(MESSAGE_KEY), Toast.LENGTH_LONG).show();
-            }
-        }
-    }
-
     public void goBack(View view) {
         getSupportFragmentManager().popBackStack();
     }
@@ -207,6 +197,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     @Override
     public void onBackPressed() {
+        // Check for correct title to be set, when previous fragment is popped.
         int pos = getSupportFragmentManager().getBackStackEntryCount();
         if (pos < 2) {
             finish();
@@ -220,15 +211,12 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Debug.e("requestCode : " + requestCode, false);
-        Debug.e("resultCode : " + resultCode, false);
         if (requestCode == AddBook.REQUEST_SCAN_BARCODE) {
             if (resultCode == Activity.RESULT_OK) {
                 if (data != null) {
                     Bundle bundle = data.getExtras();
                     Debug.bundle(bundle);
                     String barcode = bundle.getString(BarcodeCaptureActivity.BarcodeObject, "");
-                    Debug.showToastShort("BARCODE : " + barcode, this);
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     Fragment addBook = new AddBook();
                     Bundle args = new Bundle();
@@ -243,8 +231,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
                 }
             } else {
-                // TODO Add snackbar saying couldnot find any qr
-                Debug.c();
+                Toast.makeText(this, getString(R.string.error_reading_barcode), Toast.LENGTH_SHORT).show();
             }
         }
     }
