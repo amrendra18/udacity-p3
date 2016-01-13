@@ -177,6 +177,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         if (findViewById(R.id.right_container) != null) {
             id = R.id.right_container;
         }
+        setUpTitle(getResources().getString(R.string.detail));
         getSupportFragmentManager().beginTransaction()
                 .replace(id, fragment)
                 .addToBackStack(getResources().getString(R.string.detail))

@@ -34,6 +34,8 @@
     <string name="back_button">go back</string>
     <string name="share_text">A must read book: </string>
 
+    <string name="no_internet_connection">Oops.. there seems to be a problem with network.</string>
+    <string name="bad_server_response">Server sent bad response, please try again</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="about_text">This application gets book information from a Google API. All titles, cover images, and author information come from there.
     The original version of this app was built by Sascha Jaschke, and updated by Amrendra Kumar as part of Udacity Android Nanodegree program. </string>
