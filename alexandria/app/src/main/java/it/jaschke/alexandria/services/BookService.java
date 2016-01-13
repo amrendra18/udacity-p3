@@ -74,16 +74,16 @@ public class BookService extends IntentService {
      */
     private void fetchBook(String ean) {
 
+        if (ean == null || ean.length() != 13) {
+            return;
+        }
+
         // Before making any network calls, better check if network is connected.
         if (!NetworkUtils.isNetworkConnected(getApplicationContext())) {
             Debug.c();
             Intent messageIntent = new Intent(MainActivity.MESSAGE_EVENT);
             messageIntent.putExtra(MainActivity.MESSAGE_KEY, getResources().getString(R.string.no_internet_connection));
             LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(messageIntent);
-            return;
-        }
-
-        if (ean.length() != 13) {
             return;
         }
 

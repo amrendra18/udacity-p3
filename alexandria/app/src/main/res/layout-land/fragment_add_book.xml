@@ -100,7 +100,7 @@
             android:layout_alignParentRight="true"
             >
 
-            <ImageButton
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:contentDescription="@string/cancel_button"
@@ -111,7 +111,7 @@
                 android:visibility="invisible"
                 />
 
-            <ImageButton
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:contentDescription="@string/ok_button"
