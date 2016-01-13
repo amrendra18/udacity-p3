@@ -10,6 +10,7 @@
 - Updated deprecated v4.ActionBarDrawerToggle to v7.ActionBarDrawerToggle
 - Used Glide for async image loading & caching
 - Fixed crash on searching for book without internet connection
+- Used butterknife for elegant code + code formatting
 
 
 #Todo

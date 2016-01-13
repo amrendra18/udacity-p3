@@ -13,20 +13,31 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import it.jaschke.alexandria.R;
 import it.jaschke.alexandria.api.BookListAdapter;
 import it.jaschke.alexandria.api.Callback;
 import it.jaschke.alexandria.data.AlexandriaContract;
 
 
-public class ListOfBooks extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class ListOfBooks extends Fragment {
 
     private BookListAdapter bookListAdapter;
-    private ListView bookList;
     private int position = ListView.INVALID_POSITION;
-    private EditText searchText;
-
     private final int LOADER_ID = 10;
+
+    @Bind(R.id.listOfBooks)
+    ListView bookList;
+
+    @Bind(R.id.searchText)
+    EditText searchText;
+
+    @OnClick(R.id.searchButton)
+    public void searchButtonClicked(View v) {
+        ListOfBooks.this.restartLoader();
+    }
 
     public ListOfBooks() {
     }
@@ -48,25 +59,16 @@ public class ListOfBooks extends Fragment implements LoaderManager.LoaderCallbac
         );
         bookListAdapter = new BookListAdapter(getActivity(), cursor, 0);
         View rootView = inflater.inflate(R.layout.fragment_list_of_books, container, false);
-        searchText = (EditText) rootView.findViewById(R.id.searchText);
-        rootView.findViewById(R.id.searchButton).setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ListOfBooks.this.restartLoader();
-                    }
-                }
-        );
+        ButterKnife.bind(this, rootView);
 
-        bookList = (ListView) rootView.findViewById(R.id.listOfBooks);
         bookList.setAdapter(bookListAdapter);
-
         bookList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
                 Cursor cursor = bookListAdapter.getCursor();
-                if (cursor != null && cursor.moveToPosition(position)) {
+                if (cursor != null && cursor.moveToPosition(pos)) {
+                    position = pos;
                     ((Callback) getActivity())
                             .onItemSelected(cursor.getString(cursor.getColumnIndex(AlexandriaContract.BookEntry._ID)));
                 }
@@ -76,49 +78,61 @@ public class ListOfBooks extends Fragment implements LoaderManager.LoaderCallbac
         return rootView;
     }
 
-    private void restartLoader() {
-        getLoaderManager().restartLoader(LOADER_ID, null, this);
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+    private void restartLoader() {
+        if (getLoaderManager().getLoader(LOADER_ID) == null) {
+            getLoaderManager().initLoader(LOADER_ID, null, bookListLoaderCallbacks);
+        } else {
+            getLoaderManager().restartLoader(LOADER_ID, null, bookListLoaderCallbacks);
+        }
+    }
 
-        final String selection = AlexandriaContract.BookEntry.TITLE + " LIKE ? OR " + AlexandriaContract.BookEntry.SUBTITLE + " LIKE ? ";
-        String searchString = searchText.getText().toString();
+    private LoaderManager.LoaderCallbacks<Cursor> bookListLoaderCallbacks
+            = new LoaderManager.LoaderCallbacks<Cursor>() {
+        @Override
+        public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
-        if (searchString.length() > 0) {
-            searchString = "%" + searchString + "%";
+            final String selection = AlexandriaContract.BookEntry.TITLE + " LIKE ? OR " + AlexandriaContract.BookEntry.SUBTITLE + " LIKE ? ";
+            String searchString = searchText.getText().toString();
+
+            if (searchString.length() > 0) {
+                searchString = "%" + searchString + "%";
+                return new CursorLoader(
+                        getActivity(),
+                        AlexandriaContract.BookEntry.CONTENT_URI,
+                        null,
+                        selection,
+                        new String[]{searchString, searchString},
+                        null
+                );
+            }
+
             return new CursorLoader(
                     getActivity(),
                     AlexandriaContract.BookEntry.CONTENT_URI,
                     null,
-                    selection,
-                    new String[]{searchString, searchString},
+                    null,
+                    null,
                     null
             );
         }
 
-        return new CursorLoader(
-                getActivity(),
-                AlexandriaContract.BookEntry.CONTENT_URI,
-                null,
-                null,
-                null,
-                null
-        );
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        bookListAdapter.swapCursor(data);
-        if (position != ListView.INVALID_POSITION) {
-            bookList.smoothScrollToPosition(position);
+        @Override
+        public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+            bookListAdapter.swapCursor(data);
+            if (position != ListView.INVALID_POSITION) {
+                bookList.smoothScrollToPosition(position);
+            }
         }
-    }
 
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        bookListAdapter.swapCursor(null);
-    }
-
+        @Override
+        public void onLoaderReset(Loader<Cursor> loader) {
+            bookListAdapter.swapCursor(null);
+        }
+    };
 }

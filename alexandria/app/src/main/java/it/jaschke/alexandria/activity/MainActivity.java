@@ -230,8 +230,6 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
                             .commit();
 
                 }
-            } else {
-                Toast.makeText(this, getString(R.string.error_reading_barcode), Toast.LENGTH_SHORT).show();
             }
         }
     }
