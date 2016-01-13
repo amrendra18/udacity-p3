@@ -15,11 +15,13 @@
 
 #Todo
 - Add Accessibility
-- Crash on rotation
+- Crash on rotation [Done]
 - Crash when error in string split
 - Use Gilde for image loading/caching [Done]
 - Use retrofit for rest api call
-
+- Update layouts to enhance UI
+- Add dynamic search with every char in listOfBooks fragment
+- Remove un-necessary annoying keyboard
 
 ##Acknowledgments
 - [BarCodes APIs](https://search-codelabs.appspot.com/codelabs/bar-codes)
