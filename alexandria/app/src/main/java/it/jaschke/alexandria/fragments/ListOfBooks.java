@@ -20,6 +20,7 @@ import it.jaschke.alexandria.R;
 import it.jaschke.alexandria.api.BookListAdapter;
 import it.jaschke.alexandria.api.Callback;
 import it.jaschke.alexandria.data.AlexandriaContract;
+import it.jaschke.alexandria.logger.Debug;
 
 
 public class ListOfBooks extends Fragment {
@@ -49,6 +50,7 @@ public class ListOfBooks extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Debug.c();
         getActivity().setTitle(getString(R.string.books));
         Cursor cursor = getActivity().getContentResolver().query(
                 AlexandriaContract.BookEntry.CONTENT_URI,
@@ -75,6 +77,7 @@ public class ListOfBooks extends Fragment {
             }
         });
 
+        restartLoader();
         return rootView;
     }
 
