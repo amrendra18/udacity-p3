@@ -17,8 +17,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -62,7 +62,7 @@ public class BookDetail extends Fragment {
     TextView categoriesTextView;
 
     @Bind(R.id.backButton)
-    ImageButton backButton;
+    Button backButton;
 
     @Bind(R.id.fullBookCover)
     ImageView bookCoverImageView;
