@@ -1,52 +1,53 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context=".fragments.ListOfBooks">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal|top"
+    android:orientation="vertical"
+    >
 
-    <RelativeLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center_horizontal|top">
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/searchButton"
-            android:src="@drawable/ic_action_search"
-            android:contentDescription="@string/search"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_marginTop="5dp"
-            android:layout_alignParentEnd="true"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:background="@color/colorPrimaryTransparent"
+        android:orientation="horizontal">
 
         <EditText
-            android:layout_width = "fill_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/searchText"
-            android:inputType="text"
-            android:saveEnabled="true"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_toLeftOf="@+id/searchButton"
-            android:layout_toStartOf="@+id/searchButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_weight="1"
+            android:hint="@string/search_text"
+            android:inputType="text"
+            android:saveEnabled="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimary"/>
+
+        <ImageButton
+            android:id="@+id/searchButton"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/search"
+            android:src="@drawable/ic_action_search"/>
 
 
-        <ListView android:id="@+id/listOfBooks"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:layout_alignParentLeft="true"
-                  android:layout_marginLeft="0dp"
-                  android:layout_below="@+id/searchText"
-                  android:layout_alignRight="@id/searchButton"
-                  android:layout_alignParentRight="true"
-                  android:layout_alignParentStart="true"
-                  android:layout_toRightOf="@id/searchButton"/>
+    </LinearLayout>
 
 
+    <ListView
+        android:id="@+id/listOfBooks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingEnd="4dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingStart="4dp"/>
 
-    </RelativeLayout>
 
-</FrameLayout>
+</LinearLayout>

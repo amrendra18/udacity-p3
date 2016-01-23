@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
 import android.util.Patterns;
@@ -30,6 +31,7 @@ import butterknife.OnClick;
 import it.jaschke.alexandria.R;
 import it.jaschke.alexandria.activity.MainActivity;
 import it.jaschke.alexandria.data.AlexandriaContract;
+import it.jaschke.alexandria.logger.Debug;
 import it.jaschke.alexandria.services.BookService;
 
 
@@ -60,6 +62,12 @@ public class BookDetail extends Fragment {
 
     @Bind(R.id.categories)
     TextView categoriesTextView;
+
+    @Bind(R.id.authors_title)
+    TextView authorsTitleTextView;
+
+    @Bind(R.id.categories_title)
+    TextView categoriesTitleTextView;
 
     @Bind(R.id.backButton)
     Button backButton;
@@ -132,7 +140,7 @@ public class BookDetail extends Fragment {
     private LoaderManager.LoaderCallbacks<Cursor> bookDetailsLoaderCallbacks
             = new LoaderManager.LoaderCallbacks<Cursor>() {
         @Override
-        public android.support.v4.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        public Loader<Cursor> onCreateLoader(int id, Bundle args) {
             return new CursorLoader(
                     getActivity(),
                     AlexandriaContract.BookEntry.buildFullBookUri(Long.parseLong(ean)),
@@ -165,18 +173,31 @@ public class BookDetail extends Fragment {
             }
 
             String bookSubTitle = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.SUBTITLE));
-            bookSubTitleTextView.setText(bookSubTitle);
+            if (bookSubTitle != null && bookSubTitle.trim().length() > 0) {
+                bookSubTitleTextView.setText(bookSubTitle);
+            } else {
+                bookSubTitleTextView.setVisibility(View.GONE);
+            }
+
 
             String desc = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.DESC));
+            if (!(desc != null && desc.trim().length() > 0)) {
+                desc = getString(R.string.no_description);
+            }
             bookDescTextView.setText(desc);
 
+
             String authors = data.getString(data.getColumnIndex(AlexandriaContract.AuthorEntry.AUTHOR));
-            if (authors != null) {
+            if (authors != null && authors.trim().length() > 0) {
                 String[] authorsArr = authors.split(",");
                 authorsTextView.setLines(authorsArr.length);
                 authorsTextView.setText(authors.replace(",", "\n"));
+            } else {
+                authorsTitleTextView.setVisibility(View.GONE);
+                authorsTextView.setVisibility(View.GONE);
             }
             String imgUrl = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL));
+            Debug.e("url : " + imgUrl, false);
             if (Patterns.WEB_URL.matcher(imgUrl).matches()) {
 
                 Glide.with(getActivity())
@@ -186,10 +207,17 @@ public class BookDetail extends Fragment {
                         .into(bookCoverImageView);
 
                 bookCoverImageView.setVisibility(View.VISIBLE);
+            } else {
+                bookCoverImageView.setVisibility(View.GONE);
             }
 
             String categories = data.getString(data.getColumnIndex(AlexandriaContract.CategoryEntry.CATEGORY));
-            categoriesTextView.setText(categories);
+            if (categories != null && categories.trim().length() > 0) {
+                categoriesTextView.setText(categories);
+            } else {
+                categoriesTitleTextView.setVisibility(View.GONE);
+                categoriesTextView.setVisibility(View.GONE);
+            }
 
             if (rightFrameContainer != null) {
                 backButton.setVisibility(View.INVISIBLE);
