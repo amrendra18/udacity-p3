@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Menu Items -->
+    <string name="books">Liste der Bücher</string>
+    <string name="scan">Scan / hinzufügen buchen</string>
+    <string name="about">Über Alexandria</string>
+    <string name="detail">buchen Details</string>
+
+    <!-- Nav Drawer Menu Items -->
+    <string-array name="nav_drawer_items">
+        <item>@string/books</item>
+        <item>@string/scan</item>
+        <item>@string/about</item>
+    </string-array>
+
+
+    <string name="navigation_drawer_open">Offenen Schublade Navigation</string>
+    <string name="navigation_drawer_close">Schublade schließen Navigation</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="scan_button">Scan</string>
+    <string name="input_hint">ISBN-13-Einsatz. Nur Ziffern.</string>
+    <string name="book_cover">Bucheinband</string>
+
+    <string name="ok_button">sparen</string>
+    <string name="cancel_button">Abbrechen</string>
+    <string name="not_found">Buchen Sie nicht gefunden</string>
+    <string name="search">Suche</string>
+    <string name="delete">Buch löschen</string>
+    <string name="pref_startScreen">Startbildschirm auswählen</string>
+    <string name="title_activity_settings">Einstellungen</string>
+    <string name="action_share">Teilen</string>
+    <string name="back_button">zurückgehen</string>
+    <string name="delete_button">löschen</string>
+    <string name="share_text">Ein Muss Buch lesen:</string>
+    <string name="author_label">Autor:</string>
+    <string name="category_label">Kategorien: </string>
+
+    <string name="no_internet_connection">Oops .. Es scheint ein Problem mit der Netzwerk sein.</string>
+    <string name="bad_server_response">Server gesendet schlechte Antwort, versuchen Sie es erneut</string>
+    <string name="error_reading_barcode">Fehler beim Lesen von Barcode, versuchen Sie es erneut</string>
+
+    <string name="about_text">Diese Anwendung erhält Daten von Buch zu Google API. Alle Titel, abdecken Bilder, Informationen über den Autor und essen von dort.
+     Die Originalversion dieser App wurde von Sascha Jaschke als Teil Udacity Android Nanodegree Programm aufgebaut und aktualisiert von Amrendra Kumar,.</string>
+
+
+    <!-- Barcode reader strings -->
+    <string name="ok">Ok</string>
+    <string name="permission_camera_rationale">Zugriff auf die Kamera zur Detektion benötigt</string>
+    <string name="no_camera_permission">Diese Anwendung kann nicht ausgeführt werden, weil sie nicht über die Kamera Genehmigung. Die Anwendung wird nun beendet.</string>
+    <string name="low_storage_error">Die Gesichtserkennung kann Abhängigkeiten aufgrund der geringen Speichergerät nicht heruntergeladen werden</string>
+    <string name="barcode_header">Klicken Sie auf Lesen, um einen Barcode Barcode lesen</string>
+    <string name="read_barcode">Lesen Barcode</string>
+    <string name="auto_focus">Auto Focus</string>
+    <string name="use_flash">Verwenden Sie Flash</string>
+    <string name="barcode_success">Barcode erfolgreich gelesen</string>
+    <string name="barcode_failure">Kein Barcode-Capture-</string>
+    <string name="barcode_error">"Fehler beim Lesen von Barcode: %1$s"</string>
+
+    <string name="search_text">Suchen Sie für Ihr Buch hier</string>
+    <string name="no_description">Hoppla, wir haben keine Beschreibung Vorschau. Bitte lesen Sie die
+         Buchung und fügen Sie es, Bücher zu Google.</string>
+</resources>
