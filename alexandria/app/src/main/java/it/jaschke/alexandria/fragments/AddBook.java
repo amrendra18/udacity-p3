@@ -65,9 +65,14 @@ public class AddBook extends Fragment {
     @Bind(R.id.categories)
     TextView categoriesTextView;
 
+    @Bind(R.id.authors_title)
+    TextView authorsTitleTextView;
+
+    @Bind(R.id.categories_title)
+    TextView categoriesTitleTextView;
+
     @Bind(R.id.bookCover)
     ImageView bookCoverImageView;
-
 
     public AddBook() {
     }
@@ -142,6 +147,7 @@ public class AddBook extends Fragment {
         Intent bookIntent = new Intent(getActivity(), BookService.class);
         bookIntent.putExtra(BookService.EAN, barcode);
         bookIntent.setAction(BookService.FETCH_BOOK);
+        Debug.showToastShort("Fetching info for Barcode : " + barcode, getActivity(), true);
         getActivity().startService(bookIntent);
         AddBook.this.restartLoader();
     }
@@ -179,6 +185,8 @@ public class AddBook extends Fragment {
         bookCoverImageView.setVisibility(View.INVISIBLE);
         saveButton.setVisibility(View.INVISIBLE);
         deleteButton.setVisibility(View.INVISIBLE);
+        authorsTitleTextView.setVisibility(View.INVISIBLE);
+        categoriesTitleTextView.setVisibility(View.INVISIBLE);
     }
 
 
@@ -221,14 +229,23 @@ public class AddBook extends Fragment {
             bookTitleTextView.setText(bookTitle);
 
             String bookSubTitle = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.SUBTITLE));
-            bookSubTitleTextView.setText(bookSubTitle);
+            if (bookSubTitle != null && bookSubTitle.trim().length() > 0) {
+                bookSubTitleTextView.setText(bookSubTitle);
+            } else {
+                bookSubTitleTextView.setVisibility(View.GONE);
+            }
 
             String authors = data.getString(data.getColumnIndex(AlexandriaContract.AuthorEntry.AUTHOR));
-            if (authors != null) {
+            if (authors != null && authors.trim().length() > 0) {
                 String[] authorsArr = authors.split(",");
                 authorsTextView.setLines(authorsArr.length);
                 authorsTextView.setText(authors.replace(",", "\n"));
+                authorsTitleTextView.setVisibility(View.VISIBLE);
+            } else {
+                authorsTitleTextView.setVisibility(View.GONE);
+                authorsTextView.setVisibility(View.GONE);
             }
+
             String imgUrl = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL));
             if (Patterns.WEB_URL.matcher(imgUrl).matches()) {
                 Glide.with(getActivity())
@@ -237,10 +254,18 @@ public class AddBook extends Fragment {
                                 //.error(R.drawable.ic_launcher)
                         .into(bookCoverImageView);
                 bookCoverImageView.setVisibility(View.VISIBLE);
+            } else {
+                bookCoverImageView.setVisibility(View.GONE);
             }
 
             String categories = data.getString(data.getColumnIndex(AlexandriaContract.CategoryEntry.CATEGORY));
-            categoriesTextView.setText(categories);
+            if (categories != null && categories.trim().length() > 0) {
+                categoriesTitleTextView.setVisibility(View.VISIBLE);
+                categoriesTextView.setText(categories);
+            } else {
+                categoriesTitleTextView.setVisibility(View.GONE);
+                categoriesTextView.setVisibility(View.GONE);
+            }
 
             saveButton.setVisibility(View.VISIBLE);
             deleteButton.setVisibility(View.VISIBLE);
@@ -248,7 +273,6 @@ public class AddBook extends Fragment {
 
         @Override
         public void onLoaderReset(Loader<Cursor> loader) {
-
         }
     };
 }

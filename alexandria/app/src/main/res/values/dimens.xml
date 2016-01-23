@@ -13,10 +13,18 @@
 
     <dimen name="standard_margin_small">4dp</dimen>
     <dimen name="standard_padding_small">4dp</dimen>
+    <dimen name="standard_padding_large">8dp</dimen>
     <dimen name="image_padding">2dp</dimen>
 
     <dimen name="list_title_text_size">16sp</dimen>
+    <dimen name="content_text_size">18sp</dimen>
     <dimen name="list_subtitle_text_size">12sp</dimen>
     <integer name="list_title_maxlines">1</integer>
     <integer name="list_subtitle_maxlines">2</integer>
+
+    <dimen name="isbn_et_padding">20dp</dimen>
+
+    <dimen name="book_image_width_list">64dp</dimen>
+
+    <dimen name="search_et_margin">10dp</dimen>
 </resources>

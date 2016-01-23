@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="8dp">
+        android:padding="@dimen/standard_padding_large">
 
         <TextView
             android:id="@+id/fullBookTitle"
@@ -29,7 +29,7 @@
             android:paddingBottom="@dimen/image_padding"
             android:textColor="@color/colorPrimary"
             android:textIsSelectable="true"
-            android:textSize="16sp"
+            android:textSize="@dimen/list_title_text_size"
             android:textStyle="italic"/>
 
     </LinearLayout>
@@ -39,9 +39,9 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:fillViewport="false"
-        android:paddingBottom="8dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp">
+        android:paddingBottom="@dimen/standard_padding_large"
+        android:paddingLeft="@dimen/standard_padding_large"
+        android:paddingRight="@dimen/standard_padding_large">
 
 
         <LinearLayout
@@ -73,7 +73,7 @@
                         android:id="@+id/authors_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Authors:"
+                        android:text="@string/author_label"
                         android:textAllCaps="true"
                         />
 
@@ -88,7 +88,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/standard_margin_small"
-                        android:text="Categories:"
+                        android:text="@string/category_label"
                         android:textAllCaps="true"/>
 
                     <TextView
@@ -109,10 +109,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/standard_margin_small"
                 android:layout_marginTop="@dimen/standard_margin_small"
-                android:textStyle="bold"
-                android:textSize="18sp"
                 android:ellipsize="end"
-                android:spacing="2dp"/>
+                android:spacing="@dimen/image_padding"
+                android:textSize="@dimen/content_text_size"
+                android:textStyle="bold"/>
 
 
         </LinearLayout>

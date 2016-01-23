@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/fullBookCover"
-        android:layout_width="64dp"
+        android:layout_width="@dimen/book_image_width_list"
         android:layout_height="match_parent"
         android:contentDescription="@string/book_cover"
         android:padding="@dimen/image_padding"

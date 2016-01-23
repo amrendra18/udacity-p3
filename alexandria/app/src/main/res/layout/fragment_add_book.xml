@@ -8,10 +8,10 @@
         android:id="@+id/eancontainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:paddingTop="4dp"
+        android:layout_marginBottom="@dimen/standard_margin_small"
         android:background="@color/colorPrimaryTransparent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/standard_padding_small">
 
         <EditText
             android:id="@+id/ean"
@@ -24,10 +24,10 @@
             android:maxLength="@integer/ean_size"
             android:maxLines="1"
             android:minEms="@integer/ean_width"
-            android:paddingEnd="20dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingStart="20dp"
+            android:paddingEnd="@dimen/isbn_et_padding"
+            android:paddingLeft="@dimen/isbn_et_padding"
+            android:paddingRight="@dimen/isbn_et_padding"
+            android:paddingStart="@dimen/isbn_et_padding"
             android:saveEnabled="true"
             android:textColor="@color/colorPrimaryDark"
             android:textColorHint="@color/colorPrimary"/>
@@ -37,74 +37,112 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginEnd="4dp"
-            android:layout_marginRight="4dp"
+            android:layout_marginEnd="@dimen/standard_margin_small"
+            android:layout_marginRight="@dimen/standard_margin_small"
             android:text="@string/scan_button"/>
 
     </LinearLayout>
 
+
     <ScrollView
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:fillViewport="false"
-        android:paddingEnd="4dp"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:paddingStart="4dp">
+        android:paddingEnd="@dimen/standard_padding_large"
+        android:paddingLeft="@dimen/standard_padding_large"
+        android:paddingRight="@dimen/standard_padding_large"
+        android:paddingStart="@dimen/standard_padding_large">
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|top"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/bookTitle"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:paddingRight="20dp"
-                android:textIsSelectable="true"
-                android:textSize="@dimen/head_line"
-                android:textStyle="bold"/>
+                android:orientation="vertical"
+                android:padding="@dimen/standard_padding_large">
 
-            <TextView
-                android:id="@+id/bookSubTitle"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/bookTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textIsSelectable="true"
+                    android:textSize="@dimen/head_line"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/bookSubTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="5"
+                    android:paddingBottom="@dimen/image_padding"
+                    android:textColor="@color/colorPrimary"
+                    android:textIsSelectable="true"
+                    android:textSize="@dimen/list_title_text_size"
+                    android:textStyle="italic"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/bookTitle"
-                android:layout_marginTop="10dp"
-                android:ellipsize="end"
-                android:maxLines="3"
-                />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/authors"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/bookSubTitle"
-                android:layout_marginTop="20dp"
-                android:gravity="end"
-                android:textSize="@dimen/small_fontsize"
-                />
+                <ImageView
+                    android:id="@+id/bookCover"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/book_cover"/>
 
-            <ImageView
-                android:id="@+id/bookCover"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/authors"
-                android:contentDescription="@string/book_cover"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="@dimen/standard_padding_small">
 
-            <TextView
-                android:id="@+id/categories"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/bookCover"
-                android:layout_marginTop="20dp"
-                android:textSize="@dimen/small_fontsize"/>
+                    <TextView
+                        android:id="@+id/authors_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/author_label"
+                        android:textAllCaps="true"
+                        android:visibility="invisible"
+                        />
 
-        </RelativeLayout>
+                    <TextView
+                        android:id="@+id/authors"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/categories_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_margin_small"
+                        android:text="@string/category_label"
+                        android:textAllCaps="true"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:id="@+id/categories"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
 
     </ScrollView>
 
@@ -114,10 +152,10 @@
         android:layout_gravity="bottom|end"
         android:background="@color/colorPrimaryTransparent"
         android:orientation="horizontal"
-        android:paddingEnd="20dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingStart="20dp">
+        android:paddingEnd="@dimen/isbn_et_padding"
+        android:paddingLeft="@dimen/isbn_et_padding"
+        android:paddingRight="@dimen/isbn_et_padding"
+        android:paddingStart="@dimen/isbn_et_padding">
 
         <Button
             android:id="@+id/delete_button"

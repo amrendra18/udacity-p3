@@ -31,7 +31,6 @@ import butterknife.OnClick;
 import it.jaschke.alexandria.R;
 import it.jaschke.alexandria.activity.MainActivity;
 import it.jaschke.alexandria.data.AlexandriaContract;
-import it.jaschke.alexandria.logger.Debug;
 import it.jaschke.alexandria.services.BookService;
 
 
@@ -96,6 +95,10 @@ public class BookDetail extends Fragment {
         }
         View rootView = inflater.inflate(R.layout.fragment_full_book, container, false);
         ButterKnife.bind(this, rootView);
+
+        if (MainActivity.IS_TABLET && rightFrameContainer != null) {
+            backButton.setVisibility(View.GONE);
+        }
         return rootView;
     }
 
@@ -124,9 +127,9 @@ public class BookDetail extends Fragment {
     @Override
     public void onPause() {
         super.onDestroyView();
-        if (MainActivity.IS_TABLET && rightFrameContainer == null) {
+/*        if (MainActivity.IS_TABLET && rightFrameContainer == null) {
             getActivity().getSupportFragmentManager().popBackStack();
-        }
+        }*/
     }
 
     private void restartLoader() {
@@ -197,7 +200,6 @@ public class BookDetail extends Fragment {
                 authorsTextView.setVisibility(View.GONE);
             }
             String imgUrl = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL));
-            Debug.e("url : " + imgUrl, false);
             if (Patterns.WEB_URL.matcher(imgUrl).matches()) {
 
                 Glide.with(getActivity())
@@ -225,7 +227,7 @@ public class BookDetail extends Fragment {
         }
 
         @Override
-        public void onLoaderReset(android.support.v4.content.Loader<Cursor> loader) {
+        public void onLoaderReset(Loader<Cursor> loader) {
 
         }
     };

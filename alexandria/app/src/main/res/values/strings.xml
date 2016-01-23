@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Alexandria</string>
+    <string name="app_name" translatable="false">Alexandria</string>
 
     <!-- Menu Items -->
     <string name="books">List of Books</string>
@@ -34,14 +34,15 @@
     <string name="back_button">go back</string>
     <string name="delete_button">delete</string>
     <string name="share_text">A must read book: </string>
+    <string name="author_label">Authors: </string>
+    <string name="category_label">Categories: </string>
 
     <string name="no_internet_connection">Oops.. there seems to be a problem with network.</string>
     <string name="bad_server_response">Server sent bad response, please try again</string>
     <string name="error_reading_barcode">Error reading barcode, please try again</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="about_text">This application gets book information from a Google API. All titles, cover images, and author information come from there.
-    The original version of this app was built by Sascha Jaschke, and updated by Amrendra Kumar as part of Udacity Android Nanodegree program. </string>
+    The original version of this app was built by Sascha Jaschke, and updated by Amrendra Kumar, as part of Udacity Android Nanodegree program. </string>
 
 
     <!-- Barcode reader strings -->
