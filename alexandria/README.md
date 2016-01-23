@@ -5,23 +5,23 @@
 #Changes
 - Added Google Vision API for barcode reading, so no need for 3rd party barcode reader app
 - Added new book functionality using barcode
-- Updated Nav drawer with latest material theme
+- Updated Nav drawer
 - Fixed issue of improper title when pressed back
+- Fixed bug of improper fragments in stack in case of tablets
 - Updated deprecated v4.ActionBarDrawerToggle to v7.ActionBarDrawerToggle
 - Used Glide for async image loading & caching
 - Fixed crash on searching for book without internet connection
 - Used butterknife for elegant code + code formatting
 - Used custom textview for book content with custom font
 - Refactored UI layout, removed deprecated fill_parent attribute, removed relative layouts
+- Added code for making app accessible to impaired
+- Fixed bug where right container comes in place of main container on tablet rotation
+- Added code for retaining detail book page on mobile/tablet devices.
 
 #Todo
 - Add Accessibility
-- Crash on rotation [Done]
-- Crash when error in string split [Done]
-- Use Gilde for image loading/caching [Done]
 - Use retrofit for rest api call
 - Update layouts to enhance UI
-- Add dynamic search with every char in listOfBooks fragment [Done]
 - Remove un-necessary annoying keyboard
 
 ##Acknowledgments

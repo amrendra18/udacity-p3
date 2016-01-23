@@ -147,6 +147,7 @@
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/add_footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
@@ -154,6 +155,7 @@
         android:orientation="horizontal"
         android:paddingEnd="@dimen/isbn_et_padding"
         android:paddingLeft="@dimen/isbn_et_padding"
+        android:visibility="invisible"
         android:paddingRight="@dimen/isbn_et_padding"
         android:paddingStart="@dimen/isbn_et_padding">
 

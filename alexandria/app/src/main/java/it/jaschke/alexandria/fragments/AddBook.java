@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -73,6 +74,9 @@ public class AddBook extends Fragment {
 
     @Bind(R.id.bookCover)
     ImageView bookCoverImageView;
+
+    @Bind(R.id.add_footer)
+    LinearLayout mLinearLayoutFooter;
 
     public AddBook() {
     }
@@ -187,6 +191,7 @@ public class AddBook extends Fragment {
         deleteButton.setVisibility(View.INVISIBLE);
         authorsTitleTextView.setVisibility(View.INVISIBLE);
         categoriesTitleTextView.setVisibility(View.INVISIBLE);
+        mLinearLayoutFooter.setVisibility(View.INVISIBLE);
     }
 
 
@@ -266,7 +271,7 @@ public class AddBook extends Fragment {
                 categoriesTitleTextView.setVisibility(View.GONE);
                 categoriesTextView.setVisibility(View.GONE);
             }
-
+            mLinearLayoutFooter.setVisibility(View.VISIBLE);
             saveButton.setVisibility(View.VISIBLE);
             deleteButton.setVisibility(View.VISIBLE);
         }

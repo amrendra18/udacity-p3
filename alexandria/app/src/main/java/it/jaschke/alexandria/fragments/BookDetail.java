@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -19,7 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,10 +41,6 @@ public class BookDetail extends Fragment {
     private String ean;
     private String bookTitle;
     private ShareActionProvider shareActionProvider;
-
-    @Nullable
-    @Bind(R.id.right_container)
-    FrameLayout rightFrameContainer;
 
     @Bind(R.id.fullBookTitle)
     TextView bookTitleTextView;
@@ -96,7 +91,8 @@ public class BookDetail extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_full_book, container, false);
         ButterKnife.bind(this, rootView);
 
-        if (MainActivity.IS_TABLET && rightFrameContainer != null) {
+        if (MainActivity.IS_TABLET && getActivity().findViewById(R.id.right_container) !=
+                null) {
             backButton.setVisibility(View.GONE);
         }
         return rootView;
@@ -127,9 +123,9 @@ public class BookDetail extends Fragment {
     @Override
     public void onPause() {
         super.onDestroyView();
-/*        if (MainActivity.IS_TABLET && rightFrameContainer == null) {
-            getActivity().getSupportFragmentManager().popBackStack();
-        }*/
+        if (MainActivity.IS_TABLET && getActivity().findViewById(R.id.right_container) == null) {
+            getActivity().getSupportFragmentManager().popBackStack(getString(R.string.detail), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
     }
 
     private void restartLoader() {
@@ -221,8 +217,9 @@ public class BookDetail extends Fragment {
                 categoriesTextView.setVisibility(View.GONE);
             }
 
-            if (rightFrameContainer != null) {
-                backButton.setVisibility(View.INVISIBLE);
+            if (MainActivity.IS_TABLET && getActivity().findViewById(R.id.right_container) !=
+                    null) {
+                backButton.setVisibility(View.GONE);
             }
         }
 

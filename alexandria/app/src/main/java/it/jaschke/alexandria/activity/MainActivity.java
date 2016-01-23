@@ -29,6 +29,7 @@ import it.jaschke.alexandria.fragments.AddBook;
 import it.jaschke.alexandria.fragments.BookDetail;
 import it.jaschke.alexandria.fragments.ListOfBooks;
 import it.jaschke.alexandria.logger.Debug;
+import it.jaschke.alexandria.utils.AppConstants;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks, Callback {
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     public static final String MESSAGE_EVENT = "MESSAGE_EVENT";
     public static final String MESSAGE_KEY = "MESSAGE_EXTRA";
+
+    private String mEan = null;
 
     // slide menu items
     private String[] navMenuTitles;
@@ -84,6 +87,14 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         // Set up the drawer.
         navigationDrawerFragment.setUp(R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
+
+        if (savedInstanceState != null) {
+            mEan = savedInstanceState.getString(AppConstants.EAN, null);
+            if (IS_TABLET && findViewById(R.id.right_container) != null && mEan != null) {
+                onItemSelected(mEan);
+                mEan = null;
+            }
+        }
     }
 
     public String[] getNavMenuStrings() {
@@ -110,6 +121,12 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         }
 
         title = navMenuTitles[position];
+
+        // if its tablet, clear the right fragment in case of detail
+        if (IS_TABLET && findViewById(R.id.right_container) != null) {
+            fragmentManager.popBackStack(getString(R.string.detail), FragmentManager
+                    .POP_BACK_STACK_INCLUSIVE);
+        }
 
         fragmentManager.beginTransaction()
                 .replace(R.id.container, nextFragment)
@@ -165,9 +182,16 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(AppConstants.EAN, mEan);
+    }
+
+    @Override
     public void onItemSelected(String ean) {
         Bundle args = new Bundle();
         args.putString(BookDetail.EAN_KEY, ean);
+        mEan = ean;
 
         BookDetail fragment = new BookDetail();
         fragment.setArguments(args);
