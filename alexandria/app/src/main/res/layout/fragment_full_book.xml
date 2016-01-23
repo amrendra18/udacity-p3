@@ -125,10 +125,10 @@
         android:layout_gravity="bottom|end"
         android:orientation="horizontal"
         android:background="@color/colorPrimaryTransparent"
-        android:paddingEnd="20dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingStart="20dp">
+        android:paddingEnd="@dimen/isbn_et_padding"
+        android:paddingLeft="@dimen/isbn_et_padding"
+        android:paddingRight="@dimen/isbn_et_padding"
+        android:paddingStart="@dimen/isbn_et_padding">
 
         <Button
             android:id="@+id/delete_button"
