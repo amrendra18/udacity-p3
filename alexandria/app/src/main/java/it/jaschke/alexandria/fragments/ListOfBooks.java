@@ -23,6 +23,7 @@ import it.jaschke.alexandria.api.BookListAdapter;
 import it.jaschke.alexandria.api.Callback;
 import it.jaschke.alexandria.data.AlexandriaContract;
 import it.jaschke.alexandria.logger.Debug;
+import it.jaschke.alexandria.utils.Utils;
 
 
 public class ListOfBooks extends Fragment {
@@ -93,9 +94,10 @@ public class ListOfBooks extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                    restartLoader();
+                restartLoader();
             }
         });
+        Utils.hideKeyboard(getActivity());
         return rootView;
     }
 

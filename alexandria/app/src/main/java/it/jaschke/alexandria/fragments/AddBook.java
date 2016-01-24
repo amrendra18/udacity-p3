@@ -29,6 +29,7 @@ import it.jaschke.alexandria.barcode.BarcodeCaptureActivity;
 import it.jaschke.alexandria.data.AlexandriaContract;
 import it.jaschke.alexandria.logger.Debug;
 import it.jaschke.alexandria.services.BookService;
+import it.jaschke.alexandria.utils.Utils;
 
 
 public class AddBook extends Fragment {
@@ -142,7 +143,7 @@ public class AddBook extends Fragment {
                 eanEditText.setHint("");
             }
         }
-
+        Utils.hideKeyboard(getActivity());
         return rootView;
     }
 

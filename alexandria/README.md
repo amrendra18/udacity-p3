@@ -20,12 +20,8 @@
 - Added localization for DE
 - Added toolbar and back navigation to settings activity
 - Removed deprecated addPreferencesFromResource method from settings activity
+- Removed un-necessary annoying softkeyboard coming up in fragments
 
-#Todo
-- Add Accessibility
-- Use retrofit for rest api call
-- Update layouts to enhance UI
-- Remove un-necessary annoying keyboard
 
 ##Acknowledgments
 - [BarCodes APIs](https://search-codelabs.appspot.com/codelabs/bar-codes)

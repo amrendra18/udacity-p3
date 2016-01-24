@@ -11,6 +11,7 @@
         android:layout_marginBottom="@dimen/standard_margin_small"
         android:background="@color/colorPrimaryTransparent"
         android:orientation="horizontal"
+        android:focusableInTouchMode="true"
         android:paddingTop="@dimen/standard_padding_small">
 
         <EditText

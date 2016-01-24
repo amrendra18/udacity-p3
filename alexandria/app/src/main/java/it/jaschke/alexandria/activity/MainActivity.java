@@ -30,6 +30,7 @@ import it.jaschke.alexandria.fragments.BookDetail;
 import it.jaschke.alexandria.fragments.ListOfBooks;
 import it.jaschke.alexandria.logger.Debug;
 import it.jaschke.alexandria.utils.AppConstants;
+import it.jaschke.alexandria.utils.Utils;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks, Callback {
@@ -88,6 +89,9 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         navigationDrawerFragment.setUp(R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
 
+
+        Utils.hideKeyboard(this);
+
         if (savedInstanceState != null) {
             mEan = savedInstanceState.getString(AppConstants.EAN, null);
             if (IS_TABLET && findViewById(R.id.right_container) != null && mEan != null) {
@@ -95,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
                 mEan = null;
             }
         }
+
     }
 
     public String[] getNavMenuStrings() {
@@ -134,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
                 .commit();
 
         setUpTitle((String) title);
-
+        Utils.hideKeyboard(this);
     }
 
 
@@ -171,6 +176,9 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
+        if (id == android.R.id.home) {
+            Utils.hideKeyboard(this);
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -192,6 +200,8 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         Bundle args = new Bundle();
         args.putString(BookDetail.EAN_KEY, ean);
         mEan = ean;
+
+        Utils.hideKeyboard(this);
 
         BookDetail fragment = new BookDetail();
         fragment.setArguments(args);

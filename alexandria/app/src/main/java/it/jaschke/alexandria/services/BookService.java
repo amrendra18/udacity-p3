@@ -23,7 +23,7 @@ import it.jaschke.alexandria.activity.MainActivity;
 import it.jaschke.alexandria.R;
 import it.jaschke.alexandria.data.AlexandriaContract;
 import it.jaschke.alexandria.logger.Debug;
-import it.jaschke.alexandria.utils.NetworkUtils;
+import it.jaschke.alexandria.utils.Utils;
 
 
 /**
@@ -80,7 +80,7 @@ public class BookService extends IntentService {
         }
 
         // Before making any network calls, better check if network is connected.
-        if (!NetworkUtils.isNetworkConnected(getApplicationContext())) {
+        if (!Utils.isNetworkConnected(getApplicationContext())) {
             Debug.c();
             Intent messageIntent = new Intent(MainActivity.MESSAGE_EVENT);
             messageIntent.putExtra(MainActivity.MESSAGE_KEY, getResources().getString(R.string.no_internet_connection));
