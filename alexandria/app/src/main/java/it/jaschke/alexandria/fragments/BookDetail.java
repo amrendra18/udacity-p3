@@ -167,7 +167,8 @@ public class BookDetail extends Fragment {
                     shareIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 }
                 shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text) + bookTitle);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text) + bookTitle+" | "+
+                        getString(R.string.share_url) + ean);
                 shareActionProvider.setShareIntent(shareIntent);
             }
 

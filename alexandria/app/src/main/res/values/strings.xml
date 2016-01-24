@@ -61,4 +61,5 @@
     <string name="search_text">Search for your book here</string>
     <string name="no_description">Oops, we have no preview description. Please review the
         book and add it to google books.</string>
+    <string name="share_url" translatable="false">https://books.google.com/books?isbn=</string>
 </resources>
