@@ -17,6 +17,9 @@
 - Added code for making app accessible to impaired
 - Fixed bug where right container comes in place of main container on tablet rotation
 - Added code for retaining detail book page on mobile/tablet devices.
+- Added localization for DE
+- Added toolbar and back navigation to settings activity
+- Removed deprecated addPreferencesFromResource method from settings activity
 
 #Todo
 - Add Accessibility
