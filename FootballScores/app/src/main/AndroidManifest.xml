@@ -7,6 +7,11 @@
         android:name="android.permission.INTERNET"
         android:maxSdkVersion="22"/>
 
+    <!-- required for sync adapter-->
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+
     <application
         android:name=".app.FootballApp"
         android:allowBackup="true"
@@ -36,6 +41,30 @@
                 android:value=".app.activity.MainActivity"/>
         </activity>
         <service android:name=".service.MyFetchService"/>
+
+
+        <!-- SyncAdapter's dummy authentication service -->
+        <service android:name=".sync.FootballAuthenticatorService">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator"/>
+        </service>
+
+        <!-- The SyncAdapter service -->
+        <service
+            android:name=".sync.FootballSyncService"
+            android:exported="true"
+            >
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/syncadapter"/>
+        </service>
     </application>
 
 </manifest>

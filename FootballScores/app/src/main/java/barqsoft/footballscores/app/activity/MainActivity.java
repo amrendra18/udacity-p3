@@ -8,13 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import barqsoft.footballscores.R;
-import barqsoft.footballscores.api.FootballApiClientService;
 import barqsoft.footballscores.app.fragments.PagerFragment;
 import barqsoft.footballscores.logger.Debug;
-import barqsoft.footballscores.model.Fixture;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import barqsoft.footballscores.sync.FootballSyncAdapter;
 
 public class MainActivity extends ActionBarActivity {
     public static int selected_match_id;
@@ -37,8 +33,10 @@ public class MainActivity extends ActionBarActivity {
 
 
         // DEBUG
-
         Debug.c();
+        FootballSyncAdapter.initializeSyncAdapter(this);
+
+        /*
         FootballApiClientService.getInstance().getFixtures(getString(R.string.api_key))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -61,7 +59,7 @@ public class MainActivity extends ActionBarActivity {
                         }
                     }
                 });
-
+        */
         Debug.c();
         // DEBUG
     }
