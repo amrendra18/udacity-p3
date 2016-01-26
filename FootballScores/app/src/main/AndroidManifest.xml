@@ -1,39 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="barqsoft.footballscores" >
+<manifest
+    package="barqsoft.footballscores"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission
         android:name="android.permission.INTERNET"
-        android:maxSdkVersion="22" />
+        android:maxSdkVersion="22"/>
 
     <application
+        android:name=".app.FootballApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".app.activity.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
         <provider
             android:name=".ScoresProvider"
-            android:authorities="barqsoft.footballscores" />
+            android:authorities="barqsoft.footballscores"/>
 
         <activity
             android:name=".app.activity.AboutActivity"
             android:label="About"
-            android:parentActivityName=".app.activity.MainActivity" >
+            android:parentActivityName=".app.activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".app.activity.MainActivity" />
+                android:value=".app.activity.MainActivity"/>
         </activity>
-        <service android:name=".service.myFetchService" />
+        <service android:name=".service.myFetchService"/>
     </application>
 
 </manifest>
