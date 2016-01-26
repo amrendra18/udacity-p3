@@ -1,4 +1,4 @@
-package barqsoft.footballscores;
+package barqsoft.footballscores.db;
 
 import android.content.ContentResolver;
 import android.net.Uri;

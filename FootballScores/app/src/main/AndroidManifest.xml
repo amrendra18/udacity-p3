@@ -24,7 +24,7 @@
         </activity>
 
         <provider
-            android:name=".ScoresProvider"
+            android:name=".db.ScoresProvider"
             android:authorities="barqsoft.footballscores"/>
 
         <activity
