@@ -18,7 +18,7 @@ import barqsoft.footballscores.R;
 import barqsoft.footballscores.adapters.ViewHolder;
 import barqsoft.footballscores.app.activity.MainActivity;
 import barqsoft.footballscores.adapters.scoresAdapter;
-import barqsoft.footballscores.service.myFetchService;
+import barqsoft.footballscores.service.MyFetchService;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -33,7 +33,7 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
     }
 
     private void update_scores() {
-        Intent service_start = new Intent(getActivity(), myFetchService.class);
+        Intent service_start = new Intent(getActivity(), MyFetchService.class);
         getActivity().startService(service_start);
     }
 

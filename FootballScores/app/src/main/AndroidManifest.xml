@@ -35,7 +35,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".app.activity.MainActivity"/>
         </activity>
-        <service android:name=".service.myFetchService"/>
+        <service android:name=".service.MyFetchService"/>
     </application>
 
 </manifest>

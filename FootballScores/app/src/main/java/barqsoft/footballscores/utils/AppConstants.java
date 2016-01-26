@@ -5,5 +5,5 @@ package barqsoft.footballscores.utils;
  */
 public class AppConstants {
 
-    public static final String API_BASE_URL = "http://api.football-data.org/";
+
 }

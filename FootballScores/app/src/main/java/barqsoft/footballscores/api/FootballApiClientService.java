@@ -1,26 +1,29 @@
 package barqsoft.footballscores.api;
 
-import barqsoft.footballscores.utils.AppConstants;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
+import retrofit.RxJavaCallAdapterFactory;
 
 /**
  * Created by Amrendra Kumar on 27/01/16.
  */
 public class FootballApiClientService {
 
-    private static FootballApiClientService footballEndPointInterface = null;
+    public static final String API_BASE_URL = "http://api.football-data.org/";
+
+    private static FootballEndpointServiceInterface footballEndPointInterface = null;
 
     private FootballApiClientService() {
     }
 
-    public static FootballApiClientService getInstance() {
+    public static FootballEndpointServiceInterface getInstance() {
         if (footballEndPointInterface == null) {
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(AppConstants.API_BASE_URL)
+                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .baseUrl(API_BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-            footballEndPointInterface = retrofit.create(FootballApiClientService.class);
+            footballEndPointInterface = retrofit.create(FootballEndpointServiceInterface.class);
         }
         return footballEndPointInterface;
     }

@@ -7,8 +7,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import barqsoft.footballscores.app.fragments.PagerFragment;
 import barqsoft.footballscores.R;
+import barqsoft.footballscores.api.FootballApiClientService;
+import barqsoft.footballscores.app.fragments.PagerFragment;
+import barqsoft.footballscores.logger.Debug;
+import barqsoft.footballscores.model.Fixture;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class MainActivity extends ActionBarActivity {
     public static int selected_match_id;
@@ -28,6 +34,36 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.container, my_main)
                     .commit();
         }
+
+
+        // DEBUG
+
+        Debug.c();
+        FootballApiClientService.getInstance().getFixtures(getString(R.string.api_key))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Fixture.Response>() {
+                    @Override
+                    public final void onCompleted() {
+                        Debug.c();
+                    }
+
+                    @Override
+                    public final void onError(Throwable e) {
+                        Debug.e("Error: " + e.getMessage(), false);
+                    }
+
+                    @Override
+                    public final void onNext(Fixture.Response response) {
+                        Debug.c();
+                        for (Fixture fixture : response.fixtures) {
+                            Debug.i(fixture.toString(), false);
+                        }
+                    }
+                });
+
+        Debug.c();
+        // DEBUG
     }
 
 
