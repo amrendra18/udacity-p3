@@ -35,6 +35,10 @@ dependencies {
     compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
     compile 'com.github.bumptech.glide:glide:3.6.1'
 
+    compile 'com.squareup.retrofit:adapter-rxjava:2.0.0-beta2'
+    compile 'io.reactivex:rxjava:1.0.13'
+    compile 'io.reactivex:rxandroid:1.0.0'
+
     //debugg
     compile 'com.facebook.stetho:stetho:1.2.0'
     compile 'com.facebook.stetho:stetho-okhttp:1.2.0'
