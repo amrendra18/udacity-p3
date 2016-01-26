@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name=".app.activity.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,12 +26,12 @@
             android:authorities="barqsoft.footballscores" />
 
         <activity
-            android:name=".AboutActivity"
+            android:name=".app.activity.AboutActivity"
             android:label="About"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".app.activity.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="barqsoft.footballscores.MainActivity" />
+                android:value=".app.activity.MainActivity" />
         </activity>
         <service android:name=".service.myFetchService" />
     </application>

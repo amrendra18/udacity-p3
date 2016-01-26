@@ -1,4 +1,4 @@
-package barqsoft.footballscores;
+package barqsoft.footballscores.app.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import barqsoft.footballscores.app.fragments.PagerFragment;
+import barqsoft.footballscores.R;
 
 public class MainActivity extends ActionBarActivity
 {

@@ -1,4 +1,4 @@
-package barqsoft.footballscores;
+package barqsoft.footballscores.app.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,6 +6,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import barqsoft.footballscores.R;
 
 
 public class AboutActivity extends ActionBarActivity {
