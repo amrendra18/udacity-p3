@@ -273,9 +273,9 @@ https://gist.github.com/kalehv/bae765c756e94455ed88
     <color name="grey_100">#F5F5F5</color>
     <color name="grey_200">#EEEEEE</color>
     <color name="grey_300">#E0E0E0</color>
-    <color name="grey_400">#BDBDBD</color>
+    <color name="grey_400">#B6B6B6</color>
     <color name="grey_500">#9E9E9E</color>
-    <color name="grey_600">#757575</color>
+    <color name="grey_600">#727272</color>
     <color name="grey_700">#616161</color>
     <color name="grey_800">#424242</color>
     <color name="grey_900">#212121</color>
@@ -284,8 +284,13 @@ https://gist.github.com/kalehv/bae765c756e94455ed88
     <color name="white">#FFFFFF</color>
 
     <!-- Colors for the app -->
-    <color name="colorPrimary">@color/indigo_500</color>
-    <color name="colorPrimaryDark">@color/indigo_700</color>
-    <color name="colorAccent">@color/pink_A200</color>
+    <color name="colorPrimaryDark">@color/green_700</color>
+    <color name="colorPrimary">@color/green_500</color>
+    <color name="colorPrimaryLight">@color/green_100</color>
+    <color name="colorAccent">@color/orange_500</color>
+    <color name="colorPrimaryText">@color/grey_900</color>
+    <color name="colorSecondaryText">@color/grey_600</color>
+    <color name="colorDivider">@color/grey_400</color>
+
 
 </resources>
