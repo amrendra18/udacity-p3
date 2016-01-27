@@ -18,7 +18,7 @@ import barqsoft.footballscores.logger.Debug;
  * Created by Amrendra Kumar on 27/01/16.
  */
 public class FootballSyncAdapter extends AbstractThreadedSyncAdapter {
-    public static final int SYNC_INTERVAL = 30;//60 * 180;
+    public static final int SYNC_INTERVAL = 30 * 60 * 180;
     public static final int SYNC_FLEXTIME = SYNC_INTERVAL / 3;
     private static final long DAY_IN_MILLIS = 1000 * 60 * 60 * 24;
 
