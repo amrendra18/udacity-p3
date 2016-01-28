@@ -21,17 +21,16 @@ import barqsoft.footballscores.db.DatabaseContract;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainScreenFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class MainScreenFragment extends Fragment {
     public ScoresAdapter mAdapter;
     public static final int SCORES_LOADER = 0;
-    private String[] fragmentdate = new String[1];
-    private int last_selected_item = -1;
+    private String fragmentDate;
 
     public MainScreenFragment() {
     }
 
     public void setFragmentDate(String date) {
-        fragmentdate[0] = date;
+        fragmentDate = date;
     }
 
     @Override
@@ -41,7 +40,7 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
         final ListView score_list = (ListView) rootView.findViewById(R.id.scores_list);
         mAdapter = new ScoresAdapter(getActivity(), null, 0);
         score_list.setAdapter(mAdapter);
-        getLoaderManager().initLoader(SCORES_LOADER, null, this);
+        restartLoader();
         mAdapter.detail_match_id = MainActivity.selected_match_id;
         score_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -55,40 +54,39 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
         return rootView;
     }
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return new CursorLoader(getActivity(), DatabaseContract.FixtureEntry.buildScoreWithDate
-                (fragmentdate[0]),
-                null, null, null, null);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        //Log.v(FetchScoreTask.LOG_TAG,"loader finished");
-        //cursor.moveToFirst();
-        /*
-        while (!cursor.isAfterLast())
-        {
-            Log.v(FetchScoreTask.LOG_TAG,cursor.getString(1));
-            cursor.moveToNext();
+    private void restartLoader() {
+        if (getLoaderManager().getLoader(SCORES_LOADER) == null) {
+            getLoaderManager().initLoader(SCORES_LOADER, null, matchLoaderCallbacks);
+        } else {
+            getLoaderManager().restartLoader(SCORES_LOADER, null, matchLoaderCallbacks);
         }
-        */
+    }
 
-        int i = 0;
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            i++;
-            cursor.moveToNext();
+    private LoaderManager.LoaderCallbacks<Cursor> matchLoaderCallbacks
+            = new LoaderManager.LoaderCallbacks<Cursor>() {
+
+        @Override
+        public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+            return new CursorLoader(
+                    getActivity(),
+                    DatabaseContract.FixtureEntry.buildScoreWithDate(fragmentDate),
+                    null,
+                    null,
+                    null,
+                    null
+            );
         }
-        //Log.v(FetchScoreTask.LOG_TAG,"Loader query: " + String.valueOf(i));
-        mAdapter.swapCursor(cursor);
-        //mAdapter.notifyDataSetChanged();
-    }
 
-    @Override
-    public void onLoaderReset(Loader<Cursor> cursorLoader) {
-        mAdapter.swapCursor(null);
-    }
+        @Override
+        public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+            mAdapter.swapCursor(cursor);
+            mAdapter.notifyDataSetChanged();
+        }
 
+        @Override
+        public void onLoaderReset(Loader<Cursor> cursorLoader) {
+            mAdapter.swapCursor(null);
+        }
+    };
 
 }
