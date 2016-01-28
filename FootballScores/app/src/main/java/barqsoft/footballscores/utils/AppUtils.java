@@ -1,5 +1,9 @@
 package barqsoft.footballscores.utils;
 
+import android.support.annotation.NonNull;
+
+import java.util.Random;
+
 import barqsoft.footballscores.R;
 
 /**
@@ -84,5 +88,21 @@ public class AppUtils {
             default:
                 return R.drawable.no_icon;
         }
+    }
+
+
+    public static String getDateFromDateTime(@NonNull String dateTime) {
+        //"2016-01-26T17:30:00Z"
+        return dateTime.substring(0, dateTime.indexOf("T"));
+    }
+
+    public static String getTimeFromDateTime(@NonNull String dateTime) {
+        //"2016-01-26T17:30:00Z"
+        return dateTime.substring(dateTime.indexOf("T") + 1, dateTime.indexOf("Z"));
+    }
+
+    public static int randInt(int min, int max) {
+        Random rand = new Random();
+        return rand.nextInt((max - min) + 1) + min;
     }
 }
