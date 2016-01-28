@@ -52,7 +52,7 @@ public class FootballSyncAdapter extends AbstractThreadedSyncAdapter {
         getData("p2");
     }
 
-    private void getData(String timeFrame) {
+    private void getData(final String timeFrame) {
         FootballApiClientService.getInstance().getFixtures(getContext().getString(R.string
                         .api_key),
                 timeFrame)
@@ -95,6 +95,17 @@ public class FootballSyncAdapter extends AbstractThreadedSyncAdapter {
                         }
                         getContext().getContentResolver().bulkInsert(
                                 DatabaseContract.FixtureEntry.CONTENT_URI, values);
+
+
+                        if (timeFrame.equals("p2")) {
+                            String lastDate = response.timeFrameStart;
+                            Debug.e("deleting before : " + lastDate, false);
+                            getContext().getContentResolver().delete(
+                                    DatabaseContract.FixtureEntry.CONTENT_URI,
+                                    DatabaseContract.FixtureEntry.DATE_COL + " < ?",
+                                    new String[]{lastDate}
+                            );
+                        }
                     }
                 });
     }
