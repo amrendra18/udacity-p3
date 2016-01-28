@@ -40,8 +40,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".app.activity.MainActivity"/>
         </activity>
-        <service android:name=".service.MyFetchService"/>
-
 
         <!-- SyncAdapter's dummy authentication service -->
         <service android:name=".sync.FootballAuthenticatorService">

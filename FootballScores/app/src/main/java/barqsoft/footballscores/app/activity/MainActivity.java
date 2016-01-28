@@ -16,7 +16,7 @@ import java.util.Date;
 import barqsoft.footballscores.R;
 import barqsoft.footballscores.adapters.ViewPagerAdapter;
 import barqsoft.footballscores.app.fragments.MainScreenFragment;
-import barqsoft.footballscores.logger.Debug;
+import barqsoft.footballscores.sync.FootballSyncAdapter;
 import barqsoft.footballscores.utils.AppConstants;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-                Debug.e("tab pos changed : " + tab.getPosition(), false);
             }
 
             @Override
@@ -68,38 +67,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         viewPager.setCurrentItem(2);
-
-
-        // DEBUG
-        Debug.c();
         //FootballSyncAdapter.initializeSyncAdapter(this);
-
-
-/*        FootballApiClientService.getInstance().getFixtures(getString(R.string.api_key), "p2")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Fixture.Response>() {
-                    @Override
-                    public final void onCompleted() {
-                        Debug.c();
-                    }
-
-                    @Override
-                    public final void onError(Throwable e) {
-                        Debug.e("Error: " + e.getMessage(), false);
-                    }
-
-                    @Override
-                    public final void onNext(Fixture.Response response) {
-                        Debug.c();
-                        for (Fixture fixture : response.fixtures) {
-                            Debug.i(fixture.toString(), false);
-                        }
-                    }
-                });*/
-
-        Debug.c();
-        // DEBUG
+        FootballSyncAdapter.syncImmediately(this);
     }
 
 
