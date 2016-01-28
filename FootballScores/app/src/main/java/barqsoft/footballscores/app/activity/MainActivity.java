@@ -74,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
         Debug.c();
         //FootballSyncAdapter.initializeSyncAdapter(this);
 
-        /*
-        FootballApiClientService.getInstance().getFixtures(getString(R.string.api_key))
+
+/*        FootballApiClientService.getInstance().getFixtures(getString(R.string.api_key), "p2")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<Fixture.Response>() {
@@ -96,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
                             Debug.i(fixture.toString(), false);
                         }
                     }
-                });
-        */
+                });*/
+
         Debug.c();
         // DEBUG
     }

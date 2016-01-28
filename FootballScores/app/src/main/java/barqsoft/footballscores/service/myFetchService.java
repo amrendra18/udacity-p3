@@ -24,6 +24,7 @@ import java.util.Vector;
 
 import barqsoft.footballscores.db.DatabaseContract;
 import barqsoft.footballscores.R;
+import barqsoft.footballscores.logger.Debug;
 
 /**
  * Created by yehya khaled on 3/2/2015.
@@ -121,6 +122,8 @@ public class MyFetchService extends IntentService {
     }
 
     private void processJSONdata(String JSONdata, Context mContext, boolean isReal) {
+
+        //Debug.i(JSONdata.toString(), false);
         //JSON data
         // This set of league codes is for the 2015/2016 season. In fall of 2016, they will need to
         // be updated. Feel free to use the codes
@@ -168,7 +171,8 @@ public class MyFetchService extends IntentService {
 
 
             //ContentValues to be inserted
-            Vector<ContentValues> values = new Vector<ContentValues>(matches.length());
+            Vector<ContentValues> values = new Vector<ContentValues>();
+            Debug.e("Matches : " + matches.length() + "values : " + values.size(), false);
             for (int i = 0; i < matches.length(); i++) {
 
                 JSONObject match_data = matches.getJSONObject(i);
@@ -179,11 +183,11 @@ public class MyFetchService extends IntentService {
                 //add leagues here in order to have them be added to the DB.
                 // If you are finding no data in the app, check that this contains all the leagues.
                 // If it doesn't, that can cause an empty DB, bypassing the dummy data routine.
-                if (League.equals(PREMIER_LEAGUE) ||
+/*                if (League.equals(PREMIER_LEAGUE) ||
                         League.equals(SERIE_A) ||
                         League.equals(BUNDESLIGA1) ||
                         League.equals(BUNDESLIGA2) ||
-                        League.equals(PRIMERA_DIVISION)) {
+                        League.equals(PRIMERA_DIVISION)) {*/
                     match_id = match_data.getJSONObject(LINKS).getJSONObject(SELF).
                             getString("href");
                     match_id = match_id.replace(MATCH_LINK, "");
@@ -221,33 +225,37 @@ public class MyFetchService extends IntentService {
                     Away_goals = match_data.getJSONObject(RESULT).getString(AWAY_GOALS);
                     match_day = match_data.getString(MATCH_DAY);
                     ContentValues match_values = new ContentValues();
-                    match_values.put(DatabaseContract.scores_table.MATCH_ID, match_id);
-                    match_values.put(DatabaseContract.scores_table.DATE_COL, mDate);
-                    match_values.put(DatabaseContract.scores_table.TIME_COL, mTime);
-                    match_values.put(DatabaseContract.scores_table.HOME_COL, Home);
-                    match_values.put(DatabaseContract.scores_table.AWAY_COL, Away);
-                    match_values.put(DatabaseContract.scores_table.HOME_GOALS_COL, Home_goals);
-                    match_values.put(DatabaseContract.scores_table.AWAY_GOALS_COL, Away_goals);
-                    match_values.put(DatabaseContract.scores_table.LEAGUE_COL, League);
-                    match_values.put(DatabaseContract.scores_table.MATCH_DAY, match_day);
+                    match_values.put(DatabaseContract.FixtureEntry.MATCH_ID, match_id);
+                    match_values.put(DatabaseContract.FixtureEntry.DATE_COL, mDate);
+                    match_values.put(DatabaseContract.FixtureEntry.TIME_COL, mTime);
+                    match_values.put(DatabaseContract.FixtureEntry.HOME_COL, Home);
+                    match_values.put(DatabaseContract.FixtureEntry.AWAY_COL, Away);
+                    match_values.put(DatabaseContract.FixtureEntry.HOME_GOALS_COL, Home_goals);
+                    match_values.put(DatabaseContract.FixtureEntry.AWAY_GOALS_COL, Away_goals);
+                    match_values.put(DatabaseContract.FixtureEntry.LEAGUE_COL, League);
+                    match_values.put(DatabaseContract.FixtureEntry.MATCH_DAY, match_day);
                     //log spam
 
-                    //Log.v(LOG_TAG,match_id);
-                    //Log.v(LOG_TAG,mDate);
-                    //Log.v(LOG_TAG,mTime);
-                    //Log.v(LOG_TAG,Home);
-                    //Log.v(LOG_TAG,Away);
-                    //Log.v(LOG_TAG,Home_goals);
-                    //Log.v(LOG_TAG,Away_goals);
+                    Debug.e("E: "+ match_id, false);
+                    Debug.e("E: "+ mDate, false);
+                    Debug.e("E: "+ mTime, false);
+                    Debug.e("E: "+ Home, false);
+                    Debug.e("E: "+ Away, false);
+                    Debug.e("E: "+ Home_goals, false);
+                    Debug.e("E: "+ Away_goals, false);
+                    Debug.e("E: ======================", false);
 
                     values.add(match_values);
-                }
+                //}
             }
             int inserted_data = 0;
             ContentValues[] insert_data = new ContentValues[values.size()];
+
             values.toArray(insert_data);
+            Debug.i("match: " + matches.length() + "values : " + values.size() + "bulk insert :" +
+                    insert_data.length, false);
             inserted_data = mContext.getContentResolver().bulkInsert(
-                    DatabaseContract.BASE_CONTENT_URI, insert_data);
+                    DatabaseContract.FixtureEntry.CONTENT_URI, insert_data);
 
             //Log.v(LOG_TAG,"Succesfully Inserted : " + String.valueOf(inserted_data));
         } catch (JSONException e) {

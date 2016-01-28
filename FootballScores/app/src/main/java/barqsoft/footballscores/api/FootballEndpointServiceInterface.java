@@ -4,6 +4,7 @@ import barqsoft.footballscores.model.Fixture;
 import retrofit.http.GET;
 import retrofit.http.Header;
 import retrofit.http.Path;
+import retrofit.http.Query;
 import rx.Observable;
 
 /**
@@ -13,7 +14,8 @@ public interface FootballEndpointServiceInterface {
 
     @GET("alpha/fixtures")
     Observable<Fixture.Response> getFixtures(
-            @Header("X-Auth-Token") String apiKey
+            @Header("X-Auth-Token") String apiKey,
+            @Query("timeFrame") String timeFrame
     );
 
 

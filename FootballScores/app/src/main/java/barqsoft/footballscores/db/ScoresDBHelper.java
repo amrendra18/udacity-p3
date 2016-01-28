@@ -4,26 +4,26 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import barqsoft.footballscores.db.DatabaseContract.scores_table;
-
 /**
  * Created by yehya khaled on 2/25/2015.
  */
 public class ScoresDBHelper extends SQLiteOpenHelper {
+
     public static final String DATABASE_NAME = "Scores.db";
     private static final int DATABASE_VERSION = 2;
-    final String CreateScoresTable = "CREATE TABLE " + DatabaseContract.SCORES_TABLE + " ("
-            + scores_table._ID + " INTEGER PRIMARY KEY,"
-            + scores_table.DATE_COL + " TEXT NOT NULL,"
-            + scores_table.TIME_COL + " INTEGER NOT NULL,"
-            + scores_table.HOME_COL + " TEXT NOT NULL,"
-            + scores_table.AWAY_COL + " TEXT NOT NULL,"
-            + scores_table.LEAGUE_COL + " INTEGER NOT NULL,"
-            + scores_table.HOME_GOALS_COL + " TEXT NOT NULL,"
-            + scores_table.AWAY_GOALS_COL + " TEXT NOT NULL,"
-            + scores_table.MATCH_ID + " INTEGER NOT NULL,"
-            + scores_table.MATCH_DAY + " INTEGER NOT NULL,"
-            + " UNIQUE (" + scores_table.MATCH_ID + ") ON CONFLICT REPLACE"
+
+    final String SQL_CREATE_FIXTURES_TABLE = "CREATE TABLE " + DatabaseContract.FixtureEntry.TABLE_NAME + " ("
+            + DatabaseContract.FixtureEntry._ID + " INTEGER PRIMARY KEY,"
+            + DatabaseContract.FixtureEntry.DATE_COL + " TEXT NOT NULL,"
+            + DatabaseContract.FixtureEntry.TIME_COL + " INTEGER NOT NULL,"
+            + DatabaseContract.FixtureEntry.HOME_COL + " TEXT NOT NULL,"
+            + DatabaseContract.FixtureEntry.AWAY_COL + " TEXT NOT NULL,"
+            + DatabaseContract.FixtureEntry.LEAGUE_COL + " INTEGER NOT NULL,"
+            + DatabaseContract.FixtureEntry.HOME_GOALS_COL + " TEXT NOT NULL,"
+            + DatabaseContract.FixtureEntry.AWAY_GOALS_COL + " TEXT NOT NULL,"
+            + DatabaseContract.FixtureEntry.MATCH_ID + " INTEGER NOT NULL,"
+            + DatabaseContract.FixtureEntry.MATCH_DAY + " INTEGER NOT NULL,"
+            + " UNIQUE (" + DatabaseContract.FixtureEntry.MATCH_ID + ") ON CONFLICT REPLACE"
             + " );";
 
     public ScoresDBHelper(Context context) {
@@ -32,13 +32,13 @@ public class ScoresDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CreateScoresTable);
+        db.execSQL(SQL_CREATE_FIXTURES_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //Remove old values when upgrading.
-        db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.SCORES_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.FixtureEntry.TABLE_NAME);
         onCreate(db);
     }
 }
