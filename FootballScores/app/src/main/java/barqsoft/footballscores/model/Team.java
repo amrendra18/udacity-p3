@@ -1,5 +1,14 @@
 package barqsoft.footballscores.model;
 
+import android.content.ContentValues;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import barqsoft.footballscores.db.DatabaseContract;
 import barqsoft.footballscores.logger.Debug;
 
 /**
@@ -11,6 +20,9 @@ public class Team {
     String code;
     String shortName;
     String crestUrl;
+
+    @SerializedName("_links")
+    TeamLinks links;
 
 
     public String getName() {
@@ -54,5 +66,33 @@ public class Team {
         String ret = sb.toString();
         Debug.i(ret, false);
         return ret;
+    }
+
+    public ContentValues getContentValues() {
+        ContentValues value = new ContentValues();
+        value.put(DatabaseContract.TeamEntry.TEAM_ID_COL, links.teamLink.getTeamId());
+        value.put(DatabaseContract.TeamEntry.TEAM_NAME_COL, name);
+        value.put(DatabaseContract.TeamEntry.TEAM_SHORT_NAME_COL, shortName);
+        value.put(DatabaseContract.TeamEntry.TEAM_CODE_COL, code);
+        value.put(DatabaseContract.TeamEntry.TEAM_LOGO_COL, crestUrl);
+        return value;
+    }
+
+    public static final class TeamLinks {
+
+        @Expose
+        @SerializedName("self")
+        TeamLink teamLink;
+
+    }
+
+    public static final class Response {
+        @Expose
+        public int count;
+
+        @Expose
+        @SerializedName("teams")
+        public List<Team> teams = new ArrayList<>();
+
     }
 }

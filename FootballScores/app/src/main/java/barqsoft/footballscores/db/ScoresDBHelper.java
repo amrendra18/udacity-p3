@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class ScoresDBHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "football.db";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 7;
 
     final String SQL_CREATE_FIXTURES_TABLE = "CREATE TABLE " + DatabaseContract.FixtureEntry.TABLE_NAME + " ("
             + DatabaseContract.FixtureEntry._ID + " INTEGER PRIMARY KEY,"
@@ -18,6 +18,8 @@ public class ScoresDBHelper extends SQLiteOpenHelper {
             + DatabaseContract.FixtureEntry.TIME_COL + " INTEGER NOT NULL,"
             + DatabaseContract.FixtureEntry.HOME_COL + " TEXT NOT NULL,"
             + DatabaseContract.FixtureEntry.AWAY_COL + " TEXT NOT NULL,"
+            + DatabaseContract.FixtureEntry.HOME_TEAM_ID_COL + " INTEGER NOT NULL,"
+            + DatabaseContract.FixtureEntry.AWAY_TEAM_ID_COL + " INTEGER NOT NULL,"
             + DatabaseContract.FixtureEntry.LEAGUE_COL + " INTEGER NOT NULL,"
             + DatabaseContract.FixtureEntry.HOME_GOALS_COL + " TEXT NOT NULL,"
             + DatabaseContract.FixtureEntry.AWAY_GOALS_COL + " TEXT NOT NULL,"
@@ -39,10 +41,10 @@ public class ScoresDBHelper extends SQLiteOpenHelper {
             .TABLE_NAME + " ("
             + DatabaseContract.TeamEntry._ID + " INTEGER PRIMARY KEY,"
             + DatabaseContract.TeamEntry.TEAM_ID_COL + " INTEGER NOT NULL,"
-            + DatabaseContract.TeamEntry.TEAM_NAME_COL + " TEXT NOT NULL,"
-            + DatabaseContract.TeamEntry.TEAM_SHORT_NAME_COL + " TEXT NOT NULL,"
-            + DatabaseContract.TeamEntry.TEAM_CODE_COL + " TEXT NOT NULL,"
-            + DatabaseContract.TeamEntry.TEAM_LOGO_COL + " TEXT NOT NULL,"
+            + DatabaseContract.TeamEntry.TEAM_NAME_COL + " TEXT ,"
+            + DatabaseContract.TeamEntry.TEAM_SHORT_NAME_COL + " TEXT ,"
+            + DatabaseContract.TeamEntry.TEAM_CODE_COL + " TEXT ,"
+            + DatabaseContract.TeamEntry.TEAM_LOGO_COL + " TEXT ,"
             + " UNIQUE (" + DatabaseContract.TeamEntry.TEAM_ID_COL + ") ON CONFLICT REPLACE"
             + " );";
 

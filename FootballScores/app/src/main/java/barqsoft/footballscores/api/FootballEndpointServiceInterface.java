@@ -1,6 +1,10 @@
 package barqsoft.footballscores.api;
 
+import java.util.List;
+
 import barqsoft.footballscores.model.Fixture;
+import barqsoft.footballscores.model.League;
+import barqsoft.footballscores.model.Team;
 import retrofit.http.GET;
 import retrofit.http.Header;
 import retrofit.http.Path;
@@ -18,22 +22,14 @@ public interface FootballEndpointServiceInterface {
             @Query("timeFrame") String timeFrame
     );
 
-
-    @GET("alpha/teams/{team_id}")
-    void getTeamInfo(
+    @GET("alpha/soccerseasons/{league_id}/teams")
+    Observable<Team.Response> getTeamsInfoFromLeague(
             @Header("X-Auth-Token") String apiKey,
-            @Path("team_id") String teamId
+            @Path("league_id") String leagueId
     );
 
-    @GET("alpha/teams/{team_id}/fixtures")
-    void getTeamFixtures(
-            @Header("X-Auth-Token") String apiKey,
-            @Path("team_id") String teamId
-    );
-
-    @GET("alpha/teams/{team_id}/players")
-    void getTeamPlayers(
-            @Header("X-Auth-Token") String apiKey,
-            @Path("team_id") String teamId
+    @GET("alpha/soccerseasons/")
+    Observable<List<League>> getLeagueInfo(
+            @Header("X-Auth-Token") String apiKey
     );
 }

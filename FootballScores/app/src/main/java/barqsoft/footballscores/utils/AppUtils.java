@@ -1,7 +1,5 @@
 package barqsoft.footballscores.utils;
 
-import java.util.Random;
-
 import barqsoft.footballscores.R;
 
 /**
@@ -86,11 +84,5 @@ public class AppUtils {
             default:
                 return R.drawable.ic_launcher;
         }
-    }
-
-
-    public static int randInt(int min, int max) {
-        Random rand = new Random();
-        return rand.nextInt((max - min) + 1) + min;
     }
 }

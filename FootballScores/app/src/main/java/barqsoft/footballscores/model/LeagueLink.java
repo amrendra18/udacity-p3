@@ -15,6 +15,10 @@ public class LeagueLink {
         return Integer.parseInt(leagueId);
     }
 
+    public String getLeagueLink() {
+        return league;
+    }
+
 
     @Override
     public String toString() {

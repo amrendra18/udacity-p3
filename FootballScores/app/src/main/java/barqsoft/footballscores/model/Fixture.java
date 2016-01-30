@@ -1,12 +1,16 @@
 package barqsoft.footballscores.model;
 
+import android.content.ContentValues;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import barqsoft.footballscores.db.DatabaseContract;
 import barqsoft.footballscores.logger.Debug;
+import barqsoft.footballscores.utils.DateUtils;
 
 /**
  * Created by Amrendra Kumar on 27/01/16.
@@ -108,5 +112,30 @@ public class Fixture {
         public List<Fixture> fixtures = new ArrayList<>();
     }
 
+    public ContentValues getContentValues() {
+        ContentValues value = new ContentValues();
+        Links l = getLinks();
+        value.put(DatabaseContract.FixtureEntry.MATCH_ID,
+                l.getMatchLink().getMatchId());
+        value.put(DatabaseContract.FixtureEntry.DATE_COL,
+                DateUtils.getDateFromDateTime(getDate()));
+        value.put(DatabaseContract.FixtureEntry.TIME_COL,
+                DateUtils.getTimeFromDateTime(getDate()));
+        value.put(DatabaseContract.FixtureEntry.HOME_COL, getHomeTeamName());
+        value.put(DatabaseContract.FixtureEntry.AWAY_COL, getAwayTeamName());
+        value.put(DatabaseContract.FixtureEntry.HOME_GOALS_COL,
+                getResult().getGoalsHomeTeam());
+        value.put(DatabaseContract.FixtureEntry.AWAY_GOALS_COL,
+                getResult().getGoalsAwayTeam());
+        int leagueId = l.getLeagueLink().getLeagueId();
+        value.put(DatabaseContract.FixtureEntry.LEAGUE_COL, leagueId);
+        value.put(DatabaseContract.FixtureEntry.MATCH_DAY_COL, getMatchDay());
+        value.put(DatabaseContract.FixtureEntry.STATUS_COL, getStatus());
+        value.put(DatabaseContract.FixtureEntry.HOME_TEAM_ID_COL,
+                getLinks().getHomeTeamLink().getTeamId());
+        value.put(DatabaseContract.FixtureEntry.AWAY_TEAM_ID_COL,
+                getLinks().getAwayTeamLink().getTeamId());
+        return value;
+    }
 
 }

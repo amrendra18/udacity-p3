@@ -14,6 +14,10 @@ public class TeamLink {
         return Integer.parseInt(teamId);
     }
 
+    public String getTeamUrl() {
+        return team;
+    }
+
     @Override
     public String toString() {
         return "TeamLink[" + team + "]\n";

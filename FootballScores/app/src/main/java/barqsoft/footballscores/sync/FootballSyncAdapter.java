@@ -12,12 +12,20 @@ import android.content.SyncResult;
 import android.os.Build;
 import android.os.Bundle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import barqsoft.footballscores.R;
 import barqsoft.footballscores.api.FootballApiClientService;
 import barqsoft.footballscores.db.DatabaseContract;
 import barqsoft.footballscores.logger.Debug;
 import barqsoft.footballscores.model.Fixture;
+import barqsoft.footballscores.model.League;
+import barqsoft.footballscores.model.Links;
+import barqsoft.footballscores.model.Team;
+import barqsoft.footballscores.utils.AppUtils;
 import barqsoft.footballscores.utils.DateUtils;
+import rx.Observable;
 import rx.Subscriber;
 import rx.schedulers.Schedulers;
 
@@ -51,12 +59,46 @@ public class FootballSyncAdapter extends AbstractThreadedSyncAdapter {
         Debug.e("Sync is being performed", false);
         getData("n3");
         getData("p2");
+        getLeagueData();
+    }
+
+    private void getLeagueData() {
+        // should be done only once
+        // or like once in 15 days
+        FootballApiClientService.getInstance()
+                .getLeagueInfo(getContext().getString(R.string.api_key))
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Subscriber<List<League>>() {
+                    @Override
+                    public final void onCompleted() {
+                        Debug.c();
+                    }
+
+                    @Override
+                    public final void onError(Throwable e) {
+                        Debug.e("Error: " + e.getMessage(), false);
+                    }
+
+                    @Override
+                    public final void onNext(List<League> response) {
+                        Debug.c();
+                        List<ContentValues> list = new ArrayList<>();
+                        for (int i = 0; i < response.size(); i++) {
+                            list.add(response.get(i).getContentValues());
+                            fetchTeamsFromLeague(Integer.toString(response.get(i).getLeagueId()));
+                        }
+                        Debug.e("Leagues adding : " + response.size(), false);
+                        ContentValues[] insert_data = new ContentValues[list.size()];
+                        list.toArray(insert_data);
+                        getContext().getContentResolver().bulkInsert(
+                                DatabaseContract.LeagueEntry.CONTENT_URI, insert_data);
+                    }
+                });
     }
 
     private void getData(final String timeFrame) {
-        FootballApiClientService.getInstance().getFixtures(getContext().getString(R.string
-                        .api_key),
-                timeFrame)
+        FootballApiClientService.getInstance()
+                .getFixtures(getContext().getString(R.string.api_key), timeFrame)
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<Fixture.Response>() {
                     @Override
@@ -70,38 +112,22 @@ public class FootballSyncAdapter extends AbstractThreadedSyncAdapter {
                     }
 
                     @Override
-                    public final void onNext(Fixture.Response response) {
+                    public final void onNext(Fixture.Response r) {
                         Debug.c();
-                        int num = response.fixtures.size();
-                        ContentValues values[] = new ContentValues[num];
-                        int i = 0;
-                        for (Fixture f : response.fixtures) {
-                            ContentValues value = new ContentValues();
-                            value.put(DatabaseContract.FixtureEntry.MATCH_ID,
-                                    f.getLinks().getMatchLink().getMatchId());
-                            value.put(DatabaseContract.FixtureEntry.DATE_COL,
-                                    DateUtils.getDateFromDateTime(f.getDate()));
-                            value.put(DatabaseContract.FixtureEntry.TIME_COL,
-                                    DateUtils.getTimeFromDateTime(f.getDate()));
-                            value.put(DatabaseContract.FixtureEntry.HOME_COL, f.getHomeTeamName());
-                            value.put(DatabaseContract.FixtureEntry.AWAY_COL, f.getAwayTeamName());
-                            value.put(DatabaseContract.FixtureEntry.HOME_GOALS_COL,
-                                    f.getResult().getGoalsHomeTeam());
-                            value.put(DatabaseContract.FixtureEntry.AWAY_GOALS_COL,
-                                    f.getResult().getGoalsAwayTeam());
-                            value.put(DatabaseContract.FixtureEntry.LEAGUE_COL,
-                                    f.getLinks().getLeagueLink().getLeagueId());
-                            value.put(DatabaseContract.FixtureEntry.MATCH_DAY_COL, f.getMatchDay());
-                            value.put(DatabaseContract.FixtureEntry.STATUS_COL, f.getStatus());
-                            values[i] = value;
-                            i++;
+                        List<Fixture> response = r.fixtures;
+                        List<ContentValues> list = new ArrayList<>();
+                        for (int i = 0; i < response.size(); i++) {
+                            list.add(response.get(i).getContentValues());
                         }
+                        Debug.e("fixtures adding : " + response.size(), false);
+                        ContentValues[] insert_data = new ContentValues[list.size()];
+                        list.toArray(insert_data);
                         getContext().getContentResolver().bulkInsert(
-                                DatabaseContract.FixtureEntry.CONTENT_URI, values);
+                                DatabaseContract.FixtureEntry.CONTENT_URI, insert_data);
 
 
                         if (timeFrame.equals("p2")) {
-                            String lastDate = response.timeFrameStart;
+                            String lastDate = r.timeFrameStart;
                             Debug.e("deleting before : " + lastDate, false);
                             getContext().getContentResolver().delete(
                                     DatabaseContract.FixtureEntry.CONTENT_URI,
@@ -112,6 +138,77 @@ public class FootballSyncAdapter extends AbstractThreadedSyncAdapter {
                     }
                 });
     }
+
+    public void fetchTeamsFromLeague(String leagueId) {
+        FootballApiClientService.getInstance()
+                .getTeamsInfoFromLeague(getContext().getString(R.string.api_key), leagueId)
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Subscriber<Team.Response>() {
+                    @Override
+                    public final void onCompleted() {
+                        Debug.c();
+                    }
+
+                    @Override
+                    public final void onError(Throwable e) {
+                        Debug.e("Error: " + e.getMessage(), false);
+                    }
+
+                    @Override
+                    public final void onNext(Team.Response r) {
+                        List<Team> response = r.teams;
+                        Debug.c();
+                        List<ContentValues> list = new ArrayList<>();
+                        for (int i = 0; i < response.size(); i++) {
+                            list.add(response.get(i).getContentValues());
+                        }
+                        Debug.e("teams adding : " + response.size(), false);
+                        ContentValues[] insert_data = new ContentValues[list.size()];
+                        list.toArray(insert_data);
+                        getContext().getContentResolver().bulkInsert(
+                                DatabaseContract.TeamEntry.CONTENT_URI, insert_data);
+                    }
+                });
+    }
+
+    /*
+    // Ideally we would want to do this,
+    // but server cannot handle these many requests quickly in parallel
+
+    public void fetchTeams(List<String> teams) {
+        Observable.from(teams)
+                .observeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
+                .distinct()
+                .flatMap(link -> FootballApiClientService.getInstance()
+                        .getTeamInfo(getContext().getString(R.string.api_key), AppUtils
+                                .getTeamId(link)))
+                .subscribe(new Subscriber<Team>() {
+                    List<ContentValues> list = new ArrayList<>();
+
+                    @Override
+                    public final void onCompleted() {
+                        // do nothing
+                        Debug.e("totalTeam : " + list.size(), false);
+                        ContentValues[] insert_data = new ContentValues[list.size()];
+                        list.toArray(insert_data);
+                        getContext().getContentResolver().bulkInsert(
+                                DatabaseContract.TeamEntry.CONTENT_URI, insert_data);
+                    }
+
+                    @Override
+                    public final void onError(Throwable e) {
+                        Debug.e("ErrorLeague : " + e.getMessage(), false);
+                    }
+
+                    @Override
+                    public final void onNext(Team response) {
+                        list.add(response.getContentValues());
+                        Debug.e("teammm : " + response.toString(), false);
+                    }
+                });
+    }
+    */
 
 
     /**
