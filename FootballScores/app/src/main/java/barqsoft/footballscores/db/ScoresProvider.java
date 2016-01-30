@@ -22,18 +22,49 @@ public class ScoresProvider extends ContentProvider {
     private static final int MATCHES_WITH_ID = 102;
     private static final int MATCHES_WITH_DATE = 103;
 
+    private static final int LEAGUE = 200;
+    private static final int LEAGUE_WITH_ID = 201;
+
+    private static final int TEAM = 300;
+    private static final int TEAM_WITH_ID = 301;
+
+
     private static final UriMatcher sUriMatcher = buildUriMatcher();
 
     private static UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = DatabaseContract.CONTENT_AUTHORITY;
 
+        /*
+
+        From fixture table
+
+        /fixture/
+        /fixture/leauge/18
+        /fixture/id/18
+        /fixture/date/2016-02-01
+
+        From League table
+
+        /league/
+        /league/# leagueId
+
+
+        From Team table
+
+        /team/
+        /team/# teamId
+
+
+         */
         matcher.addURI(authority, DatabaseContract.PATH_FIXTURE, MATCHES);
         matcher.addURI(authority, DatabaseContract.PATH_FIXTURE + "/" + DatabaseContract
                         .PATH_LEAGUE + "/#",
                 MATCHES_WITH_LEAGUE);
-        matcher.addURI(authority, DatabaseContract.PATH_FIXTURE + "/" + DatabaseContract.PATH_MATCH_ID + "/#", MATCHES_WITH_ID);
+        matcher.addURI(authority, DatabaseContract.PATH_FIXTURE + "/" + DatabaseContract.PATH_ID + "/#", MATCHES_WITH_ID);
         matcher.addURI(authority, DatabaseContract.PATH_FIXTURE + "/" + DatabaseContract.PATH_DATE + "/*", MATCHES_WITH_DATE);
+
+
         return matcher;
     }
 

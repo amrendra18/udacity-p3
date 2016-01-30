@@ -16,8 +16,60 @@ public class DatabaseContract {
 
     public static final String PATH_FIXTURE = "fixture";
     public static final String PATH_LEAGUE = "league";
-    public static final String PATH_MATCH_ID = "id";
+    public static final String PATH_ID = "id";
     public static final String PATH_DATE = "date";
+    public static final String PATH_TEAM = "team";
+
+    public static final class LeagueEntry implements BaseColumns {
+        public static final String TABLE_NAME = "leagues";
+
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_LEAGUE).build();
+
+        public static final String CONTENT_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_LEAGUE;
+
+        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_LEAGUE;
+
+        public static final String LEAGUE_ID_COL = "id";
+        public static final String LEAGUE_NAME_COL = "name";
+
+        public static Uri buildLeagueWithId(long id) {
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+
+        public static long getLeagueIdFromUri(Uri uri) {
+            return ContentUris.parseId(uri);
+        }
+    }
+
+    public static final class TeamEntry implements BaseColumns {
+        public static final String TABLE_NAME = "teams";
+
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_TEAM).build();
+
+        public static final String CONTENT_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_TEAM;
+
+        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_TEAM;
+
+        public static final String TEAM_ID_COL = "id";
+        public static final String TEAM_NAME_COL = "name";
+        public static final String TEAM_SHORT_NAME_COL = "short";
+        public static final String TEAM_CODE_COL = "code";
+        public static final String TEAM_LOGO_COL = "logo";
+
+        public static Uri buildTeamWithId(long id) {
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+
+        public static long getTeamIdFromUri(Uri uri) {
+            return ContentUris.parseId(uri);
+        }
+    }
 
     public static final class FixtureEntry implements BaseColumns {
         public static final String TABLE_NAME = "fixtures";
@@ -28,7 +80,7 @@ public class DatabaseContract {
                 (PATH_LEAGUE)
                 .build();
         public static final Uri CONTENT_MATCH_ID_URI = CONTENT_URI.buildUpon().appendPath
-                (PATH_MATCH_ID)
+                (PATH_ID)
                 .build();
         public static final Uri CONTENT_DATE_URI = CONTENT_URI.buildUpon().appendPath
                 (PATH_DATE)
@@ -92,7 +144,8 @@ public class DatabaseContract {
                 HOME_GOALS_COL,
                 AWAY_GOALS_COL,
                 MATCH_ID,
-                MATCH_DAY_COL
+                MATCH_DAY_COL,
+                STATUS_COL
         };
     }
 }
