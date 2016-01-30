@@ -17,7 +17,7 @@ import barqsoft.footballscores.api.FootballApiClientService;
 import barqsoft.footballscores.db.DatabaseContract;
 import barqsoft.footballscores.logger.Debug;
 import barqsoft.footballscores.model.Fixture;
-import barqsoft.footballscores.utils.AppUtils;
+import barqsoft.footballscores.utils.DateUtils;
 import rx.Subscriber;
 
 /**
@@ -78,9 +78,9 @@ public class FootballSyncAdapter extends AbstractThreadedSyncAdapter {
                             value.put(DatabaseContract.FixtureEntry.MATCH_ID,
                                     f.getLinks().getMatch().getMatchId());
                             value.put(DatabaseContract.FixtureEntry.DATE_COL,
-                                    AppUtils.getDateFromDateTime(f.getDate()));
+                                    DateUtils.getDateFromDateTime(f.getDate()));
                             value.put(DatabaseContract.FixtureEntry.TIME_COL,
-                                    AppUtils.getTimeFromDateTime(f.getDate()));
+                                    DateUtils.getTimeFromDateTime(f.getDate()));
                             value.put(DatabaseContract.FixtureEntry.HOME_COL, f.getHomeTeamName());
                             value.put(DatabaseContract.FixtureEntry.AWAY_COL, f.getAwayTeamName());
                             value.put(DatabaseContract.FixtureEntry.HOME_GOALS_COL,
