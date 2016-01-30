@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import barqsoft.footballscores.R;
 import barqsoft.footballscores.utils.AppUtils;
+import barqsoft.footballscores.utils.DateUtils;
 
 /**
  * Created by yehya khaled on 2/26/2015.
@@ -47,7 +48,7 @@ public class ScoresAdapter extends CursorAdapter {
         final ViewHolder mHolder = (ViewHolder) view.getTag();
         mHolder.home_name.setText(cursor.getString(COL_HOME));
         mHolder.away_name.setText(cursor.getString(COL_AWAY));
-        mHolder.date.setText(cursor.getString(COL_MATCHTIME));
+        mHolder.date.setText(DateUtils.get12HoursTime(cursor.getString(COL_MATCHTIME)));
         mHolder.score.setText(AppUtils.getScores(cursor.getInt(COL_HOME_GOALS), cursor.getInt(COL_AWAY_GOALS)));
         mHolder.match_id = cursor.getDouble(COL_ID);
         mHolder.home_crest.setImageResource(AppUtils.getTeamCrestByTeamName(

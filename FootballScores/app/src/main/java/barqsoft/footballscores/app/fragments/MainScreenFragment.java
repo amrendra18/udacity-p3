@@ -73,7 +73,7 @@ public class MainScreenFragment extends Fragment {
                     null,
                     null,
                     null,
-                    null
+                    DatabaseContract.FixtureEntry.TIME_COL + " ASC"
             );
         }
 
