@@ -45,4 +45,13 @@
 
     <string name="contentauthority" translatable="false">barqsoft.footballscores</string>
     <string name="sync_account_type" translatable="false">footballscores.barqsoft</string>
+
+    <string name="status">Status</string>
+    <string name="league">Leauge</string>
+    <string name="matchday">Matchday</string>
+    <string name="hometeam">Manchester United</string>
+    <string name="awayteam">Liverpool</string>
+    <string name="score">5 - 3</string>
+    <string name="time">08:45 PM</string>
 </resources>
+

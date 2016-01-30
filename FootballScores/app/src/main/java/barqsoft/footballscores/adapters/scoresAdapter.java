@@ -7,8 +7,6 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 import barqsoft.footballscores.R;
 import barqsoft.footballscores.utils.AppUtils;
@@ -51,17 +49,14 @@ public class ScoresAdapter extends CursorAdapter {
         mHolder.date.setText(DateUtils.get12HoursTime(cursor.getString(COL_MATCHTIME)));
         mHolder.score.setText(AppUtils.getScores(cursor.getInt(COL_HOME_GOALS), cursor.getInt(COL_AWAY_GOALS)));
         mHolder.match_id = cursor.getDouble(COL_ID);
-        mHolder.home_crest.setImageResource(AppUtils.getTeamCrestByTeamName(
-                cursor.getString(COL_HOME)));
-        mHolder.away_crest.setImageResource(AppUtils.getTeamCrestByTeamName(
-                cursor.getString(COL_AWAY)
-        ));
+        mHolder.home_crest.setImageResource(AppUtils.getTeamCrestByTeamName(cursor.getString(COL_HOME)));
+        mHolder.away_crest.setImageResource(AppUtils.getTeamCrestByTeamName(cursor.getString(COL_AWAY)));
         //Log.v(FetchScoreTask.LOG_TAG,mHolder.home_name.getText() + " Vs. " + mHolder.away_name.getText() +" id " + String.valueOf(mHolder.match_id));
         //Log.v(FetchScoreTask.LOG_TAG,String.valueOf(detail_match_id));
         LayoutInflater vi = (LayoutInflater) context.getApplicationContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = vi.inflate(R.layout.detail_fragment, null);
-        ViewGroup container = (ViewGroup) view.findViewById(R.id.details_fragment_container);
+/*        ViewGroup container = (ViewGroup) view.findViewById(R.id.details_fragment_container);
         if (mHolder.match_id == detail_match_id) {
             //Log.v(FetchScoreTask.LOG_TAG,"will insert extraView");
 
@@ -83,7 +78,7 @@ public class ScoresAdapter extends CursorAdapter {
             });
         } else {
             container.removeAllViews();
-        }
+        }*/
 
     }
 

@@ -19,6 +19,7 @@ import barqsoft.footballscores.logger.Debug;
 import barqsoft.footballscores.model.Fixture;
 import barqsoft.footballscores.utils.DateUtils;
 import rx.Subscriber;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Amrendra Kumar on 27/01/16.
@@ -56,6 +57,7 @@ public class FootballSyncAdapter extends AbstractThreadedSyncAdapter {
         FootballApiClientService.getInstance().getFixtures(getContext().getString(R.string
                         .api_key),
                 timeFrame)
+                .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<Fixture.Response>() {
                     @Override
                     public final void onCompleted() {

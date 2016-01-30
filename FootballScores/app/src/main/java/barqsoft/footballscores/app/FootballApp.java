@@ -2,6 +2,8 @@ package barqsoft.footballscores.app;
 
 import android.app.Application;
 
+import com.facebook.stetho.Stetho;
+
 /**
  * Created by Amrendra Kumar on 27/01/16.
  */
@@ -23,7 +25,7 @@ public class FootballApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        //Stetho.initializeWithDefaults(this);
+        Stetho.initializeWithDefaults(this);
     }
 
 }

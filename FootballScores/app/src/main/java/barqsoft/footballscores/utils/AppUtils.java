@@ -1,7 +1,5 @@
 package barqsoft.footballscores.utils;
 
-import android.support.annotation.NonNull;
-
 import java.util.Random;
 
 import barqsoft.footballscores.R;
@@ -61,7 +59,7 @@ public class AppUtils {
 
     public static int getTeamCrestByTeamName(String teamname) {
         if (teamname == null) {
-            return R.drawable.no_icon;
+            return R.drawable.ic_launcher;
         }
         switch (teamname) { //This is the set of icons that are currently in the app. Feel free to find and add more
             //as you go.
@@ -86,7 +84,7 @@ public class AppUtils {
             case "Stoke City FC":
                 return R.drawable.stoke_city;
             default:
-                return R.drawable.no_icon;
+                return R.drawable.ic_launcher;
         }
     }
 
