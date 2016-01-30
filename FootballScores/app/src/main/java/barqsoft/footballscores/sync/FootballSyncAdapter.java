@@ -78,7 +78,7 @@ public class FootballSyncAdapter extends AbstractThreadedSyncAdapter {
                         for (Fixture f : response.fixtures) {
                             ContentValues value = new ContentValues();
                             value.put(DatabaseContract.FixtureEntry.MATCH_ID,
-                                    f.getLinks().getMatch().getMatchId());
+                                    f.getLinks().getMatchLink().getMatchId());
                             value.put(DatabaseContract.FixtureEntry.DATE_COL,
                                     DateUtils.getDateFromDateTime(f.getDate()));
                             value.put(DatabaseContract.FixtureEntry.TIME_COL,
@@ -90,8 +90,9 @@ public class FootballSyncAdapter extends AbstractThreadedSyncAdapter {
                             value.put(DatabaseContract.FixtureEntry.AWAY_GOALS_COL,
                                     f.getResult().getGoalsAwayTeam());
                             value.put(DatabaseContract.FixtureEntry.LEAGUE_COL,
-                                    f.getLinks().getLeague().getLeagueId());
-                            value.put(DatabaseContract.FixtureEntry.MATCH_DAY, f.getMatchDay());
+                                    f.getLinks().getLeagueLink().getLeagueId());
+                            value.put(DatabaseContract.FixtureEntry.MATCH_DAY_COL, f.getMatchDay());
+                            value.put(DatabaseContract.FixtureEntry.STATUS_COL, f.getStatus());
                             values[i] = value;
                             i++;
                         }

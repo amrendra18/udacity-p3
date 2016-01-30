@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class ScoresDBHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "Scores.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     final String SQL_CREATE_FIXTURES_TABLE = "CREATE TABLE " + DatabaseContract.FixtureEntry.TABLE_NAME + " ("
             + DatabaseContract.FixtureEntry._ID + " INTEGER PRIMARY KEY,"
@@ -21,8 +21,9 @@ public class ScoresDBHelper extends SQLiteOpenHelper {
             + DatabaseContract.FixtureEntry.LEAGUE_COL + " INTEGER NOT NULL,"
             + DatabaseContract.FixtureEntry.HOME_GOALS_COL + " TEXT NOT NULL,"
             + DatabaseContract.FixtureEntry.AWAY_GOALS_COL + " TEXT NOT NULL,"
+            + DatabaseContract.FixtureEntry.STATUS_COL + " TEXT NOT NULL,"
             + DatabaseContract.FixtureEntry.MATCH_ID + " INTEGER NOT NULL,"
-            + DatabaseContract.FixtureEntry.MATCH_DAY + " INTEGER NOT NULL,"
+            + DatabaseContract.FixtureEntry.MATCH_DAY_COL + " INTEGER NOT NULL,"
             + " UNIQUE (" + DatabaseContract.FixtureEntry.MATCH_ID + ") ON CONFLICT REPLACE"
             + " );";
 

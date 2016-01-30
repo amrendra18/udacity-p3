@@ -47,7 +47,8 @@ public class DatabaseContract {
         public static final String HOME_GOALS_COL = "home_goals";
         public static final String AWAY_GOALS_COL = "away_goals";
         public static final String MATCH_ID = "match_id";
-        public static final String MATCH_DAY = "match_day";
+        public static final String MATCH_DAY_COL = "match_day";
+        public static final String STATUS_COL = "status";
 
         public static Uri buildScoreWithId(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
@@ -91,7 +92,7 @@ public class DatabaseContract {
                 HOME_GOALS_COL,
                 AWAY_GOALS_COL,
                 MATCH_ID,
-                MATCH_DAY
+                MATCH_DAY_COL
         };
     }
 }

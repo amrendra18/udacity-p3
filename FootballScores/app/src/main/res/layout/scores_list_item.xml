@@ -7,6 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    android:layout_marginEnd="@dimen/divider_margin_vertical"
+    android:layout_marginStart="@dimen/divider_margin_vertical"
     app:cardCornerRadius="2dp">
 
     <android.support.v7.widget.GridLayout
@@ -15,33 +17,44 @@
         android:padding="@dimen/list_item_padding"
         app:columnCount="3">
 
-        <TextView
-            android:id="@+id/league_textview"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/league"
-            app:layout_gravity="fill"
-            tools:text="@string/league"/>
+            android:orientation="horizontal"
+            app:layout_columnSpan="3"
+            app:layout_gravity="fill">
 
-        <TextView
-            android:id="@+id/matchday_textview"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/matchday"
-            app:layout_gravity="fill"
-            tools:text="@string/matchday"/>
+            <TextView
+                android:id="@+id/league_textview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:lines="1"
+                android:text="@string/league"
+                app:layout_gravity="fill"
+                tools:text="@string/league"/>
 
-        <TextView
-            android:id="@+id/time_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            app:layout_gravity="fill"
-            tools:text="@string/test_text"/>
+            <TextView
+                android:id="@+id/matchday_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/matchday"
+                app:layout_gravity="fill"
+                tools:text="@string/matchday"/>
+
+            <TextView
+                android:id="@+id/time_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/divider_margin_vertical"
+                android:layout_marginStart="@dimen/divider_margin_vertical"
+                android:gravity="right"
+                app:layout_gravity="fill"
+                tools:text="@string/test_text"/>
+
+        </LinearLayout>
 
         <View
             android:id="@+id/divider_view"
@@ -56,18 +69,10 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             app:layout_columnWeight="2"
             app:layout_gravity="fill">
 
-            <TextView
-                android:id="@+id/home_name"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/TeamNames"
-                tools:text="@string/hometeam"/>
 
             <ImageView
                 android:id="@+id/home_crest"
@@ -75,6 +80,16 @@
                 android:layout_height="@dimen/crest_height"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_launcher"/>
+
+            <TextView
+                android:id="@+id/home_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:textSize="@dimen/TeamNames"
+                tools:text="@string/hometeam"/>
+
 
         </LinearLayout>
 
@@ -91,7 +106,7 @@
                 android:id="@+id/score_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:textSize="@dimen/Score"
                 tools:text="@string/score"/>
@@ -100,7 +115,7 @@
                 android:id="@+id/status_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 app:layout_gravity="center"
                 tools:text="@string/status"/>
@@ -109,7 +124,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             app:layout_columnWeight="2"
             app:layout_gravity="fill">
 
@@ -122,10 +137,10 @@
 
             <TextView
                 android:id="@+id/away_name"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
                 android:textSize="@dimen/TeamNames"
                 tools:text="@string/awayteam"/>
 

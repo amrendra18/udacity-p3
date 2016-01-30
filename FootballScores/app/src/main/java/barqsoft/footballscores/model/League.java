@@ -1,23 +1,19 @@
 package barqsoft.footballscores.model;
 
-import com.google.gson.annotations.SerializedName;
-
 /**
- * Created by Amrendra Kumar on 28/01/16.
+ * Created by Amrendra Kumar on 30/01/16.
  */
 public class League {
 
-    @SerializedName("href")
-    String league;
+    String caption;
 
-    public int getLeagueId() {
-        String leagueId = league.substring(league.lastIndexOf("/") + 1);
-        return Integer.parseInt(leagueId);
+    public String getCaption() {
+        return caption;
     }
 
 
     @Override
     public String toString() {
-        return "League[" + league + "]\n";
+        return "League[" + caption + "]\n";
     }
 }

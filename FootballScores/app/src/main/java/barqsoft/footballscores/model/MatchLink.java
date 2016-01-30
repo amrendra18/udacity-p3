@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by Amrendra Kumar on 28/01/16.
  */
-public class Match {
+public class MatchLink {
 
     @SerializedName("href")
     String match;
@@ -18,6 +18,6 @@ public class Match {
 
     @Override
     public String toString() {
-        return "Match[" + match + "]\n";
+        return "MatchLink[" + match + "]\n";
     }
 }

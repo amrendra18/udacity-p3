@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import barqsoft.footballscores.R;
+import barqsoft.footballscores.db.DatabaseContract;
 import barqsoft.footballscores.utils.AppUtils;
 import barqsoft.footballscores.utils.DateUtils;
 
@@ -51,8 +52,10 @@ public class ScoresAdapter extends CursorAdapter {
         mHolder.match_id = cursor.getDouble(COL_ID);
         mHolder.home_crest.setImageResource(AppUtils.getTeamCrestByTeamName(cursor.getString(COL_HOME)));
         mHolder.away_crest.setImageResource(AppUtils.getTeamCrestByTeamName(cursor.getString(COL_AWAY)));
-        //Log.v(FetchScoreTask.LOG_TAG,mHolder.home_name.getText() + " Vs. " + mHolder.away_name.getText() +" id " + String.valueOf(mHolder.match_id));
-        //Log.v(FetchScoreTask.LOG_TAG,String.valueOf(detail_match_id));
+        mHolder.matchDayTv.setText(context.getString(R.string.match_day, cursor.getString(cursor
+                .getColumnIndex(DatabaseContract.FixtureEntry.MATCH_DAY_COL))));
+        mHolder.statusTv.setText(cursor.getString(cursor.getColumnIndex(DatabaseContract
+                .FixtureEntry.STATUS_COL)));
         LayoutInflater vi = (LayoutInflater) context.getApplicationContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = vi.inflate(R.layout.detail_fragment, null);
@@ -66,7 +69,7 @@ public class ScoresAdapter extends CursorAdapter {
             match_day.setText(AppUtils.getMatchDay(cursor.getInt(COL_MATCHDAY),
                     cursor.getInt(COL_LEAGUE)));
             TextView league = (TextView) v.findViewById(R.id.league_textview);
-            league.setText(AppUtils.getLeague(cursor.getInt(COL_LEAGUE)));
+            league.setText(AppUtils.getLeagueLink(cursor.getInt(COL_LEAGUE)));
             Button share_button = (Button) v.findViewById(R.id.share_button);
             share_button.setOnClickListener(new View.OnClickListener() {
                 @Override

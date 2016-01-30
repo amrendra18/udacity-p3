@@ -7,48 +7,48 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Links {
     @SerializedName("self")
-    Match match;
+    MatchLink matchLink;
 
     @SerializedName("soccerseason")
-    League league;
+    LeagueLink leagueLink;
 
     @SerializedName("homeTeam")
-    Team homeTeam;
+    TeamLink homeTeamLink;
 
     @SerializedName("awayTeam")
-    Team awayTeam;
+    TeamLink awayTeamLink;
 
 
-    public Team getAwayTeam() {
-        return awayTeam;
+    public TeamLink getAwayTeamLink() {
+        return awayTeamLink;
     }
 
-    public void setAwayTeam(Team awayTeam) {
-        this.awayTeam = awayTeam;
+    public void setAwayTeamLink(TeamLink awayTeamLink) {
+        this.awayTeamLink = awayTeamLink;
     }
 
-    public Match getMatch() {
-        return match;
+    public MatchLink getMatchLink() {
+        return matchLink;
     }
 
-    public void setMatch(Match match) {
-        this.match = match;
+    public void setMatchLink(MatchLink matchLink) {
+        this.matchLink = matchLink;
     }
 
-    public League getLeague() {
-        return league;
+    public LeagueLink getLeagueLink() {
+        return leagueLink;
     }
 
-    public void setLeague(League league) {
-        this.league = league;
+    public void setLeagueLink(LeagueLink leagueLink) {
+        this.leagueLink = leagueLink;
     }
 
-    public Team getHomeTeam() {
-        return homeTeam;
+    public TeamLink getHomeTeamLink() {
+        return homeTeamLink;
     }
 
-    public void setHomeTeam(Team homeTeam) {
-        this.homeTeam = homeTeam;
+    public void setHomeTeamLink(TeamLink homeTeamLink) {
+        this.homeTeamLink = homeTeamLink;
     }
 
 }

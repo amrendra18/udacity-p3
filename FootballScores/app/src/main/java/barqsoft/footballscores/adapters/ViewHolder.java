@@ -25,6 +25,8 @@ public class ViewHolder {
     TextView score;
     @Bind(R.id.time_textview)
     TextView date;
+    @Bind(R.id.status_textview)
+    TextView statusTv;
     @Bind(R.id.home_crest)
     ImageView home_crest;
     @Bind(R.id.away_crest)
