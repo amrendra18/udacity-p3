@@ -40,17 +40,14 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.0.0'
 
     //debugg
-    compile 'com.facebook.stetho:stetho:1.2.0'
-    compile 'com.facebook.stetho:stetho-okhttp:1.2.0'
+    //compile 'com.facebook.stetho:stetho:1.2.0'
+    //compile 'com.facebook.stetho:stetho-okhttp:1.2.0'
 
 /*    compile 'com.android.support:recyclerview-v7:23.1.1'
     compile 'com.android.support:palette-v7:23.1.1'
     compile 'com.android.support:cardview-v7:23.1.1'*/
 
     testCompile 'junit:junit:4.12'
-    testCompile('org.robolectric:robolectric:3.0-rc2') {
-        exclude group: 'commons-logging', module: 'commons-logging'
-        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
-    }
+    testCompile 'org.robolectric:robolectric:3.0-rc2'
 
 }
