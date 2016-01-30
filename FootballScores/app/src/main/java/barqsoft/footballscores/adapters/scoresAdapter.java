@@ -49,12 +49,22 @@ public class ScoresAdapter extends CursorAdapter {
                         .FixtureEntry.AWAY_GOALS_COL))));
         mHolder.match_id = cursor.getDouble(cursor.getColumnIndex(DatabaseContract
                 .FixtureEntry._ID));
-        mHolder.leaugeTv.setText(
+        mHolder.leagueTv.setText(
                 AppUtils.getLeagueName(context,
                         cursor.getString(cursor.getColumnIndex(DatabaseContract.FixtureEntry.LEAGUE_COL)))
         );
-/*        mHolder.home_crest.setImageResource(AppUtils.getTeamCrestByTeamName(cursor.getString(COL_HOME)));
-        mHolder.away_crest.setImageResource(AppUtils.getTeamCrestByTeamName(cursor.getString(COL_AWAY)));*/
+
+        AppUtils.setLogo(
+                mHolder.home_crest,
+                AppUtils.getTeamLogo(context, cursor.getString(cursor.getColumnIndex(DatabaseContract.FixtureEntry.HOME_TEAM_ID_COL))),
+                context
+        );
+
+        AppUtils.setLogo(
+                mHolder.away_crest,
+                AppUtils.getTeamLogo(context, cursor.getString(cursor.getColumnIndex(DatabaseContract.FixtureEntry.AWAY_TEAM_ID_COL))),
+                context
+        );
         mHolder.matchDayTv.setText(context.getString(R.string.match_day, cursor.getString(cursor
                 .getColumnIndex(DatabaseContract.FixtureEntry.MATCH_DAY_COL))));
         mHolder.statusTv.setText(cursor.getString(cursor.getColumnIndex(DatabaseContract

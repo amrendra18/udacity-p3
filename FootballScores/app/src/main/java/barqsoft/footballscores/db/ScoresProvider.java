@@ -233,7 +233,7 @@ public class ScoresProvider extends ContentProvider {
                 retCursor = db.query(
                         DatabaseContract.TeamEntry.TABLE_NAME,
                         projection,
-                        DatabaseContract.TeamEntry.TEAM_CODE_COL + " = ?",
+                        DatabaseContract.TeamEntry.TEAM_ID_COL + " = ?",
                         new String[]{Long.toString(teamId)},
                         null,
                         null,

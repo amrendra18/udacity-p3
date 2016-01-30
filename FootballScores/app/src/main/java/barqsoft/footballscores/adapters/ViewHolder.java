@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 public class ViewHolder {
 
     @Bind(R.id.league_textview)
-    TextView leaugeTv;
+    TextView leagueTv;
     @Bind(R.id.matchday_textview)
     TextView matchDayTv;
     @Bind(R.id.home_name)
