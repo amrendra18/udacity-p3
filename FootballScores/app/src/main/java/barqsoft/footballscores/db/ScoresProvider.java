@@ -17,10 +17,10 @@ public class ScoresProvider extends ContentProvider {
 
     private static ScoresDBHelper mOpenHelper;
 
-    private static final int MATCHES = 100;
-    private static final int MATCHES_WITH_LEAGUE = 101;
-    private static final int MATCHES_WITH_ID = 102;
-    private static final int MATCHES_WITH_DATE = 103;
+    private static final int FIXTURE = 100;
+    private static final int FIXTURE_WITH_LEAGUE_ID = 101;
+    private static final int FIXTURE_WITH_ID = 102;
+    private static final int FIXTURE_WITH_DATE = 103;
 
     private static final int LEAGUE = 200;
     private static final int LEAGUE_WITH_ID = 201;
@@ -35,34 +35,26 @@ public class ScoresProvider extends ContentProvider {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = DatabaseContract.CONTENT_AUTHORITY;
 
-        /*
+        // Fixture Table
+        matcher.addURI(authority, DatabaseContract.PATH_FIXTURE, FIXTURE);
 
-        From fixture table
+        matcher.addURI(authority,
+                DatabaseContract.PATH_FIXTURE + "/" + DatabaseContract.PATH_LEAGUE + "/#",
+                FIXTURE_WITH_LEAGUE_ID);
 
-        /fixture/
-        /fixture/leauge/18
-        /fixture/id/18
-        /fixture/date/2016-02-01
+        matcher.addURI(authority,
+                DatabaseContract.PATH_FIXTURE + "/" + DatabaseContract.PATH_ID + "/#", FIXTURE_WITH_ID);
 
-        From League table
+        matcher.addURI(authority,
+                DatabaseContract.PATH_FIXTURE + "/" + DatabaseContract.PATH_DATE + "/*", FIXTURE_WITH_DATE);
 
-        /league/
-        /league/# leagueId
+        // League Table
+        matcher.addURI(authority, DatabaseContract.PATH_LEAGUE, LEAGUE);
+        matcher.addURI(authority, DatabaseContract.PATH_LEAGUE + "/#", LEAGUE_WITH_ID);
 
-
-        From Team table
-
-        /team/
-        /team/# teamId
-
-
-         */
-        matcher.addURI(authority, DatabaseContract.PATH_FIXTURE, MATCHES);
-        matcher.addURI(authority, DatabaseContract.PATH_FIXTURE + "/" + DatabaseContract
-                        .PATH_LEAGUE + "/#",
-                MATCHES_WITH_LEAGUE);
-        matcher.addURI(authority, DatabaseContract.PATH_FIXTURE + "/" + DatabaseContract.PATH_ID + "/#", MATCHES_WITH_ID);
-        matcher.addURI(authority, DatabaseContract.PATH_FIXTURE + "/" + DatabaseContract.PATH_DATE + "/*", MATCHES_WITH_DATE);
+        // Team table
+        matcher.addURI(authority, DatabaseContract.PATH_TEAM, TEAM);
+        matcher.addURI(authority, DatabaseContract.PATH_TEAM + "/#", TEAM_WITH_ID);
 
 
         return matcher;
@@ -81,8 +73,16 @@ public class ScoresProvider extends ContentProvider {
         final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
         int rowsUpdated;
         switch (match) {
-            case MATCHES: {
+            case FIXTURE: {
                 rowsUpdated = db.update(DatabaseContract.FixtureEntry.TABLE_NAME, values, selection,
+                        selectionArgs);
+            }
+            case LEAGUE: {
+                rowsUpdated = db.update(DatabaseContract.LeagueEntry.TABLE_NAME, values, selection,
+                        selectionArgs);
+            }
+            case TEAM: {
+                rowsUpdated = db.update(DatabaseContract.TeamEntry.TABLE_NAME, values, selection,
                         selectionArgs);
             }
             break;
@@ -101,14 +101,22 @@ public class ScoresProvider extends ContentProvider {
     public String getType(Uri uri) {
         final int match = sUriMatcher.match(uri);
         switch (match) {
-            case MATCHES:
+            case FIXTURE:
                 return DatabaseContract.FixtureEntry.CONTENT_TYPE;
-            case MATCHES_WITH_LEAGUE:
+            case FIXTURE_WITH_LEAGUE_ID:
                 return DatabaseContract.FixtureEntry.CONTENT_TYPE;
-            case MATCHES_WITH_ID:
+            case FIXTURE_WITH_ID:
                 return DatabaseContract.FixtureEntry.CONTENT_ITEM_TYPE;
-            case MATCHES_WITH_DATE:
+            case FIXTURE_WITH_DATE:
                 return DatabaseContract.FixtureEntry.CONTENT_TYPE;
+            case LEAGUE:
+                return DatabaseContract.LeagueEntry.CONTENT_TYPE;
+            case LEAGUE_WITH_ID:
+                return DatabaseContract.LeagueEntry.CONTENT_ITEM_TYPE;
+            case TEAM:
+                return DatabaseContract.TeamEntry.CONTENT_TYPE;
+            case TEAM_WITH_ID:
+                return DatabaseContract.TeamEntry.CONTENT_ITEM_TYPE;
             default:
                 Debug.e("ERROR : " + uri, false);
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -122,7 +130,7 @@ public class ScoresProvider extends ContentProvider {
         SQLiteDatabase db = mOpenHelper.getReadableDatabase();
         Cursor retCursor;
         switch (match) {
-            case MATCHES:
+            case FIXTURE: {
                 retCursor = db.query(
                         DatabaseContract.FixtureEntry.TABLE_NAME, //table name
                         projection, //projection
@@ -132,9 +140,10 @@ public class ScoresProvider extends ContentProvider {
                         null,
                         sortOrder
                 );
-                break;
+            }
+            break;
 
-            case MATCHES_WITH_DATE:
+            case FIXTURE_WITH_DATE: {
                 String date = DatabaseContract.FixtureEntry.getDateFromUri(uri);
                 Debug.e("uri: " + uri + " date: " + date, false);
                 retCursor = db.query(
@@ -146,9 +155,10 @@ public class ScoresProvider extends ContentProvider {
                         null,
                         sortOrder
                 );
-                break;
+            }
+            break;
 
-            case MATCHES_WITH_ID:
+            case FIXTURE_WITH_ID: {
                 long id = DatabaseContract.FixtureEntry.getMatchIdFromUri(uri);
                 Debug.e("uri: " + uri + " matchid: " + id, false);
                 retCursor = db.query(
@@ -160,9 +170,10 @@ public class ScoresProvider extends ContentProvider {
                         null,
                         sortOrder
                 );
-                break;
+            }
+            break;
 
-            case MATCHES_WITH_LEAGUE:
+            case FIXTURE_WITH_LEAGUE_ID: {
                 long leagueId = DatabaseContract.FixtureEntry.getLeagueFromUri(uri);
                 Debug.e("uri: " + uri + " league: " + leagueId, false);
                 retCursor = db.query(
@@ -174,7 +185,63 @@ public class ScoresProvider extends ContentProvider {
                         null,
                         sortOrder
                 );
-                break;
+            }
+            break;
+
+            case LEAGUE: {
+                retCursor = db.query(
+                        DatabaseContract.LeagueEntry.TABLE_NAME,
+                        projection,
+                        null,
+                        null,
+                        null,
+                        null,
+                        sortOrder
+                );
+            }
+            break;
+
+            case LEAGUE_WITH_ID: {
+                long id = DatabaseContract.LeagueEntry.getLeagueIdFromUri(uri);
+                retCursor = db.query(
+                        DatabaseContract.LeagueEntry.TABLE_NAME,
+                        projection,
+                        DatabaseContract.LeagueEntry.LEAGUE_ID_COL + " = ?",
+                        new String[]{Long.toString(id)},
+                        null,
+                        null,
+                        sortOrder
+                );
+            }
+            break;
+
+            case TEAM: {
+                retCursor = db.query(
+                        DatabaseContract.TeamEntry.TABLE_NAME,
+                        projection,
+                        null,
+                        null,
+                        null,
+                        null,
+                        sortOrder
+                );
+            }
+            break;
+
+            case TEAM_WITH_ID: {
+                long teamId = DatabaseContract.TeamEntry.getTeamIdFromUri(uri);
+                retCursor = db.query(
+                        DatabaseContract.TeamEntry.TABLE_NAME,
+                        projection,
+                        DatabaseContract.TeamEntry.TEAM_CODE_COL + " = ?",
+                        new String[]{Long.toString(teamId)},
+                        null,
+                        null,
+                        sortOrder
+                );
+            }
+            break;
+
 
             default:
                 throw new UnsupportedOperationException("Unknown Uri" + uri);
@@ -196,10 +263,30 @@ public class ScoresProvider extends ContentProvider {
         final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
         Uri returnUri;
         switch (match) {
-            case MATCHES: {
+            case FIXTURE: {
                 long _id = db.insert(DatabaseContract.FixtureEntry.TABLE_NAME, null, values);
                 if (_id > 0) {
                     returnUri = DatabaseContract.FixtureEntry.buildScoreWithMatchId(_id);
+                } else {
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                }
+            }
+            break;
+
+            case LEAGUE: {
+                long _id = db.insert(DatabaseContract.LeagueEntry.TABLE_NAME, null, values);
+                if (_id > 0) {
+                    returnUri = DatabaseContract.LeagueEntry.buildLeagueWithId(_id);
+                } else {
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                }
+            }
+            break;
+
+            case TEAM: {
+                long _id = db.insert(DatabaseContract.TeamEntry.TABLE_NAME, null, values);
+                if (_id > 0) {
+                    returnUri = DatabaseContract.TeamEntry.buildTeamWithId(_id);
                 } else {
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 }
@@ -218,8 +305,14 @@ public class ScoresProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         String tableName = null;
         switch (match) {
-            case MATCHES:
+            case FIXTURE:
                 tableName = DatabaseContract.FixtureEntry.TABLE_NAME;
+                break;
+            case LEAGUE:
+                tableName = DatabaseContract.LeagueEntry.TABLE_NAME;
+                break;
+            case TEAM:
+                tableName = DatabaseContract.TeamEntry.TABLE_NAME;
                 break;
             default:
                 break;
@@ -260,8 +353,14 @@ public class ScoresProvider extends ContentProvider {
             selection = "1";
         }
         switch (match) {
-            case MATCHES:
+            case FIXTURE:
                 deleted = db.delete(DatabaseContract.FixtureEntry.TABLE_NAME, selection, selectionArgs);
+                break;
+            case LEAGUE:
+                deleted = db.delete(DatabaseContract.LeagueEntry.TABLE_NAME, selection, selectionArgs);
+                break;
+            case TEAM:
+                deleted = db.delete(DatabaseContract.TeamEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             default:
                 throw new UnsupportedOperationException("Delete : Unknown uri: " + uri);
