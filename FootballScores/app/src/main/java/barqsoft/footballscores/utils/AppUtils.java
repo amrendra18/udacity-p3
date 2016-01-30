@@ -1,6 +1,12 @@
 package barqsoft.footballscores.utils;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
+
 import barqsoft.footballscores.R;
+import barqsoft.footballscores.db.DatabaseContract;
+import barqsoft.footballscores.logger.Debug;
 
 /**
  * Created by yehya khaled on 3/3/2015.
@@ -84,5 +90,32 @@ public class AppUtils {
             default:
                 return R.drawable.ic_launcher;
         }
+    }
+
+    public static String getLeagueName(Context context, String leagueId) {
+        String league = "League: NA";
+        Debug.c();
+        Uri uri = DatabaseContract.LeagueEntry.buildLeagueWithId(Integer.parseInt(leagueId));
+        Cursor cursor = context.getContentResolver().query(
+                uri,
+                DatabaseContract.LeagueEntry.LEAGUE_PROJECTION,
+                null,
+                null,
+                null
+        );
+
+        if (cursor != null && cursor.moveToFirst()) {
+
+            league = cursor.getString(
+                    cursor.getColumnIndex(DatabaseContract.LeagueEntry.LEAGUE_NAME_COL));
+            try {
+                if (!cursor.isClosed()) {
+                    cursor.close();
+                }
+            } catch (Exception ex) {
+            }
+        }
+        Debug.e("LeagueId: " + league + " League: " + league, false);
+        return league;
     }
 }

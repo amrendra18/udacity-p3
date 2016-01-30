@@ -42,6 +42,12 @@ public class DatabaseContract {
         public static long getLeagueIdFromUri(Uri uri) {
             return ContentUris.parseId(uri);
         }
+
+        public static final String[] LEAGUE_PROJECTION = new String[]{
+                _ID,
+                LEAGUE_ID_COL,
+                LEAGUE_NAME_COL
+        };
     }
 
     public static final class TeamEntry implements BaseColumns {
@@ -69,6 +75,15 @@ public class DatabaseContract {
         public static long getTeamIdFromUri(Uri uri) {
             return ContentUris.parseId(uri);
         }
+
+        public static final String[] TEAM_PROJECTION = new String[]{
+                _ID,
+                TEAM_ID_COL,
+                TEAM_NAME_COL,
+                TEAM_SHORT_NAME_COL,
+                TEAM_CODE_COL,
+                TEAM_LOGO_COL
+        };
     }
 
     public static final class FixtureEntry implements BaseColumns {

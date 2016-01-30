@@ -17,17 +17,7 @@ import barqsoft.footballscores.utils.DateUtils;
  * Created by yehya khaled on 2/26/2015.
  */
 public class ScoresAdapter extends CursorAdapter {
-    public static final int COL_HOME = 3;
-    public static final int COL_AWAY = 4;
-    public static final int COL_HOME_GOALS = 6;
-    public static final int COL_AWAY_GOALS = 7;
-    public static final int COL_DATE = 1;
-    public static final int COL_LEAGUE = 5;
-    public static final int COL_MATCHDAY = 9;
-    public static final int COL_ID = 8;
-    public static final int COL_MATCHTIME = 2;
     public double detail_match_id = 0;
-    private String FOOTBALL_SCORES_HASHTAG = "#Football_Scores";
 
     public ScoresAdapter(Context context, Cursor cursor, int flags) {
         super(context, cursor, flags);
@@ -45,13 +35,26 @@ public class ScoresAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, final Context context, Cursor cursor) {
         final ViewHolder mHolder = (ViewHolder) view.getTag();
-        mHolder.home_name.setText(cursor.getString(COL_HOME));
-        mHolder.away_name.setText(cursor.getString(COL_AWAY));
-        mHolder.date.setText(DateUtils.get12HoursTime(cursor.getString(COL_MATCHTIME)));
-        mHolder.score.setText(AppUtils.getScores(cursor.getInt(COL_HOME_GOALS), cursor.getInt(COL_AWAY_GOALS)));
-        mHolder.match_id = cursor.getDouble(COL_ID);
-        mHolder.home_crest.setImageResource(AppUtils.getTeamCrestByTeamName(cursor.getString(COL_HOME)));
-        mHolder.away_crest.setImageResource(AppUtils.getTeamCrestByTeamName(cursor.getString(COL_AWAY)));
+
+        mHolder.home_name.setText(cursor.getString(cursor.getColumnIndex(DatabaseContract
+                .FixtureEntry.HOME_COL)));
+
+        mHolder.away_name.setText(cursor.getString(cursor.getColumnIndex(DatabaseContract
+                .FixtureEntry.AWAY_COL)));
+        mHolder.date.setText(DateUtils.get12HoursTime(cursor.getString(cursor.getColumnIndex(DatabaseContract
+                .FixtureEntry.TIME_COL))));
+        mHolder.score.setText(AppUtils.getScores(cursor.getInt(cursor.getColumnIndex(DatabaseContract
+                .FixtureEntry.HOME_GOALS_COL)), cursor.getInt(cursor.getColumnIndex
+                (DatabaseContract
+                        .FixtureEntry.AWAY_GOALS_COL))));
+        mHolder.match_id = cursor.getDouble(cursor.getColumnIndex(DatabaseContract
+                .FixtureEntry._ID));
+        mHolder.leaugeTv.setText(
+                AppUtils.getLeagueName(context,
+                        cursor.getString(cursor.getColumnIndex(DatabaseContract.FixtureEntry.LEAGUE_COL)))
+        );
+/*        mHolder.home_crest.setImageResource(AppUtils.getTeamCrestByTeamName(cursor.getString(COL_HOME)));
+        mHolder.away_crest.setImageResource(AppUtils.getTeamCrestByTeamName(cursor.getString(COL_AWAY)));*/
         mHolder.matchDayTv.setText(context.getString(R.string.match_day, cursor.getString(cursor
                 .getColumnIndex(DatabaseContract.FixtureEntry.MATCH_DAY_COL))));
         mHolder.statusTv.setText(cursor.getString(cursor.getColumnIndex(DatabaseContract
@@ -85,11 +88,12 @@ public class ScoresAdapter extends CursorAdapter {
 
     }
 
-    public Intent createShareForecastIntent(String ShareText) {
+    public Intent createShareForecastIntent(Context context, String ShareText) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, ShareText + FOOTBALL_SCORES_HASHTAG);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, ShareText + " #" + context.getString(R.string
+                .app_name));
         return shareIntent;
     }
 

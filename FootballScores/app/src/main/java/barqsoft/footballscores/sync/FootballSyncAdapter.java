@@ -21,11 +21,7 @@ import barqsoft.footballscores.db.DatabaseContract;
 import barqsoft.footballscores.logger.Debug;
 import barqsoft.footballscores.model.Fixture;
 import barqsoft.footballscores.model.League;
-import barqsoft.footballscores.model.Links;
 import barqsoft.footballscores.model.Team;
-import barqsoft.footballscores.utils.AppUtils;
-import barqsoft.footballscores.utils.DateUtils;
-import rx.Observable;
 import rx.Subscriber;
 import rx.schedulers.Schedulers;
 
