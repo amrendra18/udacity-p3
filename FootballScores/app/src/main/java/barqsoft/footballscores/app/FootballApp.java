@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.facebook.stetho.Stetho;
 
+import barqsoft.footballscores.utils.svg.SvgImageLoader;
+
 /**
  * Created by Amrendra Kumar on 27/01/16.
  */
@@ -20,6 +22,17 @@ public class FootballApp extends Application {
             mApplication = new FootballApp();
         }
         return mApplication;
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        SvgImageLoader.clearCache(this);
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
     }
 
     @Override

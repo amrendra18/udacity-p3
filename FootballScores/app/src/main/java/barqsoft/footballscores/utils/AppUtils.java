@@ -5,11 +5,10 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-
 import barqsoft.footballscores.R;
 import barqsoft.footballscores.db.DatabaseContract;
 import barqsoft.footballscores.logger.Debug;
+import barqsoft.footballscores.utils.svg.SvgImageLoader;
 
 /**
  * Created by yehya khaled on 3/3/2015.
@@ -24,12 +23,24 @@ public class AppUtils {
         }
     }
 
-    public static void setLogo(ImageView iv, String url, Context context) {
-        Glide.with(context)
-                .load(url)
-                .placeholder(R.drawable.ic_launcher)
-                .error(R.drawable.ic_launcher)
-                .into(iv);
+    public static void setLogo(int league, ImageView iv, String url, Context context) {
+        // Since Svg is very memory intensive to load,
+        // hence not loading images for less popular league & its teams
+        switch (league) {
+            case 401: //SERIE_A
+            case 398: //PREMIER_LEGAUE
+            case 405: //CHAMPIONS_LEAGUE
+            case 399: //PRIMERA_DIVISION
+            case 394: //1. BUNDESLIGA
+            case 395: //2. BUNDESLIGA
+            case 403: //3. BUNDESLIGA
+                SvgImageLoader.getInstance(context)
+                        .loadSvg(iv, url, R.drawable.ic_launcher, R.drawable.ic_launcher);
+                break;
+            default:
+                break;
+        }
+
     }
 
     public static String getTeamLogo(Context context, String teamId) {

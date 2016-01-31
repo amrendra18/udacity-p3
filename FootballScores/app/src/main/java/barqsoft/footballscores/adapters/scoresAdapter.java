@@ -55,12 +55,17 @@ public class ScoresAdapter extends CursorAdapter {
         );
 
         AppUtils.setLogo(
+                Integer.parseInt(cursor.getString(cursor.getColumnIndex(DatabaseContract
+                        .FixtureEntry.LEAGUE_COL))),
                 mHolder.home_crest,
                 AppUtils.getTeamLogo(context, cursor.getString(cursor.getColumnIndex(DatabaseContract.FixtureEntry.HOME_TEAM_ID_COL))),
                 context
         );
 
         AppUtils.setLogo(
+                Integer.parseInt(cursor.getString(cursor.getColumnIndex(DatabaseContract
+                        .FixtureEntry
+                        .LEAGUE_COL))),
                 mHolder.away_crest,
                 AppUtils.getTeamLogo(context, cursor.getString(cursor.getColumnIndex(DatabaseContract.FixtureEntry.AWAY_TEAM_ID_COL))),
                 context
