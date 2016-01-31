@@ -84,6 +84,7 @@
                 android:layout_width="@dimen/crest_width"
                 android:layout_height="@dimen/crest_height"
                 android:layout_gravity="center"
+                android:contentDescription="@string/hometeam_text"
                 android:src="@drawable/ic_launcher_grey"/>
 
             <TextView
@@ -140,6 +141,7 @@
                 android:layout_width="@dimen/crest_width"
                 android:layout_height="@dimen/crest_height"
                 android:layout_gravity="center"
+                android:contentDescription="@string/awayteam_text"
                 android:src="@drawable/ic_launcher_grey"/>
 
             <TextView
@@ -158,6 +160,7 @@
             android:id="@+id/share_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/share"
             android:padding="@dimen/divider_height"
             android:text="@string/share"
             app:layout_columnSpan="3"

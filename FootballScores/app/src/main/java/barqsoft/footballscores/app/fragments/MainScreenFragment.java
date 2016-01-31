@@ -128,6 +128,7 @@ public class MainScreenFragment extends Fragment {
                 }
                 errorTv.setText(getActivity().getString(R.string.nomatch));
                 errorTv.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.egg_empty, 0, 0);
+                errorTv.setContentDescription(getActivity().getString(R.string.nomatch));
                 errorTv.setVisibility(View.VISIBLE);
                 errorLayout.setVisibility(View.VISIBLE);
             }

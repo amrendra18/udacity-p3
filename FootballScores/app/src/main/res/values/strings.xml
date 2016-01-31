@@ -31,6 +31,8 @@
     <string name="status">Status</string>
     <string name="league">Leauge</string>
     <string name="matchday">Matchday</string>
+    <string name="hometeam_text" >Home Team</string>
+    <string name="awayteam_text" >Away Team</string>
     <string name="hometeam" translatable="false">Manchester United</string>
     <string name="awayteam" translatable="false">Liverpool</string>
     <string name="score" translatable="false">5 &#8211; 3</string>

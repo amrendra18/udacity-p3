@@ -63,6 +63,12 @@ public class ScoresAdapter extends CursorAdapter {
                 context
         );
 
+        mHolder.home_crest.setContentDescription(context.getString(R.string.hometeam_text) + " " +
+                mHolder.home_name.getText());
+
+        mHolder.away_crest.setContentDescription(context.getString(R.string.awayteam_text) + " " +
+                mHolder.away_name.getText());
+
         AppUtils.setLogo(
                 Integer.parseInt(cursor.getString(cursor.getColumnIndex(DatabaseContract
                         .FixtureEntry
