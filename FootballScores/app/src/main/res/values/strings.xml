@@ -49,10 +49,13 @@
     <string name="matchday">Matchday</string>
     <string name="hometeam">Manchester United</string>
     <string name="awayteam">Liverpool</string>
-    <string name="score">5 - 3</string>
+    <string name="score">5 &#8211; 3</string>
     <string name="time">08:45 PM</string>
     <string name="share">Share the action</string>
     <string name="shareit">Checkout this football clash</string>
+    <string name="nomatch">No match found for the day.</string>
+    <string name="error">Some error occurred</string>
+    <string name="internet">There seems to be internet connectivity issue.</string>
     <string name="match_day" translatable="false">MatchDay <xliff:g example="18" id="match_day">%1$s</xliff:g> </string>
 </resources>
 

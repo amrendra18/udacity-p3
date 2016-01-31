@@ -28,7 +28,6 @@ public class ScoresAdapter extends CursorAdapter {
         View mItem = LayoutInflater.from(context).inflate(R.layout.scores_list_item, parent, false);
         ViewHolder mHolder = new ViewHolder(mItem);
         mItem.setTag(mHolder);
-        //Log.v(FetchScoreTask.LOG_TAG,"new View inflated");
         return mItem;
     }
 
@@ -90,14 +89,14 @@ public class ScoresAdapter extends CursorAdapter {
         });
     }
 
-    public Intent createShareForecastIntent(Context context, String ShareText) {
+    public Intent createShareForecastIntent(Context context, String shareText) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         shareIntent.setType("text/plain");
-        ShareText = context.getString(R.string.shareit) + " \n"
-                + ShareText + " \n" +
+        shareText = context.getString(R.string.shareit) + " \n"
+                + shareText + " \n" +
                 context.getString(R.string.hash_app_name);
-        shareIntent.putExtra(Intent.EXTRA_TEXT, ShareText);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, shareText);
         return shareIntent;
     }
 

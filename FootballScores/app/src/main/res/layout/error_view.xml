@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/view_error"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/error_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="4dp"
+        android:drawableTop="@drawable/egg_empty"
+        android:drawablePadding="@dimen/activity_vertical_padding"
+        android:textStyle="bold"
+        android:textSize="@dimen/TeamNames"
+        android:visibility="invisible"
+        tools:text="@string/nomatch"/>
+
+</RelativeLayout>

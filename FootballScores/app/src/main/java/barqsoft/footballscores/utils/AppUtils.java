@@ -2,6 +2,7 @@ package barqsoft.footballscores.utils;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.widget.ImageView;
 
@@ -100,5 +101,12 @@ public class AppUtils {
         }
         Debug.e("LeagueId: " + leagueId + " League: " + league, false);
         return league;
+    }
+
+    public static boolean isNetworkConnected(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context
+                .CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null;
     }
 }

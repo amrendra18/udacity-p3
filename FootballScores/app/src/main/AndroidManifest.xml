@@ -3,9 +3,9 @@
     package="barqsoft.footballscores"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission
-        android:name="android.permission.INTERNET"
-        android:maxSdkVersion="22"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
 
     <!-- required for sync adapter-->
     <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>

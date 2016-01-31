@@ -9,14 +9,20 @@ import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import barqsoft.footballscores.R;
 import barqsoft.footballscores.adapters.ScoresAdapter;
 import barqsoft.footballscores.adapters.ViewHolder;
 import barqsoft.footballscores.app.activity.MainActivity;
 import barqsoft.footballscores.db.DatabaseContract;
+import barqsoft.footballscores.logger.Debug;
+import barqsoft.footballscores.utils.AppUtils;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -25,6 +31,21 @@ public class MainScreenFragment extends Fragment {
     public ScoresAdapter mAdapter;
     public static final int SCORES_LOADER = 0;
     private String fragmentDate;
+
+    @Bind(R.id.progress_bar)
+    ProgressBar progressBar;
+
+    @Bind(R.id.error_message)
+    TextView errorTv;
+
+    @Bind(R.id.view_error)
+    RelativeLayout errorLayout;
+
+    @Bind(R.id.view_loading)
+    RelativeLayout loadingLayout;
+
+    @Bind(R.id.scores_list)
+    ListView score_list;
 
     public MainScreenFragment() {
     }
@@ -37,21 +58,24 @@ public class MainScreenFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              final Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        final ListView score_list = (ListView) rootView.findViewById(R.id.scores_list);
+        ButterKnife.bind(this, rootView);
         mAdapter = new ScoresAdapter(getActivity(), null, 0);
         score_list.setAdapter(mAdapter);
         restartLoader();
         mAdapter.detail_match_id = MainActivity.selected_match_id;
-        score_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ViewHolder selected = (ViewHolder) view.getTag();
-                mAdapter.detail_match_id = selected.match_id;
-                MainActivity.selected_match_id = (int) selected.match_id;
-                mAdapter.notifyDataSetChanged();
-            }
+        score_list.setOnItemClickListener((parent, view, position, id) -> {
+            ViewHolder selected = (ViewHolder) view.getTag();
+            mAdapter.detail_match_id = selected.match_id;
+            MainActivity.selected_match_id = (int) selected.match_id;
+            mAdapter.notifyDataSetChanged();
         });
         return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 
     private void restartLoader() {
@@ -67,6 +91,9 @@ public class MainScreenFragment extends Fragment {
 
         @Override
         public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+            progressBar.setVisibility(View.VISIBLE);
+            loadingLayout.setVisibility(View.VISIBLE);
+            errorTv.setVisibility(View.INVISIBLE);
             return new CursorLoader(
                     getActivity(),
                     DatabaseContract.FixtureEntry.buildScoreWithDate(fragmentDate),
@@ -80,7 +107,23 @@ public class MainScreenFragment extends Fragment {
         @Override
         public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
             mAdapter.swapCursor(cursor);
-            mAdapter.notifyDataSetChanged();
+
+            progressBar.setVisibility(View.INVISIBLE);
+
+
+            if (cursor != null && cursor.getCount() > 0) {
+                errorTv.setVisibility(View.INVISIBLE);
+                errorLayout.setVisibility(View.INVISIBLE);
+            } else {
+                if (!AppUtils.isNetworkConnected(getActivity())) {
+                    Debug.showToastShort(getActivity().getString(R.string
+                            .internet), getActivity(), true);
+                }
+                errorTv.setText(getActivity().getString(R.string.nomatch));
+                errorTv.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.egg_empty, 0, 0);
+                errorTv.setVisibility(View.VISIBLE);
+                errorLayout.setVisibility(View.VISIBLE);
+            }
         }
 
         @Override
