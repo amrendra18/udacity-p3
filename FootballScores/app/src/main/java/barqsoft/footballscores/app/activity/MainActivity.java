@@ -128,7 +128,9 @@ public class MainActivity extends AppCompatActivity {
             Date fragmentDate = new Date(System.currentTimeMillis() + ((i - 2) * 86400000));
             SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
             viewFragments[i] = new MainScreenFragment();
-            viewFragments[i].setFragmentDate(mFormat.format(fragmentDate));
+            Bundle bundle = new Bundle();
+            bundle.putString(AppConstants.FRAGMENT_DATE, mFormat.format(fragmentDate));
+            viewFragments[i].setArguments(bundle);
             adapter.addFrag(viewFragments[i]);
         }
         viewPager.setAdapter(adapter);

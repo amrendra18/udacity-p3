@@ -20,6 +20,7 @@ import barqsoft.footballscores.adapters.ViewHolder;
 import barqsoft.footballscores.app.activity.MainActivity;
 import barqsoft.footballscores.db.DatabaseContract;
 import barqsoft.footballscores.logger.Debug;
+import barqsoft.footballscores.utils.AppConstants;
 import barqsoft.footballscores.utils.AppUtils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -50,8 +51,15 @@ public class MainScreenFragment extends Fragment {
     public MainScreenFragment() {
     }
 
-    public void setFragmentDate(String date) {
-        fragmentDate = date;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            fragmentDate = bundle.getString(AppConstants.FRAGMENT_DATE);
+        } else {
+            Debug.e("Should not happen. Fragmentdate not supllied", false);
+        }
     }
 
     @Override
@@ -79,6 +87,9 @@ public class MainScreenFragment extends Fragment {
     }
 
     private void restartLoader() {
+        progressBar.setVisibility(View.VISIBLE);
+        loadingLayout.setVisibility(View.VISIBLE);
+        errorTv.setVisibility(View.INVISIBLE);
         if (getLoaderManager().getLoader(SCORES_LOADER) == null) {
             getLoaderManager().initLoader(SCORES_LOADER, null, matchLoaderCallbacks);
         } else {
@@ -88,12 +99,8 @@ public class MainScreenFragment extends Fragment {
 
     private LoaderManager.LoaderCallbacks<Cursor> matchLoaderCallbacks
             = new LoaderManager.LoaderCallbacks<Cursor>() {
-
         @Override
         public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-            progressBar.setVisibility(View.VISIBLE);
-            loadingLayout.setVisibility(View.VISIBLE);
-            errorTv.setVisibility(View.INVISIBLE);
             return new CursorLoader(
                     getActivity(),
                     DatabaseContract.FixtureEntry.buildScoreWithDate(fragmentDate),
