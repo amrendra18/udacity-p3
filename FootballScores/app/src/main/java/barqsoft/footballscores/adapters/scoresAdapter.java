@@ -74,9 +74,9 @@ public class ScoresAdapter extends CursorAdapter {
                 .getColumnIndex(DatabaseContract.FixtureEntry.MATCH_DAY_COL))));
         mHolder.statusTv.setText(cursor.getString(cursor.getColumnIndex(DatabaseContract
                 .FixtureEntry.STATUS_COL)));
-        LayoutInflater vi = (LayoutInflater) context.getApplicationContext()
+/*        LayoutInflater vi = (LayoutInflater) context.getApplicationContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = vi.inflate(R.layout.detail_fragment, null);
+        View v = vi.inflate(R.layout.detail_fragment, null);*/
 /*        ViewGroup container = (ViewGroup) view.findViewById(R.id.details_fragment_container);
         if (mHolder.match_id == detail_match_id) {
             //Log.v(FetchScoreTask.LOG_TAG,"will insert extraView");

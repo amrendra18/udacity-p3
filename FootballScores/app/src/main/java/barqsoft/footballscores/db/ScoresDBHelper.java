@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class ScoresDBHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "football.db";
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 1;
 
     final String SQL_CREATE_FIXTURES_TABLE = "CREATE TABLE " + DatabaseContract.FixtureEntry.TABLE_NAME + " ("
             + DatabaseContract.FixtureEntry._ID + " INTEGER PRIMARY KEY,"

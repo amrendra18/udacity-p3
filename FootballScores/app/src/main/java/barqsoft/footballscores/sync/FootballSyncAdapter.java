@@ -22,6 +22,7 @@ import barqsoft.footballscores.logger.Debug;
 import barqsoft.footballscores.model.Fixture;
 import barqsoft.footballscores.model.League;
 import barqsoft.footballscores.model.Team;
+import barqsoft.footballscores.utils.AppUtils;
 import rx.Subscriber;
 import rx.schedulers.Schedulers;
 
@@ -80,8 +81,11 @@ public class FootballSyncAdapter extends AbstractThreadedSyncAdapter {
                         Debug.c();
                         List<ContentValues> list = new ArrayList<>();
                         for (int i = 0; i < response.size(); i++) {
-                            list.add(response.get(i).getContentValues());
-                            fetchTeamsFromLeague(Integer.toString(response.get(i).getLeagueId()));
+                            League l = response.get(i);
+                            if (AppUtils.leagueCovered(l.getLeagueId())) {
+                                list.add(l.getContentValues());
+                                fetchTeamsFromLeague(Integer.toString(l.getLeagueId()));
+                            }
                         }
                         Debug.e("Leagues adding : " + response.size(), false);
                         ContentValues[] insert_data = new ContentValues[list.size()];
@@ -113,7 +117,10 @@ public class FootballSyncAdapter extends AbstractThreadedSyncAdapter {
                         List<Fixture> response = r.fixtures;
                         List<ContentValues> list = new ArrayList<>();
                         for (int i = 0; i < response.size(); i++) {
-                            list.add(response.get(i).getContentValues());
+                            Fixture f = response.get(i);
+                            if (AppUtils.leagueCovered(f.getLinks().getLeagueLink().getLeagueId())) {
+                                list.add(f.getContentValues());
+                            }
                         }
                         Debug.e("fixtures adding : " + response.size(), false);
                         ContentValues[] insert_data = new ContentValues[list.size()];

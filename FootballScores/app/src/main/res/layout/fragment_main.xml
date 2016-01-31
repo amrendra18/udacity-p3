@@ -12,6 +12,6 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:divider="@android:color/transparent"
-        android:dividerHeight="8sp"
+        android:dividerHeight="16sp"
         android:padding="@dimen/list_horizonal_margin"/>
 </LinearLayout>
