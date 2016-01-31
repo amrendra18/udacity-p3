@@ -43,6 +43,7 @@
     <string name="contentauthority" translatable="false">barqsoft.footballscores</string>
     <string name="sync_account_type" translatable="false">footballscores.barqsoft</string>
 
+    <string name="hash_app_name" translatable="false">#FootballScores</string>
     <string name="status">Status</string>
     <string name="league">Leauge</string>
     <string name="matchday">Matchday</string>
@@ -52,6 +53,6 @@
     <string name="time">08:45 PM</string>
     <string name="share">Share the action</string>
     <string name="shareit">Checkout this football clash</string>
-    <string name="match_day" translatable="false">Day <xliff:g example="18" id="match_day">%1$s</xliff:g> </string>
+    <string name="match_day" translatable="false">MatchDay <xliff:g example="18" id="match_day">%1$s</xliff:g> </string>
 </resources>
 

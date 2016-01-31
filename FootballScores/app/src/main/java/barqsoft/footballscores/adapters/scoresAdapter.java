@@ -41,18 +41,20 @@ public class ScoresAdapter extends CursorAdapter {
 
         mHolder.away_name.setText(cursor.getString(cursor.getColumnIndex(DatabaseContract
                 .FixtureEntry.AWAY_COL)));
-        mHolder.date.setText(DateUtils.get12HoursTime(cursor.getString(cursor.getColumnIndex(DatabaseContract
-                .FixtureEntry.TIME_COL))));
+        String time = DateUtils.get12HoursTime(cursor.getString(cursor.getColumnIndex(DatabaseContract
+                .FixtureEntry.TIME_COL)));
+        String date = cursor.getString(cursor.getColumnIndex(DatabaseContract
+                .FixtureEntry.DATE_COL));
+        mHolder.date.setText(time);
         mHolder.score.setText(AppUtils.getScores(cursor.getInt(cursor.getColumnIndex(DatabaseContract
                 .FixtureEntry.HOME_GOALS_COL)), cursor.getInt(cursor.getColumnIndex
                 (DatabaseContract
                         .FixtureEntry.AWAY_GOALS_COL))));
         mHolder.match_id = cursor.getDouble(cursor.getColumnIndex(DatabaseContract
                 .FixtureEntry._ID));
-        mHolder.leagueTv.setText(
-                AppUtils.getLeagueName(context,
-                        cursor.getString(cursor.getColumnIndex(DatabaseContract.FixtureEntry.LEAGUE_COL)))
-        );
+        String leagueName = AppUtils.getLeagueName(context,
+                cursor.getString(cursor.getColumnIndex(DatabaseContract.FixtureEntry.LEAGUE_COL)));
+        mHolder.leagueTv.setText(leagueName);
 
         AppUtils.setLogo(
                 Integer.parseInt(cursor.getString(cursor.getColumnIndex(DatabaseContract
@@ -70,24 +72,31 @@ public class ScoresAdapter extends CursorAdapter {
                 AppUtils.getTeamLogo(context, cursor.getString(cursor.getColumnIndex(DatabaseContract.FixtureEntry.AWAY_TEAM_ID_COL))),
                 context
         );
-        mHolder.matchDayTv.setText(context.getString(R.string.match_day, cursor.getString(cursor
-                .getColumnIndex(DatabaseContract.FixtureEntry.MATCH_DAY_COL))));
+        String matchDay = context.getString(R.string.match_day, cursor.getString(cursor
+                .getColumnIndex(DatabaseContract.FixtureEntry.MATCH_DAY_COL)));
+        mHolder.matchDayTv.setText(matchDay);
         mHolder.statusTv.setText(cursor.getString(cursor.getColumnIndex(DatabaseContract
                 .FixtureEntry.STATUS_COL)));
         mHolder.shareButton.setOnClickListener(v -> {
             //add Share Action
             context.startActivity(createShareForecastIntent(
                     context,
-                    mHolder.home_name.getText() + " " + mHolder.score.getText() + " " + mHolder.away_name.getText() + " "));
+                    leagueName + " \n"
+                            + matchDay + " \n"
+                            + date + " " + time + "\n"
+                            + mHolder.home_name.getText() + " "
+                            + mHolder.score.getText() + " "
+                            + mHolder.away_name.getText() + " "));
         });
     }
 
     public Intent createShareForecastIntent(Context context, String ShareText) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         shareIntent.setType("text/plain");
-        ShareText = context.getString(R.string.shareit) + " " + ShareText + " #" + context.getString(R.string
-                .app_name);
+        ShareText = context.getString(R.string.shareit) + " \n"
+                + ShareText + " \n" +
+                context.getString(R.string.hash_app_name);
         shareIntent.putExtra(Intent.EXTRA_TEXT, ShareText);
         return shareIntent;
     }
