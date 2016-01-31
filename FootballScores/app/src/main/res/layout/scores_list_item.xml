@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
-                android:textSize="@dimen/Score"
+                android:textSize="@dimen/scoreTextSize"
                 android:textStyle="bold"
                 tools:text="@string/score"/>
 
