@@ -1,0 +1,16 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="@dimen/widget_margin">
+
+    <ListView
+        android:id="@+id/score_list_widget"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/colorSecondaryText"
+        android:dividerHeight="1dp">
+    </ListView>
+
+</FrameLayout>

@@ -1,6 +1,7 @@
 package barqsoft.footballscores.model;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -136,6 +137,32 @@ public class Fixture {
         value.put(DatabaseContract.FixtureEntry.AWAY_TEAM_ID_COL,
                 getLinks().getAwayTeamLink().getTeamId());
         return value;
+    }
+
+    public static Fixture getFixtureForWidgetFromCursor(Cursor cursor) {
+        Fixture f = new Fixture();
+        f.homeTeamName = cursor.getString(cursor.getColumnIndex(
+                DatabaseContract.FixtureEntry.HOME_COL
+        ));
+        f.awayTeamName = cursor.getString(cursor.getColumnIndex(
+                DatabaseContract.FixtureEntry.AWAY_COL
+        ));
+        Result result = new Result();
+        result.goalsHomeTeam = cursor.getInt(cursor.getColumnIndex(
+                DatabaseContract.FixtureEntry.HOME_GOALS_COL
+        ));
+        result.goalsAwayTeam = cursor.getInt(cursor.getColumnIndex(
+                DatabaseContract.FixtureEntry.AWAY_GOALS_COL
+        ));
+        Debug.e("Found : " + f.homeTeamName + " vs " + f.awayTeamName, false);
+        f.result = result;
+        f.status = cursor.getString(cursor.getColumnIndex(
+                DatabaseContract.FixtureEntry.STATUS_COL
+        ));
+        f.date = cursor.getString(cursor.getColumnIndex(
+                DatabaseContract.FixtureEntry.TIME_COL
+        ));
+        return f;
     }
 
 }

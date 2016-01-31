@@ -109,4 +109,11 @@ public class AppUtils {
 
         return cm.getActiveNetworkInfo() != null;
     }
+
+    public static String getScoreForWidget(int goal) {
+        if (goal < 0) {
+            return "-";
+        }
+        return "" + goal;
+    }
 }
