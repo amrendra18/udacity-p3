@@ -155,6 +155,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/share_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="@dimen/divider_height"

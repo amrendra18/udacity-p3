@@ -51,6 +51,7 @@
     <string name="score">5 - 3</string>
     <string name="time">08:45 PM</string>
     <string name="share">Share the action</string>
+    <string name="shareit">Checkout this football clash</string>
     <string name="match_day" translatable="false">Day <xliff:g example="18" id="match_day">%1$s</xliff:g> </string>
 </resources>
 

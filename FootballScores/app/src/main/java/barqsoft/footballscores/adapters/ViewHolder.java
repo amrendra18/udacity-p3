@@ -1,6 +1,7 @@
 package barqsoft.footballscores.adapters;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,6 +32,8 @@ public class ViewHolder {
     ImageView home_crest;
     @Bind(R.id.away_crest)
     ImageView away_crest;
+    @Bind(R.id.share_button)
+    Button shareButton;
 
     public double match_id;
 

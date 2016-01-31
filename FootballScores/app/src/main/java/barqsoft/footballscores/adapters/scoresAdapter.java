@@ -74,41 +74,21 @@ public class ScoresAdapter extends CursorAdapter {
                 .getColumnIndex(DatabaseContract.FixtureEntry.MATCH_DAY_COL))));
         mHolder.statusTv.setText(cursor.getString(cursor.getColumnIndex(DatabaseContract
                 .FixtureEntry.STATUS_COL)));
-/*        LayoutInflater vi = (LayoutInflater) context.getApplicationContext()
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = vi.inflate(R.layout.detail_fragment, null);*/
-/*        ViewGroup container = (ViewGroup) view.findViewById(R.id.details_fragment_container);
-        if (mHolder.match_id == detail_match_id) {
-            //Log.v(FetchScoreTask.LOG_TAG,"will insert extraView");
-
-            container.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
-                    , ViewGroup.LayoutParams.MATCH_PARENT));
-            TextView match_day = (TextView) v.findViewById(R.id.matchday_textview);
-            match_day.setText(AppUtils.getMatchDay(cursor.getInt(COL_MATCHDAY),
-                    cursor.getInt(COL_LEAGUE)));
-            TextView league = (TextView) v.findViewById(R.id.league_textview);
-            league.setText(AppUtils.getLeagueLink(cursor.getInt(COL_LEAGUE)));
-            Button share_button = (Button) v.findViewById(R.id.share_button);
-            share_button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //add Share Action
-                    context.startActivity(createShareForecastIntent(mHolder.home_name.getText() + " "
-                            + mHolder.score.getText() + " " + mHolder.away_name.getText() + " "));
-                }
-            });
-        } else {
-            container.removeAllViews();
-        }*/
-
+        mHolder.shareButton.setOnClickListener(v -> {
+            //add Share Action
+            context.startActivity(createShareForecastIntent(
+                    context,
+                    mHolder.home_name.getText() + " " + mHolder.score.getText() + " " + mHolder.away_name.getText() + " "));
+        });
     }
 
     public Intent createShareForecastIntent(Context context, String ShareText) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, ShareText + " #" + context.getString(R.string
-                .app_name));
+        ShareText = context.getString(R.string.shareit) + " " + ShareText + " #" + context.getString(R.string
+                .app_name);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, ShareText);
         return shareIntent;
     }
 
