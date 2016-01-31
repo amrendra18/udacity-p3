@@ -57,7 +57,7 @@
                 android:textStyle="bold"
                 android:gravity="right"
                 app:layout_gravity="fill"
-                tools:text="@string/test_text"/>
+                tools:text="@string/time"/>
 
         </LinearLayout>
 

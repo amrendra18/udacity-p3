@@ -4,41 +4,25 @@
     <!--
     Providing API key through gradle script
     Check : app/build.gradle
-    <string name="api_key" translatable="false"></string>
+    <string name="api_key" translatable="false">COPY_YOUR_FOOTBALL_API_KEY_HERE</string>
     -->
 
-    <string name="app_name">Football Scores</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name" translatable="false">Football Scores</string>
     <string name="action_settings">Settings</string>
-    <string name="test_text">Test</string>
     <string name="today">Today</string>
     <string name="yesterday">Yesterday</string>
     <string name="tomorrow">Tomorrow</string>
-    <string name="champions_league">UEFA Champions League</string>
-    <string name="bundesliga">Bundesliga</string>
-    <string name="premierleague">Premier League</string>
-    <string name="primeradivison">Primera Division</string>
-    <string name="seriaa">Serie A</string>
-    <string name="matchday_text">Match day</string>
-    <string name="group_stage_text">Group stages</string>
-    <string name="first_knockout_round">First knockout round</string>
-    <string name="quarter_final">Quarter Final</string>
-    <string name="semi_final">Semi Final</string>
-    <string name="final_text">Final</string>
-    <string name="share_text">Share</string>
     <string name="about">About</string>
-    <string name="title_activity_about">AboutActivity</string>
+
     <string name="about_text">
         This Application get Football Matches Score for the Premier League,Seria A,Bundesliga,Primera Division
         and the Uefa Champions League.
         All Matches data are acquired from football-data.org free API.
         All team Logos are acquired from http://hdlogo.wordpress.com/ upon requesting permission form the owner.
-        The original version of this app was created by Yahia Khalid Ibn El Walid Ahmed, and a modified version is given to students in the Udacity Android Nanodegree program.
+        The original version of this app was created by Yahia Khalid Ibn El Walid Ahmed, and a modified version is given to students in the Udacity Android Nanodegree program, this version is update by
+        Amrendra Kumar.
         To report any bugs,or suggestions do not hesitate to send a mail to y.k.ibnelwalid@gmail.com.
-
-        During the off season, fake data will be added to the app.
     </string>
-    <string name="widget_text">This is a widget probably.</string>
 
     <string name="contentauthority" translatable="false">barqsoft.footballscores</string>
     <string name="sync_account_type" translatable="false">footballscores.barqsoft</string>
@@ -47,14 +31,13 @@
     <string name="status">Status</string>
     <string name="league">Leauge</string>
     <string name="matchday">Matchday</string>
-    <string name="hometeam">Manchester United</string>
-    <string name="awayteam">Liverpool</string>
-    <string name="score">5 &#8211; 3</string>
-    <string name="time">08:45 PM</string>
+    <string name="hometeam" translatable="false">Manchester United</string>
+    <string name="awayteam" translatable="false">Liverpool</string>
+    <string name="score" translatable="false">5 &#8211; 3</string>
+    <string name="time" translatable="false">08:45 PM</string>
     <string name="share">Share the action</string>
     <string name="shareit">Checkout this football clash</string>
-    <string name="nomatch">No match found for the day.</string>
-    <string name="error">Some error occurred</string>
+    <string name="nomatch">No football match found for the day.</string>
     <string name="internet">There seems to be internet connectivity issue.</string>
     <string name="match_day" translatable="false">MatchDay <xliff:g example="18" id="match_day">%1$s</xliff:g> </string>
 </resources>

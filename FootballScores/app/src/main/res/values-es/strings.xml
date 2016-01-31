@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_settings">Ajustes</string>
+    <string name="today">hoy en día</string>
+    <string name="yesterday">Ayer</string>
+    <string name="tomorrow">Mañana</string>
+    <string name="about">acerca de</string>
+
+    <string name="about_text">
+ThisApplication obtener resultado del partido de fútbol de la Premier League, Serie A, Bundesliga, Liga BBVA
+         y la UEFA Champions League.
+         Todos los datos de los partidos se adquieren de API gratuita football-data.org.
+         Todos los logotipos de los equipos son adquiridos de http://hdlogo.wordpress.com/ Al solicitar el permiso formulario propietario.
+         La versión original de esta aplicación que creó por Yahia Khalid Ibn El Walid Ahmed, y una versión modificada se da a los estudiantes en el programa Udacity Android Nanodegree, esta versión se actualiza
+         Amrendra Kumar.
+         Para informar de cualquier error o sugerencias no dude en enviar un correo a y.k.ibnelwalid@gmail.com.
+    </string>
+
+    <string name="contentauthority" translatable="false">barqsoft.footballscores</string>
+    <string name="sync_account_type" translatable="false">footballscores.barqsoft</string>
+
+    <string name="hash_app_name" translatable="false">#FootballScores</string>
+    <string name="status">Estado</string>
+    <string name="league">Liga</string>
+    <string name="matchday">Jornada</string>
+
+    <string name="share">Comparte la acción</string>
+    <string name="shareit">Pedido este choque de fútbol</string>
+    <string name="nomatch">No hay resultados para el fútbol el día del partido.</string>
+    <string name="internet">No parece haber problema de conectividad a Internet.</string>
+</resources>
+
