@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-
     <!-- required for sync adapter-->
     <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
@@ -68,7 +67,10 @@
 
 
         <!-- Widget -->
-        <receiver android:name=".widget.FootballWidget">
+        <receiver
+            android:name=".widget.FootballWidget"
+            android:enabled="true"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
             </intent-filter>
@@ -77,8 +79,10 @@
                 android:resource="@xml/widget_info"/>
         </receiver>
 
-        <service android:name=".widget.WidgetService"
-                 android:permission="android.permission.BIND_REMOTEVIEWS"/>
+        <service
+            android:name=".widget.WidgetService"
+            android:enabled="true"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
     </application>
 
 </manifest>
