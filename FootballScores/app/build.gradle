@@ -30,9 +30,6 @@ android {
 }
 
 dependencies {
-
-
-
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     compile 'com.android.support:appcompat-v7:23.1.1'
@@ -50,12 +47,6 @@ dependencies {
     compile 'io.reactivex:rxjava:1.0.13'
     compile 'io.reactivex:rxandroid:1.0.0'
 
-    //debugg
-    compile 'com.facebook.stetho:stetho:1.2.0'
-    //compile 'com.facebook.stetho:stetho-okhttp:1.2.0'
-
-/*    compile 'com.android.support:recyclerview-v7:23.1.1'
-    compile 'com.android.support:palette-v7:23.1.1' */
     compile 'com.android.support:cardview-v7:23.1.1'
     compile 'com.android.support:gridlayout-v7:23.0.1'
 

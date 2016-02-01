@@ -2,8 +2,6 @@ package barqsoft.footballscores.app;
 
 import android.app.Application;
 
-import com.facebook.stetho.Stetho;
-
 import barqsoft.footballscores.utils.svg.SvgImageLoader;
 
 /**
@@ -38,7 +36,11 @@ public class FootballApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Stetho.initializeWithDefaults(this);
+        /*
+        Stetho doesnot work in debug mode, while running unit test cases with Robolectric.
+        Need to check why?
+         */
+        //Stetho.initializeWithDefaults(this);
     }
 
 }
