@@ -19,8 +19,8 @@
 
         <ImageView
             android:id="@+id/home_crest"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="@dimen/small_icon"
+            android:layout_height="@dimen/small_icon"
             android:contentDescription="@string/hometeam_text"
             android:paddingEnd="@dimen/divider_height"
             android:paddingLeft="@dimen/divider_height"
@@ -72,8 +72,8 @@
 
         <ImageView
             android:id="@+id/away_crest"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="@dimen/small_icon"
+            android:layout_height="@dimen/small_icon"
             android:contentDescription="@string/hometeam_text"
             android:paddingEnd="@dimen/divider_height"
             android:paddingLeft="@dimen/divider_height"

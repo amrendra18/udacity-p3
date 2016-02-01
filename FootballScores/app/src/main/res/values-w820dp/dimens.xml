@@ -6,8 +6,12 @@
     <dimen name="list_horizontal_margin">300dp</dimen>
 
     <dimen name="scoreTextSize">60sp</dimen>
-    <dimen name="leagueTextSize">30sp</dimen>
+    <dimen name="leagueTextSize">32sp</dimen>
     <dimen name="crest_height">128dp</dimen>
     <dimen name="crest_width">128dp</dimen>
     <dimen name="TeamNames">24sp</dimen>
+
+    <dimen name="widget_min_width">200dp</dimen>
+    <dimen name="widget_min_height">150dp</dimen>
+
 </resources>

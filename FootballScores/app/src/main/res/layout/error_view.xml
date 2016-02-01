@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="@dimen/divider_margin_vertical"
         android:drawableTop="@drawable/egg_empty"
         android:contentDescription="@string/nomatch"
         android:drawablePadding="@dimen/activity_vertical_padding"

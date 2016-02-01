@@ -14,8 +14,16 @@
     <dimen name="TeamNames">14sp</dimen>
     <dimen name="TeamNamesWidget">12sp</dimen>
     <dimen name="scoreTextSize">30sp</dimen>
-    <dimen name="leagueTextSize">15sp</dimen>
+    <dimen name="leagueTextSize">16sp</dimen>
     <dimen name="crest_height">64dp</dimen>
     <dimen name="crest_width">64dp</dimen>
     <dimen name="widget_margin">8dp</dimen>
+    <dimen name="center_padding">48dp</dimen>
+    <dimen name="score_card_radius">3dp</dimen>
+    <dimen name="small_icon">24dp</dimen>
+
+    <dimen name="widget_min_width">180dp</dimen>
+    <dimen name="widget_min_height">80dp</dimen>
+
+
 </resources>
