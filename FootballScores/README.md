@@ -8,9 +8,9 @@ In app/build.gradle replace **"COPY_YOUR_FOOTBALL_API_KEY_HERE"** with your API 
 
 ## Preview
 
-![Preview Image](../master/snaps/preview6_widget_small.png)
+![Preview Image](../../master/snaps/preview6_widget_small.png)
  
-![Preview Image](../master/snaps/preview.gif)   
+![Preview Image](../../master/snaps/preview.gif)   
 
 App demo [here](https://www.youtube.com/watch?v=hhsLan2DmN4)
 
