@@ -96,12 +96,18 @@ public class BookService extends IntentService {
                 null  // sort order
         );
 
-        if (bookEntry.getCount() > 0) {
+        if (bookEntry != null) {
             bookEntry.close();
             return;
         }
 
-        bookEntry.close();
+        /*
+        We should use Retrofit, Gson & RxJava
+        to perform HTTP REST calls and for parsing, asynchronously.
+
+        I already used these libraries in Popular Movies app,
+        and Football Scores app, not doing here.
+         */
 
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
