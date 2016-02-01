@@ -71,7 +71,8 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/nomatch"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+            android:textColor="@color/colorSecondaryText"
+            android:textAppearance="?android:textAppearanceMedium"/>
 
     </FrameLayout>
 </LinearLayout>

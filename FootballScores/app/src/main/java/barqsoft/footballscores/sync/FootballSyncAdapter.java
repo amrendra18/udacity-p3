@@ -2,11 +2,13 @@ package barqsoft.footballscores.sync;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.appwidget.AppWidgetManager;
 import android.content.AbstractThreadedSyncAdapter;
 import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SyncRequest;
 import android.content.SyncResult;
 import android.os.Build;
@@ -23,6 +25,7 @@ import barqsoft.footballscores.model.Fixture;
 import barqsoft.footballscores.model.League;
 import barqsoft.footballscores.model.Team;
 import barqsoft.footballscores.utils.AppUtils;
+import barqsoft.footballscores.widget.FootballWidget;
 import rx.Subscriber;
 import rx.schedulers.Schedulers;
 
@@ -57,6 +60,9 @@ public class FootballSyncAdapter extends AbstractThreadedSyncAdapter {
         getData("n3");
         getData("p2");
         getLeagueData();
+        Intent intent = new Intent(getContext(), FootballWidget.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        getContext().sendBroadcast(intent);
     }
 
     private void getLeagueData() {

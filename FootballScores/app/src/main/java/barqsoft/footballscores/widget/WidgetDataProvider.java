@@ -85,6 +85,7 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
 
     @Override
     public void onDataSetChanged() {
+        initData();
     }
 
     @Override

@@ -3,12 +3,15 @@ package barqsoft.footballscores.widget;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
 
 import barqsoft.footballscores.R;
 import barqsoft.footballscores.app.activity.MainActivity;
+import barqsoft.footballscores.logger.Debug;
+import barqsoft.footballscores.utils.AppConstants;
 
 /**
  * Created by Amrendra Kumar on 31/01/16.
@@ -40,5 +43,17 @@ public class FootballWidget extends AppWidgetProvider {
         }
     }
 
-
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        super.onReceive(context, intent);
+        if (intent != null) {
+            Debug.c();
+            if (intent.getAction().equals(AppConstants.BROADCAST_DATA_UPDATED)) {
+                Debug.e("Need to update widget", false);
+                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+                int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, getClass()));
+                appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.score_list_widget);
+            }
+        }
+    }
 }
