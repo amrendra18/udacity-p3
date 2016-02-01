@@ -80,11 +80,11 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
     @Override
     public void onCreate() {
         Debug.c();
-        initData();
     }
 
     @Override
     public void onDataSetChanged() {
+        Debug.c();
         initData();
     }
 

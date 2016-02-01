@@ -13,15 +13,22 @@
     <string name="yesterday">Yesterday</string>
     <string name="tomorrow">Tomorrow</string>
     <string name="about">About</string>
+    <string name="refresh">Refresh</string>
+    <string name="sync_progress">Sync in progress</string>
 
     <string name="about_text">
-        This Application get Football Matches Score for the Premier League,Seria A,Bundesliga,Primera Division
+        This Application get Football Matches Score for the Premier League,Seria
+        A,Bundesliga,Primera Division
         and the Uefa Champions League.
         All Matches data are acquired from football-data.org free API.
-        All team Logos are acquired from http://hdlogo.wordpress.com/ upon requesting permission form the owner.
-        The original version of this app was created by Yahia Khalid Ibn El Walid Ahmed, and a modified version is given to students in the Udacity Android Nanodegree program, this version is updated by
+        All team Logos are acquired from http://hdlogo.wordpress.com/ upon requesting permission
+        form the owner.
+        The original version of this app was created by Yahia Khalid Ibn El Walid Ahmed, and a
+        modified version is given to students in the Udacity Android Nanodegree program, this
+        version is updated by
         Amrendra Kumar.
-        To report any bugs,or suggestions do not hesitate to send a mail to y.k.ibnelwalid@gmail.com.
+        To report any bugs,or suggestions do not hesitate to send a mail to
+        y.k.ibnelwalid@gmail.com.
     </string>
 
     <string name="contentauthority" translatable="false">barqsoft.footballscores</string>
@@ -31,8 +38,8 @@
     <string name="status">Status</string>
     <string name="league">Leauge</string>
     <string name="matchday">Matchday</string>
-    <string name="hometeam_text" >Home Team</string>
-    <string name="awayteam_text" >Away Team</string>
+    <string name="hometeam_text">Home Team</string>
+    <string name="awayteam_text">Away Team</string>
     <string name="hometeam" translatable="false">Manchester United</string>
     <string name="awayteam" translatable="false">Liverpool</string>
     <string name="score" translatable="false">5 &#8211; 3</string>
@@ -41,6 +48,8 @@
     <string name="shareit">Checkout this football clash</string>
     <string name="nomatch">No football match found for the day.</string>
     <string name="internet">There seems to be internet connectivity issue.</string>
-    <string name="match_day" translatable="false">MatchDay <xliff:g example="18" id="match_day">%1$s</xliff:g> </string>
+    <string name="match_day" translatable="false">MatchDay
+        <xliff:g example="18" id="match_day">%1$s</xliff:g>
+    </string>
 </resources>
 

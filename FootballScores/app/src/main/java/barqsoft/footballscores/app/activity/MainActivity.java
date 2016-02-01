@@ -16,6 +16,7 @@ import java.util.Date;
 import barqsoft.footballscores.R;
 import barqsoft.footballscores.adapters.ViewPagerAdapter;
 import barqsoft.footballscores.app.fragments.MainScreenFragment;
+import barqsoft.footballscores.logger.Debug;
 import barqsoft.footballscores.sync.FootballSyncAdapter;
 import barqsoft.footballscores.utils.AppConstants;
 import butterknife.Bind;
@@ -87,6 +88,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        if (id == R.id.action_refresh) {
+            FootballSyncAdapter.syncImmediately(this);
+            Debug.showToastShort(getString(R.string.sync_progress), this, true);
+            return true;
+        }
         if (id == R.id.action_about) {
             Intent start_about = new Intent(this, AboutActivity.class);
             startActivity(start_about);

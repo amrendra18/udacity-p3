@@ -47,7 +47,7 @@ public class FootballWidget extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
         if (intent != null) {
-            Debug.c();
+            Debug.e("intent : " + intent.getAction(), false);
             if (intent.getAction().equals(AppConstants.BROADCAST_DATA_UPDATED)) {
                 Debug.e("Need to update widget", false);
                 AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
