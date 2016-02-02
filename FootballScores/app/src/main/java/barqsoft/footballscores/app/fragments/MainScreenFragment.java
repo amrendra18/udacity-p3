@@ -15,7 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import barqsoft.footballscores.R;
-import barqsoft.footballscores.adapters.ScoresAdapter;
+import barqsoft.footballscores.adapters.FootballScoreAdapter;
 import barqsoft.footballscores.adapters.ViewHolder;
 import barqsoft.footballscores.app.activity.MainActivity;
 import barqsoft.footballscores.db.DatabaseContract;
@@ -29,7 +29,7 @@ import butterknife.ButterKnife;
  * A placeholder fragment containing a simple view.
  */
 public class MainScreenFragment extends Fragment {
-    public ScoresAdapter mAdapter;
+    public FootballScoreAdapter mAdapter;
     public static final int SCORES_LOADER = 0;
     private String fragmentDate;
 
@@ -54,6 +54,7 @@ public class MainScreenFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Bug fix : on device rotation date was set to null, hence no data was loaded for null date
         Bundle bundle = getArguments();
         if (bundle != null) {
             fragmentDate = bundle.getString(AppConstants.FRAGMENT_DATE);
@@ -67,7 +68,7 @@ public class MainScreenFragment extends Fragment {
                              final Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, rootView);
-        mAdapter = new ScoresAdapter(getActivity(), null, 0);
+        mAdapter = new FootballScoreAdapter(getActivity(), null, 0);
         score_list.setAdapter(mAdapter);
         restartLoader();
         mAdapter.detail_match_id = MainActivity.selected_match_id;

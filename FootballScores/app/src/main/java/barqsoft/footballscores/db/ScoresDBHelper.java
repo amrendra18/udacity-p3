@@ -61,6 +61,7 @@ public class ScoresDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        //Bug Fix, after deleting old table, we need to create new tables
         //Remove old values when upgrading.
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.FixtureEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.LeagueEntry.TABLE_NAME);
