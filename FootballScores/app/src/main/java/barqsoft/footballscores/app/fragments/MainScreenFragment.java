@@ -68,6 +68,10 @@ public class MainScreenFragment extends Fragment {
                              final Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, rootView);
+        // Update :
+        // Removed intent service to fetch details
+        // Using sync adapter to sync data from server to local DB
+        // Using content provider to fetch data from local DB
         mAdapter = new FootballScoreAdapter(getActivity(), null, 0);
         score_list.setAdapter(mAdapter);
         restartLoader();

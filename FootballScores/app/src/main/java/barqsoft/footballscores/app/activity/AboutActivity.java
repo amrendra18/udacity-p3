@@ -14,6 +14,8 @@ import barqsoft.footballscores.R;
 
 public class AboutActivity extends ActionBarActivity {
 
+    // Update
+    // Added toolbar and back navigation to settings activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
