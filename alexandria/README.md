@@ -1,27 +1,17 @@
 #Alexandria
-- Books browsing app
+Books browsing Android app, to keep track of all your favourite books, 
+and have it with you where-ever you go, on the fly. Just scan the barcode and you are good to go.
 
+#Preview
 
-#Changes
-- Added Google Vision API for barcode reading, so no need for 3rd party barcode reader app
-- Added new book functionality using barcode
-- Updated Nav drawer
-- Fixed issue of improper title when pressed back
-- Fixed bug of improper fragments in stack in case of tablets
-- Updated deprecated v4.ActionBarDrawerToggle to v7.ActionBarDrawerToggle
-- Used Glide for async image loading & caching
-- Fixed crash on searching for book without internet connection
-- Used butterknife for elegant code + code formatting
-- Used custom textview for book content with custom font
-- Refactored UI layout, removed deprecated fill_parent attribute, removed relative layouts
-- Added code for making app accessible to impaired
-- Fixed bug where right container comes in place of main container on tablet rotation
-- Added code for retaining detail book page on mobile/tablet devices.
-- Added localization for DE
-- Added toolbar and back navigation to settings activity
-- Removed deprecated addPreferencesFromResource method from settings activity
-- Removed un-necessary annoying softkeyboard coming up in fragments
+![Preview Image](../../master/alexandria/snaps/preview.gif)
 
+##Third Party Libraries Used
+
+- [Stetho](https://github.com/facebook/stetho) [For debugging]
+- [Glide](https://github.com/bumptech/glide) [For image loading/caching]
+- [Butterknife](http://jakewharton.github.io/butterknife/) [For binding]
+- [Barcode Reader](https://github.com/googlesamples/android-vision/tree/master/visionSamples/barcode-reader) [Barcode Reader]
 
 ##Acknowledgments
 - [BarCodes APIs](https://search-codelabs.appspot.com/codelabs/bar-codes)
