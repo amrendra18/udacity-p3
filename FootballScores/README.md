@@ -7,9 +7,6 @@ This app uses [football-data.org](http://api.football-data.org/index) APIs for a
 In app/build.gradle replace **"COPY_YOUR_FOOTBALL_API_KEY_HERE"** with your API key
 
 ## Preview
-
-![Preview Image](../../master/FootballScores/snaps/preview6_widget_small.png)
- 
 ![Preview Image](../../master/FootballScores/snaps/preview.gif)   
 
 App demo [here](https://www.youtube.com/watch?v=hhsLan2DmN4)
@@ -21,9 +18,9 @@ App demo [here](https://www.youtube.com/watch?v=hhsLan2DmN4)
 - [Butterknife](http://jakewharton.github.io/butterknife/) [For binding]
 - [Retrofit](http://square.github.io/retrofit/) [For rest api calls]
 - [Gson](http://mvnrepository.com/artifact/com.squareup.retrofit/converter-gson/2.0.0-beta1) [For json handling]
-- [svg](https://github.com/BigBadaboom/androidsvg)[For rendering SVG images]
-- [RxJava, RxAndroid](https://github.com/ReactiveX/RxAndroid/wiki)[For event subscription & threading]
-- [Robolectric](https://github.com/robolectric/robolectric)[For unit test cases]
+- [Svg](https://github.com/BigBadaboom/androidsvg) [For rendering SVG images]
+- [RxJava, RxAndroid](https://github.com/ReactiveX/RxAndroid/wiki) [For event subscription & threading]
+- [Robolectric](https://github.com/robolectric/robolectric) [For unit test cases]
 
 
 ##Acknowledgments
