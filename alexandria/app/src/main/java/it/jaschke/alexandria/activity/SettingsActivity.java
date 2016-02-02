@@ -21,6 +21,10 @@ import it.jaschke.alexandria.fragments.SettingsFragment;
 public class SettingsActivity extends PreferenceActivity {
 
     /*
+    Update :
+    1. Added toolbar and back navigation to settings activity
+    2. Remove deprecated addPreferencesFromResource method from activity to fragment
+
     How to add action bar to settings activity
     http://stackoverflow.com/questions/17849193/how-to-add-action-bar-from-support-library-into-preferenceactivity
 

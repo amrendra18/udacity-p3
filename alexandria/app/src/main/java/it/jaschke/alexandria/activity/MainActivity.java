@@ -231,6 +231,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     @Override
     public void onBackPressed() {
+        // Bug fixed :
         // Check for correct title to be set, when previous fragment is popped.
         int pos = getSupportFragmentManager().getBackStackEntryCount();
         if (pos < 2) {

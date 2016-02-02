@@ -21,7 +21,7 @@ import java.util.Map;
  * Created by Amrendra Kumar on 05/01/16.
  */
 public class Debug {
-    private static final Boolean DEBUG = true;
+    private static final Boolean DEBUG = false;
     private static final String TAG = "alexandria";
 
     private static String getMsg(String msg) {

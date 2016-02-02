@@ -170,6 +170,9 @@ public class AddBook extends Fragment {
     @OnClick(R.id.scan_button)
     void scanButtonClicked(View view) {
         Debug.i("scan to perform", false);
+
+        // Update :
+        // Using google vision APIs, so no need to use 3rd party app for barcode scanning
         Intent intent = new Intent(getActivity(), BarcodeCaptureActivity.class);
         intent.putExtra(BarcodeCaptureActivity.AutoFocus, true);
         getActivity().startActivityForResult(intent, REQUEST_SCAN_BARCODE);

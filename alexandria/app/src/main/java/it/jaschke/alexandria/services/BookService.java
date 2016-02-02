@@ -29,7 +29,7 @@ import it.jaschke.alexandria.utils.Utils;
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
  * a service on a separate handler thread.
- * <p>
+ * <p/>
  */
 public class BookService extends IntentService {
 
@@ -79,7 +79,9 @@ public class BookService extends IntentService {
             return;
         }
 
+        // Bug Fix :
         // Before making any network calls, better check if network is connected.
+        // Otherwise we get null json and it throws NPE, and app crashes
         if (!Utils.isNetworkConnected(getApplicationContext())) {
             Debug.c();
             Intent messageIntent = new Intent(MainActivity.MESSAGE_EVENT);
