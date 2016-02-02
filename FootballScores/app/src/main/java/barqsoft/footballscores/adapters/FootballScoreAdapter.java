@@ -16,10 +16,10 @@ import barqsoft.footballscores.utils.DateUtils;
 /**
  * Created by yehya khaled on 2/26/2015.
  */
-public class ScoresAdapter extends CursorAdapter {
+public class FootballScoreAdapter extends CursorAdapter {
     public double detail_match_id = 0;
 
-    public ScoresAdapter(Context context, Cursor cursor, int flags) {
+    public FootballScoreAdapter(Context context, Cursor cursor, int flags) {
         super(context, cursor, flags);
     }
 
