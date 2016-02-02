@@ -6,6 +6,8 @@ and have it with you where-ever you go, on the fly. Just scan the barcode and yo
 
 ![Preview Image](../../master/alexandria/snaps/preview.gif)
 
+App demo [here](https://www.youtube.com/watch?v=OxABBB01b7M)
+
 ##Third Party Libraries Used
 
 - [Stetho](https://github.com/facebook/stetho) [For debugging]
