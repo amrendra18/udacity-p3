@@ -11,6 +11,7 @@
         android:entryValues="@array/pref_start_values"
         android:key="pref_startFragment"
         android:title="@string/pref_startScreen"
+        android:defaultValue="0"
         />
 
 </PreferenceScreen>
