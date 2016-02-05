@@ -123,8 +123,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:orientation="horizontal"
         android:background="@color/colorPrimaryTransparent"
+        android:orientation="horizontal"
         android:paddingEnd="@dimen/isbn_et_padding"
         android:paddingLeft="@dimen/isbn_et_padding"
         android:paddingRight="@dimen/isbn_et_padding"
@@ -133,29 +133,14 @@
         <Button
             android:id="@+id/delete_button"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:layout_weight="1"
             android:contentDescription="@string/back_button"
             android:drawableLeft="@drawable/ic_action_discard"
-            android:drawablePadding="0dp"
+            android:drawablePadding="@dimen/standard_margin_small"
             android:drawableStart="@drawable/ic_action_discard"
             android:text="@string/delete"/>
-
-        <Button
-            android:id="@+id/backButton"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_weight="1"
-            android:contentDescription="@string/back_button"
-            android:drawableLeft="@drawable/ic_action_undo"
-            android:drawablePadding="0dp"
-            android:drawableStart="@drawable/ic_action_undo"
-            android:onClick="goBack"
-            android:text="@string/back_button"/>
 
     </LinearLayout>
 

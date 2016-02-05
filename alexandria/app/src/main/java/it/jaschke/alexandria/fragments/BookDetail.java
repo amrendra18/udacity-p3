@@ -18,7 +18,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -63,9 +62,6 @@ public class BookDetail extends Fragment {
     @Bind(R.id.categories_title)
     TextView categoriesTitleTextView;
 
-    @Bind(R.id.backButton)
-    Button backButton;
-
     @Bind(R.id.fullBookCover)
     ImageView bookCoverImageView;
 
@@ -90,11 +86,6 @@ public class BookDetail extends Fragment {
         }
         View rootView = inflater.inflate(R.layout.fragment_full_book, container, false);
         ButterKnife.bind(this, rootView);
-
-        if (MainActivity.IS_TABLET && getActivity().findViewById(R.id.right_container) !=
-                null) {
-            backButton.setVisibility(View.GONE);
-        }
         return rootView;
     }
 
@@ -216,11 +207,6 @@ public class BookDetail extends Fragment {
             } else {
                 categoriesTitleTextView.setVisibility(View.GONE);
                 categoriesTextView.setVisibility(View.GONE);
-            }
-
-            if (MainActivity.IS_TABLET && getActivity().findViewById(R.id.right_container) !=
-                    null) {
-                backButton.setVisibility(View.GONE);
             }
         }
 

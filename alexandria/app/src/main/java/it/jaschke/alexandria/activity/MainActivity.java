@@ -219,10 +219,6 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     }
 
-    public void goBack(View view) {
-        getSupportFragmentManager().popBackStack();
-    }
-
     private boolean isTablet() {
         return (getApplicationContext().getResources().getConfiguration().screenLayout
                 & Configuration.SCREENLAYOUT_SIZE_MASK)
