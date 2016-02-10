@@ -1,4 +1,4 @@
-#Football Scores
+#Football Scores [![Build Status](https://travis-ci.org/thecodegame/udacity-p3.svg?branch=master)](https://travis-ci.org/thecodegame/udacity-p3)
 Football score browsing app, always keep updated of all the latest football action.
 
 ![Preview Image](../master/FootballScores/snaps/preview.gif)   
