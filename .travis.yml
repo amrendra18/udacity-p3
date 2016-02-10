@@ -1,0 +1,25 @@
+language: android
+
+sudo: false
+android:
+  components:
+    - build-tools-23.0.1
+    - android-23
+    - extra-android-m2repository
+    - extra-google-m2repository
+    #- sys-img-armeabi-v7a-android-19
+
+os:
+  - linux
+
+before_install:
+  - chmod +x alexandria/gradlew
+  - chmod +x FootballScores/gradlew
+
+
+script:
+  - ./build_alexandria.sh
+  - ./build_football.sh
+
+env:
+  - secure: "FrOz2z0FVQUoLdWnERIoRj/1z3H7vhpcGlTKxilljAiaJNjDYHYE0spNaJoLK/PqFRtueO0bP6XvYQ2e2e9zOYBUJO82LN0QVBPDBkjTMx8mEA9OBUppJw7cq4ezrZ42BG17S88CYmGWDDZudrpGh9WFUBnE5ktPZ7ixdgHLJEdjG8cwsYIIsNxUA4gKbEmuxFzIlnk+3iS5ZdPjgdohAku+OYpmQd7Ike+SMzqvasUBS5WANDySQKynXyUqc7hjWcRUmtXV6qAl2kn51FPjAbhas4fg4RDXjZ7WXof7n4tGMp+ITxqi7T2oRZ99Ow0J2y9OaZ4cy3ucnusj9qt3DffXQ+zfz9xm4nF2UFXxNqnu+QX0rIy8ESqSWpBvXPKte6ktyYdZ30Dc8W640mjj7lwnDLan6XZaPaVZsH79WHiPbOS5X8oXQmzR//3HNUGJlfSUxH46uNwFR3UuhWrOyeJA049pkZ0ebc7glfTZmvEZHDOOEKc+ZWvYllt8DRF+8FV9kVCNkJ2MrtFnBSAMgAxSBVXLqn8aqEu+lYKZWKb/WKVoVL0ThUuGU3rqwQn3jMo36L3DqXOK3q29QDBCyIm3ywdB9G7vchOUaCwLVKHFeWfc/t2gAeFGRi0tK99/Do5hpxGLkz2urL09coRrRiTXiKxTV0GfjwY2SinKLno="
