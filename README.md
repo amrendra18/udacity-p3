@@ -15,7 +15,3 @@ Book browsing app, keep track of your favourite books with you always, just a cl
 App demo [here](https://www.youtube.com/watch?v=OxABBB01b7M)
 
 More about app [here](https://github.com/amrendra18/udacity-p3/tree/master/alexandria)
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/amrendra18/udacity-p3/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
